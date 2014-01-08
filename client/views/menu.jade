@@ -1,0 +1,36 @@
+div(class='navbar navbar-inverse navbar-fixed-top',role='navigation')
+    div(class='container')
+        div(class='navbar-header')
+            button(type='button',class='navbar-toggle',data-toggle='collapse',data-target='.navbar-collapse')
+                span(class='sr-only') Toggle navigation
+                span(class='icon-bar')
+                span(class='icon-bar')
+                span(class='icon-bar')
+            a(class='navbar-brand',href='/home') ModelerApp
+        div(class='navbar-collapse collapse',data-ng-controller="LoginCtrl")
+            ul(class='nav navbar-nav',data-access-level='accessLevels.user')
+              li(class='dropdown')
+                a(href='#',class='dropdown-toggle',data-toggle='dropdown') Utilisateurs 
+                    b(class='caret')
+                ul(class='dropdown-menu')
+                    li
+                        a(href='/user/list') Liste
+                    li
+                        a(href='/user/add') Ajouter
+                    li
+                        a(href='http://www.google.fr') Go google
+            form(class='navbar-form navbar-right',role='form',ng-submit="login()", name="loginForm",data-access-level='accessLevels.anon')
+                div(class='form-group')
+                    input(type="text", data-ng-model="username", placeholder="Utilisateur", name="username", required, autofocus,class='form-control')
+                | &nbsp;
+                div(class='form-group')
+                    input(type="password", data-ng-model="password", placeholder="Mot de passe", name="password", required,class='form-control')
+                | &nbsp;
+                button.btn(type="submit", data-ng-disabled="loginForm.$invalid",class='btn btn-success') Connexion
+            form(class='navbar-form navbar-right',role='form',ng-submit="logout()", name="logoutForm",data-access-level='accessLevels.user')
+                div(class='app-user-info')
+                    | Bienvenue&nbsp;
+                    strong {{ user.username }}&nbsp;
+                    span.label(data-ng-class='{"label-info": user.role.title == userRoles.user.title, "label-success": user.role.title == userRoles.admin.title}') {{ user.role.title }}
+                    | &nbsp; 
+                    button.btn(type="submit", data-ng-disabled="logoutForm.$invalid",class='btn btn-success') D&#233;connexion

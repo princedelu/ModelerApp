@@ -1,0 +1,16 @@
+extends layout
+
+block hautpage
+
+block content
+	br
+	.alert.alert-success(data-ng-bind="success", data-ng-show="success")
+	.alert.alert-error(data-ng-bind='error', data-ng-show='error')
+	div(data-ng-view='ng-view')
+	
+block partial
+	// Partial views... Load up front to make transitions smoother
+	script(type='text/ng-template', id='list')
+		include partials/user/list
+	script(type='text/ng-template', id='add')
+		include partials/user/add
