@@ -4,6 +4,7 @@ var express =       require('express')
     , passport =    require('passport')
     , path =        require('path')
 	, fs = 			require('fs')
+    , mongoose =    require('mongoose')
     , User =        require('./server/models/User.js');
 
 // Variables
@@ -11,6 +12,9 @@ var app = module.exports = express();
 //var logFile = fs.createWriteStream(path.join(__dirname, 'log/logServer.log'), {flags: 'a'}); //use {flags: 'w'} to open in write mode
 var clientDir = path.join(__dirname, 'client');
 
+mongoose.connect('mongodb://localhost/modelerApp', function(err) {
+  if (err) { throw err; }
+});
 
 // Configuration
 app.set('views', path.join(__dirname , '/client/views'));

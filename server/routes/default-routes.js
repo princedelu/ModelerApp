@@ -4,6 +4,7 @@ var _ =           require('underscore')
     , AuthCtrl =  require('../controllers/auth')
     , User =      require('../models/User.js')
 	, routesUser = require('./routes-user').routes
+	, routesZone = require('./routes-zone').routes
     , userRoles = require('../../client/javascript/routingConfig').userRoles
     , accessLevels = require('../../client/javascript/routingConfig').accessLevels;
 
@@ -59,7 +60,7 @@ var routesConcat = {};
 
 module.exports = function(app) {
 
-	routesConcat = _.union(routesUser,routes);
+	routesConcat = _.union(routesZone,routesUser,routes);
 	
     _.each(routesConcat, function(route) {
         route.middleware.unshift(ensureAuthorized);
