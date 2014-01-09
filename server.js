@@ -16,7 +16,7 @@ var clientDir = path.join(__dirname, 'client');
 app.set('views', path.join(__dirname , '/client/views'));
 app.set('view engine', 'jade');
 //app.use(express.logger({stream: logFile})); // Active le middleware de logging
-app.use(express.logger(dev));
+app.use(express.logger('dev'));
 app.use(express.cookieParser());
 app.use(express.bodyParser());
 app.use(express.methodOverride());
