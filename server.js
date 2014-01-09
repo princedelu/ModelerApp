@@ -8,14 +8,15 @@ var express =       require('express')
 
 // Variables
 var app = module.exports = express();
-var logFile = fs.createWriteStream(path.join(__dirname, 'log/logServer.log'), {flags: 'a'}); //use {flags: 'w'} to open in write mode
+//var logFile = fs.createWriteStream(path.join(__dirname, 'log/logServer.log'), {flags: 'a'}); //use {flags: 'w'} to open in write mode
 var clientDir = path.join(__dirname, 'client');
 
 
 // Configuration
 app.set('views', path.join(__dirname , '/client/views'));
 app.set('view engine', 'jade');
-app.use(express.logger({stream: logFile})); // Active le middleware de logging
+//app.use(express.logger({stream: logFile})); // Active le middleware de logging
+app.use(express.logger(dev));
 app.use(express.cookieParser());
 app.use(express.bodyParser());
 app.use(express.methodOverride());
