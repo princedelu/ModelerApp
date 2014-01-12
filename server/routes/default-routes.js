@@ -3,8 +3,7 @@ var _ =           require('underscore')
     , passport =  require('passport')
     , AuthCtrl =  require('../controllers/auth')
     , User =      require('../models/User.js')
-	, routesUser = require('./routes-user').routes
-	, routesZone = require('./routes-zone').routes
+	, routesUser = require('./routes-user')
     , userRoles = require('../../client/javascript/routingConfig').userRoles
     , accessLevels = require('../../client/javascript/routingConfig').accessLevels;
 
@@ -58,7 +57,9 @@ var routes = [
 
 var routesConcat = {};
 
-module.exports = function(app) {
+module.exports = function(app,db) {
+
+	var routesZone = require('./routes-zone');
 
 	routesConcat = _.union(routesZone,routesUser,routes);
 	

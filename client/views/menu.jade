@@ -27,6 +27,9 @@ div(class='navbar navbar-inverse navbar-fixed-top',role='navigation')
                     input(type="password", data-ng-model="password", placeholder="Mot de passe", name="password", required,class='form-control')
                 | &nbsp;
                 button.btn(type="submit", data-ng-disabled="loginForm.$invalid",class='btn btn-success') Connexion
+                | &nbsp;
+                button(type='button',class='btn btn-link app-btn-delete',data-ng-show='error',data-original-title='',data-toggle="popover",data-placement="auto",data-content="Votre utilisateur ou votre mot de passe sont incorrectes")
+                    span(class='glyphicon glyphicon-exclamation-sign',data-ng-show='error')
             form(class='navbar-form navbar-right',role='form',ng-submit="logout()", name="logoutForm",data-access-level='accessLevels.user')
                 div(class='app-user-info')
                     | Bienvenue&nbsp;
@@ -34,3 +37,5 @@ div(class='navbar navbar-inverse navbar-fixed-top',role='navigation')
                     span.label(data-ng-class='{"label-info": user.role.title == userRoles.user.title, "label-success": user.role.title == userRoles.admin.title}') {{ user.role.title }}
                     | &nbsp; 
                     button.btn(type="submit", data-ng-disabled="logoutForm.$invalid",class='btn btn-success') D&#233;connexion
+            
+
