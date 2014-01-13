@@ -11,15 +11,12 @@ module.exports = {
         res.json(users);
     },
 	get: function(req, res) {
-		console.log(req.params.nom);
-        var users = User.findAll();
-        _.each(users, function(user) {
-            delete user.password;
-        });
-        res.json(users[1]);
+        var user = User.findByUsername(req.params.nom);
+        delete user.password;
+        res.json(user);
     },
 	delete : function(req, res) {
-		console.log(req.params.nom);
+	console.log(req.params.nom);
         res.send();
     },
 	add : function(req, res) {

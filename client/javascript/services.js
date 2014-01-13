@@ -63,6 +63,21 @@ angular.module('ModelerApp')
     };
 });
 
+angular.module('ModelerApp')
+.factory('Zone', function($http) {
+	
+	return {
+        list: function(success, error) {
+            $http.get('/api/zone').success(success).error(error);
+        },
+		add: function(user, success, error) {
+            $http.post('/api/zone', user).success(function(res) {
+                success();
+            }).error(error);
+        }
+    };
+});
+
 
 
 

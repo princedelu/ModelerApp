@@ -14,11 +14,6 @@ module.exports = {
             if(err === 'UserAlreadyExists') return res.send(403, "User already exists");
             else if(err)                    return res.send(500);
 			else return res.send(200);
-
-            //req.logIn(user, function(err) {
-            //    if(err)     { next(err); }
-            //    else        { res.json(200, { "role": user.role, "username": user.username }); }
-            //});
 			
         });
     },
@@ -27,7 +22,7 @@ module.exports = {
         passport.authenticate('local', function(err, user) {
 
             if(err)     { return next(err); }
-            if(!user)   { return res.send(400); }
+            if(!user)   { return res.send(403); }
 
 
             req.logIn(user, function(err) {

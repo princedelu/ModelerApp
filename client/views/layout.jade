@@ -9,24 +9,27 @@ html(lang='en', data-ng-app='ModelerApp')
         title Outil de modelisation
         link(href='/css/bootstrap-theme.min.css', rel='stylesheet')
         link(href='/css/bootstrap.min.css', rel='stylesheet')
+        link(href='/css/style.min.css', rel='stylesheet')
         link(rel='stylesheet', href='/css/app.css')
 
     body(data-ng-cloak)
 
         include menu
-
+        
         block content
         
-            hr
+        hr
 
-            footer
-                p &copy; SCO 2013
+        footer
+            p &copy; SCO 2013
 
+  
         script(src='/lib/underscore-1.4.4.min.js')
         script(src='/lib/angular.1.2.6.js')
         script(src='/lib/angular-cookies.1.2.6.min.js')
         script(src='/lib/angular-route.1.2.6.min.js')
         script(src='/lib/jquery-1.10.2.min.js')
+        script(src='/lib/jstree.min.js')
         script(src='/lib/bootstrap-3.0.3.min.js')
         script(src='/javascript/routingConfig.js')
         script(src='/javascript/app.js')

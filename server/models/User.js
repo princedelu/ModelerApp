@@ -39,22 +39,6 @@ module.exports = {
         callback(null, user);
     },
 
-    findOrCreateOauthUser: function(provider, providerId) {
-        var user = module.exports.findByProviderId(provider, providerId);
-        if(!user) {
-            user = {
-                id: _.max(users, function(user) { return user.id; }).id + 1,
-                username: provider + '_user', // Should keep Oauth users anonymous on demo site
-                role: userRoles.user,
-                provider: provider
-            };
-            user[provider] = providerId;
-            users.push(user);
-        }
-
-        return user;
-    },
-
     findAll: function() {
         return _.map(users, function(user) { return _.clone(user); });
     },
@@ -92,7 +76,7 @@ module.exports = {
                 done(null, false, { message: 'Incorrect username.' });
             }
             else if(user.password != password) {
-                done(null, false, { message: 'Incorrect username.' });
+                done(null, false, { message: 'Incorrect password.' });
             }
             else {
                 return done(null, user);

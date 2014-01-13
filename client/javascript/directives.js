@@ -53,3 +53,46 @@ angular.module('ModelerApp').directive('activeNav', ['$location', function($loca
     };
 
 }]);
+
+angular.module('ModelerApp').directive('jstree', ['$location', function($location) {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            $(function() {
+                $( "#jstree1" ).jstree({
+                     "core" : {
+                       // so that create works
+                       "check_callback" : true
+                     },
+                    "plugins" : [ "contextmenu" ], contextmenu: {items: customMenu}
+                  });
+            });
+
+            function customMenu(node) {
+                // The default set of all items
+                var id = node.id;
+                id = id.substring(6,id.length+1);
+                var items = {
+                    addItem: {
+                        label: "Ajout",
+                        action: function (node) {   window.location = '/' + id + '/add';
+                                                }
+                    },
+                    listItem: {
+                        label: "Liste",
+                        action: function (node) {window.location = '/' + id + '/list';}
+                    }
+                };
+
+                if ($(node).hasClass("folder")) {
+                    // Delete the "delete" menu item
+                    delete items.deleteItem;
+                }
+
+                return items;
+            }
+        }
+
+    };
+
+}]);

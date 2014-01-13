@@ -64,3 +64,34 @@ angular.module('ModelerApp')
             });
     };
 }]);
+
+angular.module('ModelerApp')
+.controller('ZoneCtrl',
+['$rootScope', '$scope', '$location', 'Zone', function($rootScope, $scope, $location, Zone) {
+	
+	Zone.list(function(res) {
+        $scope.zones = res;
+        $scope.loading = false;
+    }, function(err) {
+        $rootScope.error = "Failed to fetch zones.";
+        $scope.loading = false;
+    });
+
+    $scope.add = function() {
+		$rootScope.success = '';
+		$rootScope.error = '';
+        Zone.add({
+                username: $scope.username,
+                password: $scope.password,
+                role: $scope.role
+            },
+            function() {
+				$rootScope.success = 'Succes';
+                $location.path('/zone/list');
+            },
+            function(err) {
+                $rootScope.error = err;
+				$location.path('/zone/add');
+            });
+    };
+}]);

@@ -10,3 +10,18 @@ body {
 .app-btn-delete{
 	color : #D43F3A;
 }
+
+.app-pastille-error{
+	color : #D43F3A;
+}
+
+#main {
+margin:auto;
+}
+#menuleft  {
+float:left;
+width:190px;
+}
+#contenu {
+margin-left:200px;
+}

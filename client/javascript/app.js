@@ -30,6 +30,12 @@ angular.module('ModelerApp', ['ngCookies', 'ngRoute'])
             controller:     'UserCtrl',
             access:         access.admin
         });
+    $routeProvider.when('/zone/list',
+        {
+            templateUrl:    '/partials/zone/list.jade',
+            controller:     'ZoneCtrl',
+            access:         access.user
+        });
     $routeProvider.when('/404',
         {
             templateUrl:    '/partials/404.jade',
@@ -69,3 +75,9 @@ angular.module('ModelerApp', ['ngCookies', 'ngRoute'])
         });
 
     }]);
+
+$(document).ready(function () {
+	$('label.tree-toggler').click(function () {
+		$(this).parent().children('ul.tree').toggle(200);
+	});
+});
