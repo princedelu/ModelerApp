@@ -3,7 +3,7 @@ var express =       require('express')
     , http =        require('http')
     , passport =    require('passport')
     , path =        require('path')
-    , fs = 	    require('fs')
+    , fs = 	        require('fs')
     , User =        require('./server/models/User.js');
 
 // Variables

@@ -54,7 +54,7 @@ angular.module('ModelerApp').directive('activeNav', ['$location', function($loca
 
 }]);
 
-angular.module('ModelerApp').directive('jstree', ['$location', function($location) {
+angular.module('ModelerApp').directive('jstree', ['$rootScope','$location', function($rootScope,$location) {
     return {
         restrict: 'A',
         link: function(scope, element, attrs) {
@@ -75,12 +75,19 @@ angular.module('ModelerApp').directive('jstree', ['$location', function($locatio
                 var items = {
                     addItem: {
                         label: "Ajout",
-                        action: function (node) {   window.location = '/' + id + '/add';
+                        action: function (node) {   
+                                                    $rootScope.$apply(function(){
+                                                       $location.path('/' + id + '/add'); 
+                                                    });                                   
                                                 }
                     },
                     listItem: {
                         label: "Liste",
-                        action: function (node) {window.location = '/' + id + '/list';}
+                        action: function (node) {
+                                                    $rootScope.$apply(function(){
+                                                       $location.path('/' + id + '/list'); 
+                                                    });  
+                                                }
                     }
                 };
 

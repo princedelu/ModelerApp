@@ -59,7 +59,7 @@ var routesConcat = {};
 
 module.exports = function(app,db) {
 
-	var routesZone = require('./routes-zone');
+	var routesZone = require('./routes-name')('zone');
 
 	routesConcat = _.union(routesZone,routesUser,routes);
 	
