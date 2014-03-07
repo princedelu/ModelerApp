@@ -34,6 +34,23 @@ angular.module('ModelerApp', ['ngCookies', 'ngRoute'])
         {
             templateUrl:    '/partials/zone/list.jade',
             controller:     'ZoneCtrl',
+            action :        'list',
+            access:         access.user
+        });
+    $routeProvider.when('/zone/add',
+        {
+            templateUrl:    '/partials/zone/add.jade',
+            controller:     'ZoneCtrl',
+            action :        'add',
+            access:         access.user
+        });
+    $routeProvider.when('/zone/item/azer',
+        {
+            templateUrl:function(params) { 
+                            return '/partials/zone/get.jade';
+                        },
+            controller:     'ZoneCtrl',
+            action :       'get',
             access:         access.user
         });
     $routeProvider.when('/404',

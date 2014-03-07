@@ -15,6 +15,10 @@ body {
 	color : #D43F3A;
 }
 
+.app-control{
+	width : 75%;
+}
+
 #main {
 margin:auto;
 }
@@ -25,3 +29,5 @@ width:190px;
 #contenu {
 margin-left:200px;
 }
+
+

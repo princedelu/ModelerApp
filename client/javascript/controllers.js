@@ -67,23 +67,28 @@ angular.module('ModelerApp')
 
 angular.module('ModelerApp')
 .controller('ZoneCtrl',
-['$rootScope', '$scope', '$location', 'Zone', function($rootScope, $scope, $location, Zone) {
+['$rootScope', '$scope', '$location','$route','$routeParams', 'Zone', function($rootScope, $scope, $location,$route,$routeParams, Zone) {
 	
-	Zone.list(function(res) {
-        $scope.zones = res;
-        $scope.loading = false;
-    }, function(err) {
-        $rootScope.error = "Failed to fetch zones.";
-        $scope.loading = false;
-    });
+	var action = $route.current.action;
+
+    $scope.list = function() {
+        $rootScope.success = '';
+		$rootScope.error = '';
+        Zone.list(function(res) {
+            $scope.zones = res;
+            $scope.loading = false;
+        }, function(err) {
+            $rootScope.error = "Failed to fetch zones.";
+            $scope.loading = false;
+        });
+     };
 
     $scope.add = function() {
 		$rootScope.success = '';
 		$rootScope.error = '';
         Zone.add({
-                username: $scope.username,
-                password: $scope.password,
-                role: $scope.role
+                nom: $scope.nom,
+                description: $scope.description,
             },
             function() {
 				$rootScope.success = 'Succes';
@@ -94,4 +99,44 @@ angular.module('ModelerApp')
 				$location.path('/zone/add');
             });
     };
+    $scope.delete = function(nom) {
+		$rootScope.success = '';
+		$rootScope.error = '';
+        Zone.delete(nom,
+            function() {
+				$rootScope.success = 'Succes';
+                $route.reload();
+            },
+            function(err) {
+                $rootScope.error = err;
+				$route.reload();
+            });
+    };
+
+    $scope.get = function(nom) {
+		$rootScope.success = '';
+		$rootScope.error = '';
+        Zone.get(nom,
+            function(res) {
+				$scope.zone = res;
+                $scope.loading = false;
+            }, function(err) {
+                $rootScope.error = "Failed to fetch zone.";
+                $scope.loading = false;
+            });
+    };
+
+    console.log("action : " + action);
+    switch (action)
+    {
+        case 'list':
+            $scope.list();
+            break;
+        case 'get':
+            var nom = 'azer';
+            $scope.get(nom);
+            break;
+        default:
+            break;
+    }
 }]);

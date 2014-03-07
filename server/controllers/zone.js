@@ -25,7 +25,7 @@ module.exports = {
         res.send(200);
     },
 	add : function(req, res) {
-	    var zone = new Zone({nom : req.params.nom, description : req.params.description});
+	    var zone = new Zone({nom : req.body.nom, description : req.body.description});
 	    zone.save(function (err) {
 	      if (err) { res.send(403,'Erreur interne') }
 	      console.log('Zone ajoutée avec succès !');

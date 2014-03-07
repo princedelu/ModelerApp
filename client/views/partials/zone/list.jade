@@ -12,9 +12,10 @@ div(id='contenu')
         tbody
             tr(data-ng-repeat="zone in zones")
                 td 
-                   | {{ zone.nom }}
+                    a(href='/zone/item/{{ zone.nom }}')
+                        | {{ zone.nom }}
                 td
                    | {{ zone.description }}
                 td
-                    button(type='button',class='btn btn-link app-btn-delete')
+                    button(type='button',class='btn btn-link app-btn-delete',ng-click='delete(zone.nom)')
                         span(class='glyphicon glyphicon-remove')

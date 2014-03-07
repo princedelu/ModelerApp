@@ -59,9 +59,8 @@ angular.module('ModelerApp').directive('jstree', ['$rootScope','$location', func
         restrict: 'A',
         link: function(scope, element, attrs) {
             $(function() {
-                $( "#jstree1" ).jstree({
+               $(element[0]).jstree({
                      "core" : {
-                       // so that create works
                        "check_callback" : true
                      },
                     "plugins" : [ "contextmenu" ], contextmenu: {items: customMenu}

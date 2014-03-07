@@ -70,8 +70,18 @@ angular.module('ModelerApp')
         list: function(success, error) {
             $http.get('/api/zone').success(success).error(error);
         },
-		add: function(user, success, error) {
-            $http.post('/api/zone', user).success(function(res) {
+		add: function(zone, success, error) {
+            $http.post('/api/zone', zone).success(function(res) {
+                success();
+            }).error(error);
+        },
+        get: function(nom, success, error) {
+            $http.get('/api/zone/' + nom).success(function(res) {
+                success();
+            }).error(error);
+        },
+        delete: function(nom, success, error) {
+            $http.delete('/api/zone/' + nom).success(function(res) {
                 success();
             }).error(error);
         }
