@@ -1,4 +1,3 @@
-'use strict';
 
 angular.module('ModelerApp', ['ngCookies', 'ngRoute'])
 
@@ -18,38 +17,30 @@ angular.module('ModelerApp', ['ngCookies', 'ngRoute'])
             controller:     'LoginCtrl',
             access:         access.user
         });
-	$routeProvider.when('/user/add',
+    $routeProvider.when('/:objet/list',
         {
-            templateUrl:    '/partials/user/add.jade',
-			controller:     'UserCtrl',
-            access:         access.admin
-        });
-    $routeProvider.when('/user/list',
-        {
-            templateUrl:    '/partials/user/list.jade',
-            controller:     'UserCtrl',
-            access:         access.admin
-        });
-    $routeProvider.when('/zone/list',
-        {
-            templateUrl:    '/partials/zone/list.jade',
-            controller:     'ZoneCtrl',
+            templateUrl:    function(params) {
+                                return '/partials/' + params.objet + '/list.jade';
+                            },
+            controller:     'dynamicCtrl',
             action :        'list',
             access:         access.user
         });
-    $routeProvider.when('/zone/add',
+    $routeProvider.when('/:objet/add',
         {
-            templateUrl:    '/partials/zone/add.jade',
-            controller:     'ZoneCtrl',
+            templateUrl:    function(params) {
+                                return '/partials/' + params.objet + '/get.jade';
+                            },
+            controller:     'dynamicCtrl',
             action :        'add',
             access:         access.user
         });
-    $routeProvider.when('/zone/item/azer',
+    $routeProvider.when('/:objet/item/:id',
         {
             templateUrl:function(params) { 
-                            return '/partials/zone/get.jade';
+                            return '/partials/' + params.objet + '/get.jade';
                         },
-            controller:     'ZoneCtrl',
+            controller:    'dynamicCtrl',
             action :       'get',
             access:         access.user
         });
@@ -86,9 +77,7 @@ angular.module('ModelerApp', ['ngCookies', 'ngRoute'])
             if (!Auth.authorize(next.access)) {
                if(Auth.isLoggedIn()) $location.path('/home');
                else                  $location.path('/');
-            }else{
-				  $location.path(next.originalPath);
-			}
+            }
         });
 
     }]);

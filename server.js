@@ -26,7 +26,6 @@ app.use(express.cookieSession(
         secret: process.env.COOKIE_SECRET || "Superdupersecret"
     }));
 
-
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(User.localStrategy);

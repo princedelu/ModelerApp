@@ -32,111 +32,129 @@ angular.module('ModelerApp')
     };
 }]);
 
-angular.module('ModelerApp')
-.controller('UserCtrl',
-['$rootScope', '$scope', '$location', 'User', function($rootScope, $scope, $location, User) {
-    $scope.role = User.userRoles.user;
-    $scope.userRoles = User.userRoles;
+var controllers = {
+    userCtrl : function($rootScope, $scope, $location,$route,$routeParams, User) {
+
+                    $scope.role = User.userRoles.user;
+                    $scope.userRoles = User.userRoles;
+                    var nomObjet = 'user';
 	
-	User.list(function(res) {
-        $scope.users = res;
-        $scope.loading = false;
-    }, function(err) {
-        $rootScope.error = "Failed to fetch users.";
-        $scope.loading = false;
-    });
+	                User.list(nomObjet,function(res) {
+                        $scope.users = res;
+                        $scope.loading = false;
+                    }, function(err) {
+                        $rootScope.error = "Failed to fetch users.";
+                        $scope.loading = false;
+                    });
 
-    $scope.add = function() {
-		$rootScope.success = '';
-		$rootScope.error = '';
-        User.add({
-                username: $scope.username,
-                password: $scope.password,
-                role: $scope.role
-            },
-            function() {
-				$rootScope.success = 'Succes';
-                $location.path('/user/list');
-            },
-            function(err) {
-                $rootScope.error = err;
-				$location.path('/user/add');
-            });
-    };
-}]);
+                    $scope.add = function() {
+		                $rootScope.success = '';
+		                $rootScope.error = '';
+                        User.add(nomObjet,{
+                                username: $scope.username,
+                                password: $scope.password,
+                                role: $scope.role
+                            },
+                            function() {
+				                $rootScope.success = 'Succes';
+                                $location.path('/user/list');
+                            },
+                            function(err) {
+                                $rootScope.error = err;
+				                $location.path('/user/add');
+                            });
+                    };
+               },
+
+        zoneCtrl : function($rootScope, $scope, $location,$route,$routeParams, Zone) {
+	
+	                    var action = $route.current.action;
+                        $scope.action = action;
+                        var nomObjet = 'zone';
+
+                        $scope.list = function() {
+                            $rootScope.success = '';
+		                    $rootScope.error = '';
+                            Zone.list(nomObjet,function(res) {
+                                $scope.zones = res;
+                                $scope.loading = false;
+                            }, function(err) {
+                                $rootScope.error = "Failed to fetch zones.";
+                                $scope.loading = false;
+                            });
+                         };
+
+                        $scope.add = function() {
+		                    $rootScope.success = '';
+		                    $rootScope.error = '';
+                            if (action == 'get'){
+                                $scope.update();
+                            }else{
+                                Zone.add(nomObjet,{
+                                        nom: $scope.nom,
+                                        description: $scope.description,
+                                    },
+                                    function() {
+				                        $rootScope.success = 'Succes';
+                                        $location.path('/zone/list');
+                                    },
+                                    function(err) {
+                                        $rootScope.error = err;
+				                        $location.path('/zone/add');
+                                    });
+                            }
+                        };
+                        
+                        $scope.update = function() {
+		                    $rootScope.success = '';
+		                    $rootScope.error = '';
+                            $location.path('/zone/list');
+                        };
+                        
+                        $scope.delete = function(id) {
+		                    $rootScope.success = '';
+		                    $rootScope.error = '';
+                            Zone.delete(nomObjet,id,
+                                function() {
+				                    $rootScope.success = 'Succes';
+                                    $route.reload();
+                                },
+                                function(err) {
+                                    $rootScope.error = err;
+				                    $route.reload();
+                                });
+                        };
+
+                        $scope.get = function(id) {
+		                    $rootScope.success = '';
+		                    $rootScope.error = '';
+                            Zone.get(nomObjet,id,
+                                function(res) {
+				                    $scope.nom = res.nom;
+                                    $scope.description = res.description;
+                                    $scope.loading = false;
+                                }, function(err) {
+                                    $rootScope.error = "Failed to fetch zone.";
+                                    $scope.loading = false;
+                                });
+                        };
+
+                        switch (action)
+                        {
+                            case 'list':
+                                $scope.list();
+                                break;
+                            case 'get':
+                                var id = $routeParams.id;
+                                $scope.get(id);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+};
 
 angular.module('ModelerApp')
-.controller('ZoneCtrl',
-['$rootScope', '$scope', '$location','$route','$routeParams', 'Zone', function($rootScope, $scope, $location,$route,$routeParams, Zone) {
-	
-	var action = $route.current.action;
-
-    $scope.list = function() {
-        $rootScope.success = '';
-		$rootScope.error = '';
-        Zone.list(function(res) {
-            $scope.zones = res;
-            $scope.loading = false;
-        }, function(err) {
-            $rootScope.error = "Failed to fetch zones.";
-            $scope.loading = false;
-        });
-     };
-
-    $scope.add = function() {
-		$rootScope.success = '';
-		$rootScope.error = '';
-        Zone.add({
-                nom: $scope.nom,
-                description: $scope.description,
-            },
-            function() {
-				$rootScope.success = 'Succes';
-                $location.path('/zone/list');
-            },
-            function(err) {
-                $rootScope.error = err;
-				$location.path('/zone/add');
-            });
-    };
-    $scope.delete = function(nom) {
-		$rootScope.success = '';
-		$rootScope.error = '';
-        Zone.delete(nom,
-            function() {
-				$rootScope.success = 'Succes';
-                $route.reload();
-            },
-            function(err) {
-                $rootScope.error = err;
-				$route.reload();
-            });
-    };
-
-    $scope.get = function(nom) {
-		$rootScope.success = '';
-		$rootScope.error = '';
-        Zone.get(nom,
-            function(res) {
-				$scope.zone = res;
-                $scope.loading = false;
-            }, function(err) {
-                $rootScope.error = "Failed to fetch zone.";
-                $scope.loading = false;
-            });
-    };
-
-    console.log("action : " + action);
-    switch (action)
-    {
-        case 'list':
-            $scope.list();
-            break;
-        case 'get':
-            var nom = 'azer';
-            $scope.get(nom);
-            break;
-        default:
-            break;
-    }
+.controller('dynamicCtrl', ['$rootScope', '$scope', '$location','$route','$routeParams', 'Objet', function($rootScope, $scope, $location,$route,$routeParams, Objet) { 
+    controllers[$routeParams.objet+"Ctrl"]($rootScope, $scope, $location,$route,$routeParams, Objet);
 }]);

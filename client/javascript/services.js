@@ -47,47 +47,25 @@ angular.module('ModelerApp')
 });
 
 angular.module('ModelerApp')
-.factory('User', function($http) {
+.factory('Objet', function($http) {
 	var userRoles = routingConfig.userRoles;
-	
+
 	return {
-        list: function(success, error) {
-            $http.get('/api/user').success(success).error(error);
+        list: function(nomObjet,success, error) {
+            $http.get('/api/'+ nomObjet).success(success).error(error);
         },
-		add: function(user, success, error) {
-            $http.post('/api/user', user).success(function(res) {
-                success();
-            }).error(error);
+		add: function(nomObjet,objet, success, error) {
+            $http.post('/api/' + nomObjet, objet).success(success).error(error);
         },
-		userRoles: userRoles,
+        get: function(nomObjet,id, success, error) {
+            $http.get('/api/' + nomObjet + '/' + id).success(success).error(error);
+        },
+        delete: function(nomObjet,id, success, error) {
+            $http.delete('/api/' + nomObjet + '/' + id).success(success).error(error);
+        },
+		userRoles : userRoles
     };
 });
-
-angular.module('ModelerApp')
-.factory('Zone', function($http) {
-	
-	return {
-        list: function(success, error) {
-            $http.get('/api/zone').success(success).error(error);
-        },
-		add: function(zone, success, error) {
-            $http.post('/api/zone', zone).success(function(res) {
-                success();
-            }).error(error);
-        },
-        get: function(nom, success, error) {
-            $http.get('/api/zone/' + nom).success(function(res) {
-                success();
-            }).error(error);
-        },
-        delete: function(nom, success, error) {
-            $http.delete('/api/zone/' + nom).success(function(res) {
-                success();
-            }).error(error);
-        }
-    };
-});
-
 
 
 

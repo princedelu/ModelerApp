@@ -13,6 +13,7 @@ var routes = [
 		httpMethod: 'GET',
 		middleware: [function (req, res) {
 			var requestedView = path.join('./', req.url);
+            console.log('requestView ' + requestedView);
 			res.render(requestedView);
 		}]
 	},
