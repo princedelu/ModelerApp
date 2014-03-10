@@ -1,8 +1,9 @@
 include ../../menuleft
 
 div(id='contenu')
-    h1 Ajout d'une zone
-    form(ng-submit="add()", name="addForm",role='form')
+    h1(data-ng-if="action == 'add'") Ajout d'un bloc
+    h1(data-ng-if="action != 'add'") Affichage d'un bloc
+    form(ng-submit='add()', name="addForm",role='form')
         div(class='form-group')
             label(for='nom') Nom
             input(type="text", data-ng-model="nom", id='nom', placeholder="Nom", name="nom", required, data-ng-minlength="1", data-ng-maxlength="20", autofocus,class='form-control app-control')
@@ -21,3 +22,5 @@ div(id='contenu')
                 li(ng-show="addForm.description.$error.required") Une description est requise
                 li(ng-show="addForm.description.$error.$error.minlength") La description doit avoir une longueur minimale de 1
                 li(ng-show="addForm.description.$error.maxlength") La description doit avoir une longueur maximum de 60
+        div(ng-show="doublon") Merci de saisir un autre nom, celui-ci est déjà utilisé
+        

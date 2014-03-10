@@ -16,7 +16,6 @@ module.exports = {
         res.json(user);
     },
 	delete : function(req, res) {
-	console.log(req.params.nom);
         res.send();
     },
 	add : function(req, res) {

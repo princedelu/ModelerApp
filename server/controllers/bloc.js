@@ -1,50 +1,50 @@
-var _ = require('underscore'), Zone = require('../models/Zone.js'), result;
+var _ = require('underscore'), Bloc = require('../models/Bloc.js'), result;
 
 module.exports = {
 	list: function(req, res) {
-		Zone.find(null, function (err, zones) {
+		Bloc.find(null, function (err, blocs) {
 			if (err) { res.send(403,'Erreur interne'); }
-			res.send(200,zones);
+			res.send(200,blocs);
 		});
 	},
 	get: function(req, res) {
-		var query = Zone.findOne(null);
+		var query = Bloc.findOne(null);
 		query.where('nom', req.params.nom);
-		query.exec(function (err, zone) {
+		query.exec(function (err, bloc) {
 			if (err) { res.send(403,'Erreur interne'); }
-			res.send(200,zone);
+			res.send(200,bloc);
 		});
 	},
 	delete : function(req, res) {
-		Zone.remove({
+		Bloc.remove({
 			nom : req.params.nom
 		}, function(err) {
 			if (err) {
 				res.send(403, 'Erreur interne');
 			}
-			console.log('Zone supprimée avec succès !');
+			console.log('Bloc supprimé avec succès !');
 		});
 		res.send(200);
-	}, 
+	},
 	add : function(req, res) {
-		var query = Zone.findOne(null);
+		var query = Bloc.findOne(null);
 		query.where('nom', req.body.nom);
-		query.exec(function(err, zone) {
+		query.exec(function(err, bloc) {
 			if (err) {
 				res.send(403, 'Erreur interne');
 			}
-			if (zone != null) {
+			if (bloc != null) {
 				res.send(403, 'Doublon');
 			}else{
-				var zone = new Zone({
+				var bloc = new Bloc({
 					nom : req.body.nom,
 					description : req.body.description
 				});
-				zone.save(function(err) {
+				bloc.save(function(err) {
 					if (err) {
 						res.send(403, 'Erreur interne')
 					}
-					console.log('Zone ajoutée avec succès !');
+					console.log('Bloc ajouté avec succès !');
 				});
 				res.send(200);
 			}

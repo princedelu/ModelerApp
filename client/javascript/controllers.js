@@ -19,7 +19,7 @@ angular.module('ModelerApp')
                 $location.path('/home');
             },
             function(err) {
-                $rootScope.error = "Failed to login";
+                $scope.error = "Failed to login";
             });
     };
 	
@@ -27,7 +27,7 @@ angular.module('ModelerApp')
         Auth.logout(function() {
             $location.path('/');
         }, function() {
-            $rootScope.error = "Failed to logout";
+            $scope.error = "Failed to logout";
         });
     };
 }]);
@@ -43,24 +43,24 @@ var controllers = {
                         $scope.users = res;
                         $scope.loading = false;
                     }, function(err) {
-                        $rootScope.error = "Failed to fetch users.";
+                        $scope.error = "Failed to fetch users.";
                         $scope.loading = false;
                     });
 
                     $scope.add = function() {
-		                $rootScope.success = '';
-		                $rootScope.error = '';
+		                $scope.success = '';
+		                $scope.error = '';
                         User.add(nomObjet,{
                                 username: $scope.username,
                                 password: $scope.password,
                                 role: $scope.role
                             },
                             function() {
-				                $rootScope.success = 'Succes';
+				                $scope.success = 'Succes';
                                 $location.path('/user/list');
                             },
                             function(err) {
-                                $rootScope.error = err;
+                                $scope.error = err;
 				                $location.path('/user/add');
                             });
                     };
@@ -73,20 +73,20 @@ var controllers = {
                         var nomObjet = 'zone';
 
                         $scope.list = function() {
-                            $rootScope.success = '';
-		                    $rootScope.error = '';
+                            $scope.success = '';
+		                    $scope.error = '';
                             Zone.list(nomObjet,function(res) {
                                 $scope.zones = res;
                                 $scope.loading = false;
                             }, function(err) {
-                                $rootScope.error = "Failed to fetch zones.";
+                                $scope.error = "Failed to fetch zones.";
                                 $scope.loading = false;
                             });
                          };
 
                         $scope.add = function() {
-		                    $rootScope.success = '';
-		                    $rootScope.error = '';
+		                    $scope.success = '';
+		                    $scope.error = '';
                             if (action == 'get'){
                                 $scope.update();
                             }else{
@@ -95,46 +95,135 @@ var controllers = {
                                         description: $scope.description,
                                     },
                                     function() {
-				                        $rootScope.success = 'Succes';
-                                        $location.path('/zone/list');
+				                        $scope.success = 'Succes';
+                                        $location.path('/' + nomObjet + '/list');
                                     },
                                     function(err) {
-                                        $rootScope.error = err;
-				                        $location.path('/zone/add');
+                                        $scope.error = err;
+                                        if (err == 'Doublon'){$scope.doublon='true';}
+				                        $location.path('/' + nomObjet + '/add');
                                     });
                             }
                         };
                         
                         $scope.update = function() {
-		                    $rootScope.success = '';
-		                    $rootScope.error = '';
-                            $location.path('/zone/list');
+		                    $scope.success = '';
+		                    $scope.error = '';
+                            $location.path('/' + nomObjet + '/list');
                         };
                         
                         $scope.delete = function(id) {
-		                    $rootScope.success = '';
-		                    $rootScope.error = '';
+		                    $scope.success = '';
+		                    $scope.error = '';
                             Zone.delete(nomObjet,id,
                                 function() {
-				                    $rootScope.success = 'Succes';
+				                    $scope.success = 'Succes';
                                     $route.reload();
                                 },
                                 function(err) {
-                                    $rootScope.error = err;
+                                    $scope.error = err;
 				                    $route.reload();
                                 });
                         };
 
                         $scope.get = function(id) {
-		                    $rootScope.success = '';
-		                    $rootScope.error = '';
+		                    $scope.success = '';
+		                    $scope.error = '';
                             Zone.get(nomObjet,id,
                                 function(res) {
 				                    $scope.nom = res.nom;
                                     $scope.description = res.description;
                                     $scope.loading = false;
                                 }, function(err) {
-                                    $rootScope.error = "Failed to fetch zone.";
+                                    $scope.error = "Failed to fetch zone.";
+                                    $scope.loading = false;
+                                });
+                        };
+
+                        switch (action)
+                        {
+                            case 'list':
+                                $scope.list();
+                                break;
+                            case 'get':
+                                var id = $routeParams.id;
+                                $scope.get(id);
+                                break;
+                            default:
+                                break;
+                        }
+                    },
+
+        blocCtrl : function($rootScope, $scope, $location,$route,$routeParams, Bloc) {
+	
+	                    var action = $route.current.action;
+                        $scope.action = action;
+                        var nomObjet = 'bloc';
+
+                        $scope.list = function() {
+                            $scope.success = '';
+		                    $scope.error = '';
+                            Bloc.list(nomObjet,function(res) {
+                                $scope.blocs = res;
+                                $scope.loading = false;
+                            }, function(err) {
+                                $scope.error = "Failed to fetch blocs.";
+                                $scope.loading = false;
+                            });
+                         };
+
+                        $scope.add = function() {
+		                    $scope.success = '';
+		                    $scope.error = '';
+                            if (action == 'get'){
+                                $scope.update();
+                            }else{
+                                Bloc.add(nomObjet,{
+                                        nom: $scope.nom,
+                                        description: $scope.description,
+                                    },
+                                    function() {
+				                        $scope.success = 'Succes';
+                                        $location.path('/' + nomObjet + '/list');
+                                    },
+                                    function(err) {
+                                        $scope.error = err;
+                                        if (err == 'Doublon'){$scope.doublon='true';}
+				                        $location.path('/' + nomObjet + '/add');
+                                    });
+                            }
+                        };
+                        
+                        $scope.update = function() {
+		                    $scope.success = '';
+		                    $scope.error = '';
+                            $location.path('/' + nomObjet + '/list');
+                        };
+                        
+                        $scope.delete = function(id) {
+		                    $scope.success = '';
+		                    $scope.error = '';
+                            Bloc.delete(nomObjet,id,
+                                function() {
+				                    $scope.success = 'Succes';
+                                    $route.reload();
+                                },
+                                function(err) {
+                                    $scope.error = err;
+				                    $route.reload();
+                                });
+                        };
+
+                        $scope.get = function(id) {
+		                    $scope.success = '';
+		                    $scope.error = '';
+                            Bloc.get(nomObjet,id,
+                                function(res) {
+				                    $scope.nom = res.nom;
+                                    $scope.description = res.description;
+                                    $scope.loading = false;
+                                }, function(err) {
+                                    $scope.error = "Failed to fetch zone.";
                                     $scope.loading = false;
                                 });
                         };
