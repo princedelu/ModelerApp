@@ -109,13 +109,27 @@ var controllers = {
                         $scope.update = function() {
 		                    $scope.success = '';
 		                    $scope.error = '';
-                            $location.path('/' + nomObjet + '/list');
+
+                            Zone.put(nomObjet,{
+                                        _id : $scope._id,
+                                        nom: $scope.nom,
+                                        description: $scope.description,
+                                    },
+                                    function() {
+                                        $scope.success = 'Succes';
+                                        $location.path('/' + nomObjet + '/list');
+                                    },
+                                    function(err) {
+                                        $scope.error = err;
+                                        if (err == 'Doublon'){$scope.doublon='true';}
+                                       $location.path('/' + nomObjet + '/item/' + $routeParams.id);
+                                    });
                         };
                         
-                        $scope.delete = function(id) {
+                        $scope.delete = function(nom) {
 		                    $scope.success = '';
 		                    $scope.error = '';
-                            Zone.delete(nomObjet,id,
+                            Zone.delete(nomObjet,nom,
                                 function() {
 				                    $scope.success = 'Succes';
                                     $route.reload();
@@ -131,6 +145,7 @@ var controllers = {
 		                    $scope.error = '';
                             Zone.get(nomObjet,id,
                                 function(res) {
+				                    $scope._id = res._id;
 				                    $scope.nom = res.nom;
                                     $scope.description = res.description;
                                     $scope.loading = false;
@@ -195,9 +210,23 @@ var controllers = {
                         };
                         
                         $scope.update = function() {
-		                    $scope.success = '';
-		                    $scope.error = '';
-                            $location.path('/' + nomObjet + '/list');
+                            $scope.success = '';
+                            $scope.error = '';
+
+                            Bloc.put(nomObjet,{
+                                        _id : $scope._id,
+                                        nom: $scope.nom,
+                                        description: $scope.description,
+                                    },
+                                    function() {
+                                        $scope.success = 'Succes';
+                                        $location.path('/' + nomObjet + '/list');
+                                    },
+                                    function(err) {
+                                        $scope.error = err;
+                                        if (err == 'Doublon'){$scope.doublon='true';}
+                                       $location.path('/' + nomObjet + '/item/' + $routeParams.id);
+                                    });
                         };
                         
                         $scope.delete = function(id) {
@@ -219,6 +248,7 @@ var controllers = {
 		                    $scope.error = '';
                             Bloc.get(nomObjet,id,
                                 function(res) {
+                                    $scope._id = res._id;
 				                    $scope.nom = res.nom;
                                     $scope.description = res.description;
                                     $scope.loading = false;
@@ -227,6 +257,18 @@ var controllers = {
                                     $scope.loading = false;
                                 });
                         };
+                        
+                        $scope.loadListe = function() {
+                            $scope.success = '';
+                            $scope.error = '';
+                            Bloc.list("zone",function(res) {
+                                $scope.zones = res;
+                                $scope.loading = false;
+                            }, function(err) {
+                                $scope.error = "Failed to fetch zones.";
+                                $scope.loading = false;
+                            });
+                         };
 
                         switch (action)
                         {
@@ -236,6 +278,9 @@ var controllers = {
                             case 'get':
                                 var id = $routeParams.id;
                                 $scope.get(id);
+                                break;
+                            case 'add':
+                                $scope.loadListe();
                                 break;
                             default:
                                 break;

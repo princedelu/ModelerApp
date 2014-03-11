@@ -11,6 +11,7 @@ div(id='contenu')
             label(for='description') Description
             textarea(rows=4, data-ng-model="description", placeholder="Description", name="description", required, data-ng-minlength="1", data-ng-maxlength="60",class='form-control app-control')
         div(class='form-group')
+            input(type="hidden", data-ng-model="_id", id='_id', name="_id")
             button.btn(type="submit", data-ng-disabled="addForm.$invalid") Valider
 
         .alert.alert-error(ng-show="addForm.$invalid && addForm.$dirty")

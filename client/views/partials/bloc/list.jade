@@ -8,6 +8,7 @@ div(id='contenu')
             tr
                 th Nom
                 th Description
+                th Zone
                 th Action
         tbody
             tr(data-ng-repeat="bloc in blocs")
@@ -16,6 +17,8 @@ div(id='contenu')
                         | {{ bloc.nom }}
                 td
                    | {{ bloc.description }}
+                td
+                   | {{ bloc.zoneNom }}
                 td
                     button(type='button',class='btn btn-link app-btn-delete',ng-click='delete(bloc.nom)')
                         span(class='glyphicon glyphicon-remove')

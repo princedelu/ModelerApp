@@ -37,9 +37,9 @@ module.exports = exports = function(name) {
 	
 	    // Put 
 	    {
-		    path: '/api/'+ name + '/:nom',
+		    path: '/api/'+ name,
 		    httpMethod: 'PUT',
-		    middleware: [Ctrl.get],
+		    middleware: [Ctrl.put],
 		    accessLevel: accessLevels.user
 	    },
 	

@@ -63,6 +63,9 @@ angular.module('ModelerApp')
         delete: function(nomObjet,id, success, error) {
             $http.delete('/api/' + nomObjet + '/' + id).success(success).error(error);
         },
+        put: function(nomObjet,objet, success, error) {
+            $http.put('/api/' + nomObjet, objet).success(success).error(error);
+        },
 		userRoles : userRoles
     };
 });
