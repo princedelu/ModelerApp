@@ -1,0 +1,27 @@
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+.app-user-info{
+	color : #FFFFFF;
+}
+
+.app-btn-delete{
+	color : #D43F3A;
+}
+
+.app-pastille-error{
+	color : #D43F3A;
+}
+
+#main {
+margin:auto;
+}
+#menuleft  {
+float:left;
+width:190px;
+}
+#contenu {
+margin-left:200px;
+}

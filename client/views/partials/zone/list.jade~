@@ -1,0 +1,21 @@
+include ../../menuleft
+
+div(id='contenu')
+    h1 Adminstration des zones
+
+    table.table.table-striped.table-condensed(data-ng-hide="loading")
+        thead
+            tr
+                th Nom
+                th Description
+                th Action
+        tbody
+            tr(data-ng-repeat="zone in zones")
+                td 
+                    a(href='#/zone/item/{{ zone.nom }}')
+                        | {{ zone.nom }}
+                td
+                   | {{ zone.description }}
+                td
+                    button(type='button',class='btn btn-link app-btn-delete',ng-click='delete(zone.nom)')
+                        span(class='glyphicon glyphicon-remove')

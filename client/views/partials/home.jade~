@@ -1,0 +1,4 @@
+include ../menuleft
+
+    h1 Hello user
+    p This view is visible to logged in users.

@@ -1,0 +1,24 @@
+include ../../menuleft
+
+div(id='contenu')
+    h1 Adminstration des quartiers
+
+    table.table.table-striped.table-condensed(data-ng-hide="loading")
+        thead
+            tr
+                th Nom
+                th Description
+                th Bloc
+                th Action
+        tbody
+            tr(data-ng-repeat="quartier in quartiers")
+                td 
+                    a(href='/quartier/item/{{ quartier.nom }}')
+                        | {{ quartier.nom }}
+                td
+                   | {{ quartier.description }}
+                td
+                   | {{ quartier.bloc.nom }}
+                td
+                    button(type='button',class='btn btn-link app-btn-delete',ng-click='delete(quartier.nom)')
+                        span(class='glyphicon glyphicon-remove')

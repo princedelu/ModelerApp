@@ -1,0 +1,7 @@
+var mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost/modelerapp', function(err) {
+	if (err) console.log("Connexion en erreur");
+	else console.log("Connexion en OK");
+});
+module.exports = exports = mongoose;

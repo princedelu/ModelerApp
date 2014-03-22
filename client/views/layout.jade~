@@ -1,0 +1,39 @@
+doctype html
+html(lang='en', data-ng-app='ModelerApp')
+    head
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible',content='IE=edge')
+        meta(name='description',content='Outil de modelisation')
+        meta(name='author',content='SCO')
+        link(rel='shortcut icon',href='../../docs-assets/ico/favicon.png')
+        title Outil de modelisation
+        link(href='/css/bootstrap-theme.min.css', rel='stylesheet')
+        link(href='/css/bootstrap.min.css', rel='stylesheet')
+        link(href='/css/style.min.css', rel='stylesheet')
+        link(rel='stylesheet', href='/css/app.css')
+
+    body(data-ng-cloak)
+
+        include menu
+        
+        block content
+        
+        hr
+
+        footer
+            p &copy; SCO 2013
+
+  
+        script(src='/lib/underscore-1.4.4.min.js')
+        script(src='/lib/angular.1.2.6.js')
+        script(src='/lib/angular-cookies.1.2.6.min.js')
+        script(src='/lib/angular-route.1.2.6.min.js')
+        script(src='/lib/jquery-1.10.2.min.js')
+        script(src='/lib/jstree.min.js')
+        script(src='/lib/bootstrap-3.0.3.min.js')
+        script(src='/javascript/routingConfig.js')
+        script(src='/javascript/app.js')
+        script(src='/javascript/services.js')
+        script(src='/javascript/controllers.js')
+        script(src='/javascript/filters.js')
+        script(src='/javascript/directives.js')
