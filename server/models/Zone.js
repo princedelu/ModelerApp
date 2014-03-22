@@ -10,4 +10,4 @@ var zoneSchema = new Schema({
 	description : String 
 });
 
-module.exports = exports = mongoose.model('zones', zoneSchema);
+module.exports = exports = mongoose.model('zone', zoneSchema);

@@ -29,12 +29,27 @@ module.exports = {
             if (zone != null && zone._id != id) {
                 res.send(403, 'Doublon');
             }else{
-                Zone.update(conditions,{nom : req.body.nom,description : req.body.description },options,function(err) {
-                    if (err) {
-                        res.send(403, 'Erreur interne')
-                    }
-                    console.log('Zone mise à jour avec succès !');
-                });
+                var zoneObject = {
+					    nom : req.body.nom,
+					    description : req.body.description
+				    };
+                var zone = new Zone(zoneObject);
+                if (id==null)
+                {
+				    zone.save(function(err) {
+					    if (err) {
+						    res.send(403, 'Erreur interne')
+					    }
+					    console.log('Zone ajoutée avec succès !');
+				    });
+                } else {
+                    Zone.update(conditions,zoneObject,options,function(err) {
+                        if (err) {
+                            res.send(403, 'Erreur interne')
+                        }
+                        console.log('Zone mise à jour avec succès !');
+                    });
+                }
                 res.send(200);
             }
         });
@@ -49,29 +64,5 @@ module.exports = {
 			console.log('Zone supprimée avec succès !');
 		});
 		res.send(200);
-	}, 
-	add : function(req, res) {
-		var query = Zone.findOne(null);
-		query.where('nom', req.body.nom);
-		query.exec(function(err, zone) {
-			if (err) {
-				res.send(403, 'Erreur interne');
-			}
-			if (zone != null) {
-				res.send(403, 'Doublon');
-			}else{
-				var zone = new Zone({
-					nom : req.body.nom,
-					description : req.body.description
-				});
-				zone.save(function(err) {
-					if (err) {
-						res.send(403, 'Erreur interne')
-					}
-					console.log('Zone ajoutée avec succès !');
-				});
-				res.send(200);
-			}
-		});
 	}
 };

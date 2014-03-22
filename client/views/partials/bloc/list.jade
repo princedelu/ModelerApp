@@ -18,7 +18,7 @@ div(id='contenu')
                 td
                    | {{ bloc.description }}
                 td
-                   | {{ bloc.zoneNom }}
+                   | {{ bloc.zone.nom }}
                 td
                     button(type='button',class='btn btn-link app-btn-delete',ng-click='delete(bloc.nom)')
                         span(class='glyphicon glyphicon-remove')

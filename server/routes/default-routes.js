@@ -61,8 +61,9 @@ module.exports = function(app,db) {
 
 	var routesZone = require('./routes-name')('zone');
 	var routesBloc = require('./routes-name')('bloc');
+    var routesQuartier = require('./routes-name')('quartier');
 
-	routesConcat = _.union(routesBloc,routesZone,routesUser,routes);
+	routesConcat = _.union(routesQuartier,routesBloc,routesZone,routesUser,routes);
 	
     _.each(routesConcat, function(route) {
         route.middleware.unshift(ensureAuthorized);

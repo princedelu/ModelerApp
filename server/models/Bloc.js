@@ -1,6 +1,5 @@
 var Bloc
-	,mongoose = require('../database.js')
-	,Zone = require('../models/Zone.js');
+	,mongoose = require('../database.js');
 
 var Schema = mongoose.Schema,
     ObjectId = Schema.ObjectId;
@@ -9,7 +8,7 @@ var Schema = mongoose.Schema,
 var blocSchema = new Schema({
 	nom : { type : String },
 	description : String,
-	zone : {type: Schema.Types.ObjectId,ref: 'Zone'}
+	zone : {type: Schema.Types.ObjectId,ref: 'zone'}
 });
 
-module.exports = exports = mongoose.model('blocs', blocSchema);
+module.exports = exports = mongoose.model('bloc', blocSchema);

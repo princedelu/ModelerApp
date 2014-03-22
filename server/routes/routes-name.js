@@ -55,7 +55,7 @@ module.exports = exports = function(name) {
 	    {
 		    path: '/api/'+ name,
 		    httpMethod: 'POST',
-		    middleware: [Ctrl.add],
+		    middleware: [Ctrl.put],
 		    accessLevel: accessLevels.user
 	    },
 
