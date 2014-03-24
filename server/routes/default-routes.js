@@ -5,7 +5,8 @@ var _ =           require('underscore')
     , User =      require('../models/User.js')
 	, routesUser = require('./routes-user')
     , userRoles = require('../../client/javascript/routingConfig').userRoles
-    , accessLevels = require('../../client/javascript/routingConfig').accessLevels;
+    , accessLevels = require('../../client/javascript/routingConfig').accessLevels
+    , config = require('../../client/javascript/config.json');
 
 var routes = [
 
@@ -58,12 +59,14 @@ var routes = [
 var routesConcat = {};
 
 module.exports = function(app,db) {
+    
+    routesConcat = _.union(routesUser,routes);
 
-	var routesZone = require('./routes-name')('zone');
-	var routesBloc = require('./routes-name')('bloc');
-    var routesQuartier = require('./routes-name')('quartier');
-
-	routesConcat = _.union(routesQuartier,routesBloc,routesZone,routesUser,routes);
+    for(var index=0;index<config.length;index++){
+        var element = config[index];
+        var routesElement = require('./routes-name')(element.model,index);
+        routesConcat = _.union(routesElement,routesConcat);
+    }
 	
     _.each(routesConcat, function(route) {
         route.middleware.unshift(ensureAuthorized);

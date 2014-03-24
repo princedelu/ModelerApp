@@ -1,8 +1,8 @@
 
 
-module.exports = exports = function(name) {
+module.exports = exports = function(name,index) {
 
-    var Ctrl =  		require('../controllers/' + name)
+    var Ctrl =  		require('../controllers/element')(index)
 	, path =            require('path')
 	, userRoles = 		require('../../client/javascript/routingConfig').userRoles
 	, accessLevels = 	require('../../client/javascript/routingConfig').accessLevels;
