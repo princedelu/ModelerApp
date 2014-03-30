@@ -1,4 +1,5 @@
-var config = require('../../client/javascript/config.json');
+var config = require('../../client/javascript/modelConfig').modelConfig;
+
 
 module.exports = exports = function(index) {
 
@@ -10,7 +11,7 @@ module.exports = exports = function(index) {
            var query =  ObjectType.find();
            for(var indexPopulate=0;indexPopulate<ObjectJSON.populate.length;indexPopulate++){
             
-                query.populate(ObjectJSON.populate[indexPopulate].nom);
+                query.populate(ObjectJSON.populate[indexPopulate].model);
            }
            query.exec(function (err, objet) {
                 if (err) { res.send(403,'Erreur interne'); }
@@ -39,11 +40,13 @@ module.exports = exports = function(index) {
                 if (objet != null && objet._id != id) {
                     res.send(403, 'Doublon');
                 }else{
-                   var objetModel = {};
-                   for(var indexChamps=0;indexChamps<ObjectJSON.champs.length;indexChamps++){
-                       var value = ObjectJSON.champs[indexChamps].model;
-                       objetModel[value]=req.body[value];
-                   }
+					var objetModel = {};
+					for(var indexChamps=0;indexChamps<ObjectJSON.champs.length;indexChamps++){
+						var modelChamp = ObjectJSON.champs[indexChamps].model;
+						if (modelChamp != "_id") {
+							objetModel[modelChamp]=req.body[modelChamp];
+						}
+					}
                     var objet = new ObjectType(objetModel);
                     if (id==null)
                     {

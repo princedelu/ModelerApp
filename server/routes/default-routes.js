@@ -6,7 +6,7 @@ var _ =           require('underscore')
 	, routesUser = require('./routes-user')
     , userRoles = require('../../client/javascript/routingConfig').userRoles
     , accessLevels = require('../../client/javascript/routingConfig').accessLevels
-    , config = require('../../client/javascript/config.json');
+    , config = require('../../client/javascript/modelConfig').modelConfig;
 
 var routes = [
 

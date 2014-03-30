@@ -10,7 +10,7 @@ div(id='contenu')
                 th Description
                 th Action
         tbody
-            tr(data-ng-repeat="zone in zones")
+            tr(data-ng-repeat="zone in objets")
                 td 
                     a(href='/zone/item/{{ zone.nom }}')
                         | {{ zone.nom }}

@@ -11,7 +11,7 @@ div(id='contenu')
                 th Zone
                 th Action
         tbody
-            tr(data-ng-repeat="bloc in blocs")
+            tr(data-ng-repeat="bloc in objets")
                 td 
                     a(href='/bloc/item/{{ bloc.nom }}')
                         | {{ bloc.nom }}

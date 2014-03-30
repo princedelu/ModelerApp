@@ -33,11 +33,10 @@ angular.module('ModelerApp')
 }]);
 
 var controllers = {
-    userCtrl : function($rootScope, $scope, $location,$route,$routeParams, User) {
+    userCtrl : function($rootScope, $scope, $location,$route,$routeParams, User,nomObjet) {
 
                     $scope.role = User.userRoles.user;
                     $scope.userRoles = User.userRoles;
-                    var nomObjet = 'user';
 	
 	                User.list(nomObjet,function(res) {
                         $scope.users = res;
@@ -65,21 +64,27 @@ var controllers = {
                             });
                     };
                },
-
-        zoneCtrl : function($rootScope, $scope, $location,$route,$routeParams, Zone) {
+		objetCtrl : function($rootScope, $scope, $location,$route,$routeParams, Objet, nomObjet) {
 	
 	                    var action = $route.current.action;
                         $scope.action = action;
-                        var nomObjet = 'zone';
+						var elementConfig;
+						
+						for(var index=0;index<modelConfig.modelConfig.length;index++){
+							elementConfig = modelConfig.modelConfig[index];
+							if (elementConfig.model == nomObjet){
+								break;
+							}
+						}
 
                         $scope.list = function() {
                             $scope.success = '';
 		                    $scope.error = '';
-                            Zone.list(nomObjet,function(res) {
-                                $scope.zones = res;
+                            Objet.list(nomObjet,function(res) {
+                                $scope.objets = res;
                                 $scope.loading = false;
                             }, function(err) {
-                                $scope.error = "Failed to fetch zones.";
+                                $scope.error = "Failed to fetch "+ nomObjet;
                                 $scope.loading = false;
                             });
                          };
@@ -90,114 +95,15 @@ var controllers = {
                             if (action == 'get'){
                                 $scope.update();
                             }else{
-                                Zone.add(nomObjet,{
-                                        nom: $scope.nom,
-                                        description: $scope.description,
-                                    },
-                                    function() {
-				                        $scope.success = 'Succes';
-                                        $location.path('/' + nomObjet + '/list');
-                                    },
-                                    function(err) {
-                                        $scope.error = err;
-                                        if (err == 'Doublon'){$scope.doublon='true';}
-				                        $location.path('/' + nomObjet + '/add');
-                                    });
-                            }
-                        };
-                        
-                        $scope.update = function() {
-		                    $scope.success = '';
-		                    $scope.error = '';
-
-                            Zone.put(nomObjet,{
-                                        _id : $scope._id,
-                                        nom: $scope.nom,
-                                        description: $scope.description,
-                                    },
-                                    function() {
-                                        $scope.success = 'Succes';
-                                        $location.path('/' + nomObjet + '/list');
-                                    },
-                                    function(err) {
-                                        $scope.error = err;
-                                        if (err == 'Doublon'){$scope.doublon='true';}
-                                       $location.path('/' + nomObjet + '/item/' + $routeParams.id);
-                                    });
-                        };
-                        
-                        $scope.delete = function(nom) {
-		                    $scope.success = '';
-		                    $scope.error = '';
-                            Zone.delete(nomObjet,nom,
-                                function() {
-				                    $scope.success = 'Succes';
-                                    $route.reload();
-                                },
-                                function(err) {
-                                    $scope.error = err;
-				                    $route.reload();
-                                });
-                        };
-
-                        $scope.get = function(id) {
-		                    $scope.success = '';
-		                    $scope.error = '';
-                            Zone.get(nomObjet,id,
-                                function(res) {
-				                    $scope._id = res._id;
-				                    $scope.nom = res.nom;
-                                    $scope.description = res.description;
-                                    $scope.loading = false;
-                                }, function(err) {
-                                    $scope.error = "Failed to fetch zone.";
-                                    $scope.loading = false;
-                                });
-                        };
-
-                        switch (action)
-                        {
-                            case 'list':
-                                $scope.list();
-                                break;
-                            case 'get':
-                                var id = $routeParams.id;
-                                $scope.get(id);
-                                break;
-                            default:
-                                break;
-                        }
-                    },
-
-        blocCtrl : function($rootScope, $scope, $location,$route,$routeParams, Bloc) {
-	
-	                    var action = $route.current.action;
-                        $scope.action = action;
-                        var nomObjet = 'bloc';
-
-                        $scope.list = function() {
-                            $scope.success = '';
-		                    $scope.error = '';
-                            Bloc.list(nomObjet,function(res) {
-                                $scope.blocs = res;
-                                $scope.loading = false;
-                            }, function(err) {
-                                $scope.error = "Failed to fetch blocs.";
-                                $scope.loading = false;
-                            });
-                         };
-
-                        $scope.add = function() {
-		                    $scope.success = '';
-		                    $scope.error = '';
-                            if (action == 'get'){
-                                $scope.update();
-                            }else{
-                                Bloc.add(nomObjet,{
-                                        nom: $scope.nom,
-                                        description: $scope.description,
-                                        zone : $scope.zone,
-                                    },
+								var objetValue = {};
+								for(var indexChamps=0;indexChamps<elementConfig.champs.length;indexChamps++){
+									var modelChamp = elementConfig.champs[indexChamps].model;
+									if (modelChamp != "_id") {
+										objetValue[modelChamp]=$scope[modelChamp];
+									}
+								}
+							
+                                Objet.add(nomObjet,objetValue,
                                     function() {
 				                        $scope.success = 'Succes';
                                         $location.path('/' + nomObjet + '/list');
@@ -214,12 +120,13 @@ var controllers = {
                             $scope.success = '';
                             $scope.error = '';
 
-                            Bloc.put(nomObjet,{
-                                        _id : $scope._id,
-                                        nom: $scope.nom,
-                                        description: $scope.description,
-                                        zone : $scope.zone,
-                                    },
+							var objetValue = {};
+							for(var indexChamps=0;indexChamps<elementConfig.champs.length;indexChamps++){
+								var modelChamp = elementConfig.champs[indexChamps].model;
+									objetValue[modelChamp]=$scope[modelChamp];
+							}
+							
+                            Objet.put(nomObjet,objetValue,
                                     function() {
                                         $scope.success = 'Succes';
                                         $location.path('/' + nomObjet + '/list');
@@ -234,7 +141,7 @@ var controllers = {
                         $scope.delete = function(id) {
 		                    $scope.success = '';
 		                    $scope.error = '';
-                            Bloc.delete(nomObjet,id,
+                            Objet.delete(nomObjet,id,
                                 function() {
 				                    $scope.success = 'Succes';
                                     $route.reload();
@@ -248,15 +155,15 @@ var controllers = {
                         $scope.get = function(id) {
 		                    $scope.success = '';
 		                    $scope.error = '';
-                            Bloc.get(nomObjet,id,
+                            Objet.get(nomObjet,id,
                                 function(res) {
-                                    $scope._id = res._id;
-				                    $scope.nom = res.nom;
-                                    $scope.description = res.description;
-                                    $scope.zone = res.zone;
+									for(var indexChamps=0;indexChamps<elementConfig.champs.length;indexChamps++){
+										var modelChamp = elementConfig.champs[indexChamps].model;
+										eval("$scope." + modelChamp + "=res." + modelChamp);
+									}
                                     $scope.loading = false;
                                 }, function(err) {
-                                    $scope.error = "Failed to fetch bloc.";
+                                    $scope.error = "Failed to fetch "+ nomObjet;
                                     $scope.loading = false;
                                 });
                         };
@@ -264,13 +171,20 @@ var controllers = {
                         $scope.loadListe = function() {
                             $scope.success = '';
                             $scope.error = '';
-                            Bloc.list("zone",function(res) {
-                                $scope.zones = res;
-                                $scope.loading = false;
-                            }, function(err) {
-                                $scope.error = "Failed to fetch zones.";
-                                $scope.loading = false;
-                            });
+							
+							for(var indexPopulate=0;indexPopulate<elementConfig.populate.length;indexPopulate++){
+            					var modelPopulate=elementConfig.populate[indexPopulate].model;
+								Objet.list(modelPopulate,function(res) {
+									$scope[modelPopulate + "s"]=res;
+									$scope.loading = false;
+								}, function(err) {
+									$scope.error = "Failed to fetch " + modelPopulate;
+									$scope.loading = false;
+								});
+						   }
+							
+							
+                            
                          };
 
                         switch (action)
@@ -289,133 +203,16 @@ var controllers = {
                             default:
                                 break;
                         }
-                    },
-
-        quartierCtrl : function($rootScope, $scope, $location,$route,$routeParams, Quartier) {
-	
-	                    var action = $route.current.action;
-                        $scope.action = action;
-                        var nomObjet = 'quartier';
-
-                        $scope.list = function() {
-                            $scope.success = '';
-		                    $scope.error = '';
-                            Quartier.list(nomObjet,function(res) {
-                                $scope.quartiers = res;
-                                $scope.loading = false;
-                            }, function(err) {
-                                $scope.error = "Failed to fetch quartiers.";
-                                $scope.loading = false;
-                            });
-                         };
-
-                        $scope.add = function() {
-		                    $scope.success = '';
-		                    $scope.error = '';
-                            if (action == 'get'){
-                                $scope.update();
-                            }else{
-                                Quartier.add(nomObjet,{
-                                        nom: $scope.nom,
-                                        description: $scope.description,
-                                        bloc : $scope.bloc,
-                                    },
-                                    function() {
-				                        $scope.success = 'Succes';
-                                        $location.path('/' + nomObjet + '/list');
-                                    },
-                                    function(err) {
-                                        $scope.error = err;
-                                        if (err == 'Doublon'){$scope.doublon='true';}
-				                        $location.path('/' + nomObjet + '/add');
-                                    });
-                            }
-                        };
-                        
-                        $scope.update = function() {
-                            $scope.success = '';
-                            $scope.error = '';
-
-                            Quartier.put(nomObjet,{
-                                        _id : $scope._id,
-                                        nom: $scope.nom,
-                                        description: $scope.description,
-                                        bloc : $scope.bloc,
-                                    },
-                                    function() {
-                                        $scope.success = 'Succes';
-                                        $location.path('/' + nomObjet + '/list');
-                                    },
-                                    function(err) {
-                                        $scope.error = err;
-                                        if (err == 'Doublon'){$scope.doublon='true';}
-                                       $location.path('/' + nomObjet + '/item/' + $routeParams.id);
-                                    });
-                        };
-                        
-                        $scope.delete = function(id) {
-		                    $scope.success = '';
-		                    $scope.error = '';
-                            Quartier.delete(nomObjet,id,
-                                function() {
-				                    $scope.success = 'Succes';
-                                    $route.reload();
-                                },
-                                function(err) {
-                                    $scope.error = err;
-				                    $route.reload();
-                                });
-                        };
-
-                        $scope.get = function(id) {
-		                    $scope.success = '';
-		                    $scope.error = '';
-                            Quartier.get(nomObjet,id,
-                                function(res) {
-                                    $scope._id = res._id;
-				                    $scope.nom = res.nom;
-                                    $scope.description = res.description;
-                                    $scope.bloc = res.bloc;
-                                    $scope.loading = false;
-                                }, function(err) {
-                                    $scope.error = "Failed to fetch quartier.";
-                                    $scope.loading = false;
-                                });
-                        };
-                        
-                        $scope.loadListe = function() {
-                            $scope.success = '';
-                            $scope.error = '';
-                            Quartier.list("bloc",function(res) {
-                                $scope.blocs = res;
-                                $scope.loading = false;
-                            }, function(err) {
-                                $scope.error = "Failed to fetch blocs.";
-                                $scope.loading = false;
-                            });
-                         };
-
-                        switch (action)
-                        {
-                            case 'list':
-                                $scope.list();
-                                break;
-                            case 'get':
-                                var id = $routeParams.id;
-                                $scope.loadListe();
-                                $scope.get(id);
-                                break;
-                            case 'add':
-                                $scope.loadListe();
-                                break;
-                            default:
-                                break;
-                        }
+						
                     }
                         
 };
 
 angular.module('ModelerApp')
-.controller('dynamicCtrl', ['$rootScope', '$scope', '$location','$route','$routeParams', 'Objet', function($rootScope, $scope, $location,$route,$routeParams, Objet) { 
-    controllers[$routeParams.objet+"Ctrl"]($rootScope, $scope, $location,$route,$routeParams, Objet);
+.controller('dynamicCtrl', ['$rootScope', '$scope', '$location','$route','$routeParams', 'Objet', function($rootScope, $scope, $location,$route,$routeParams, Objet) {
+	var controllerName="user";
+	if ($routeParams.objet != "user"){
+		controllerName="objet";
+	}	
+    controllers[controllerName+"Ctrl"]($rootScope, $scope, $location,$route,$routeParams, Objet,$routeParams.objet);
 }]);

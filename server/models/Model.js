@@ -1,5 +1,5 @@
 var mongoose = require('../database.js');
-var config = require('../../client/javascript/config.json');
+var config = require('../../client/javascript/modelConfig').modelConfig;
 
 module.exports = exports = function(index) {
 
@@ -12,14 +12,17 @@ module.exports = exports = function(index) {
     var objetModel = {};
     for(var indexChamps=0;indexChamps<ObjectJSON.champs.length;indexChamps++){
         var nomChamp = ObjectJSON.champs[indexChamps].model;
-        var valeurChamp = ObjectJSON.champs[indexChamps].typeChamp;
- 
-        if(valeurChamp=='ObjectId'){
-            var champExterne = ObjectJSON.champs[indexChamps].champExterne;
-            valeurChamp={type: Schema.Types.ObjectId,ref:champExterne};
-        } 
+		
+		if (nomChamp != "_id"){
+			var typeChamp = ObjectJSON.champs[indexChamps].typeChamp;
+	 
+			if(typeChamp=='ObjectId'){
+				var champExterne = ObjectJSON.champs[indexChamps].champExterne;
+				typeChamp={type: Schema.Types.ObjectId,ref:champExterne};
+			} 
 
-        objetModel[nomChamp]=valeurChamp;
+			objetModel[nomChamp]=typeChamp;
+		}
     }
 
     var objectSchema = new Schema(objetModel);

@@ -11,7 +11,7 @@ div(id='contenu')
                 th Bloc
                 th Action
         tbody
-            tr(data-ng-repeat="quartier in quartiers")
+            tr(data-ng-repeat="quartier in objets")
                 td 
                     a(href='/quartier/item/{{ quartier.nom }}')
                         | {{ quartier.nom }}
