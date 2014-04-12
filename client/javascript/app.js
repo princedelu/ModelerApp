@@ -70,7 +70,7 @@ angular.module('ModelerApp', ['ngCookies', 'ngRoute'])
 }])
 
     .run(['$rootScope', '$location', '$http', 'Auth', function ($rootScope, $location, $http, Auth) {
-
+        $rootScope.modelConfig = modelConfig.modelConfig;
         $rootScope.$on("$routeChangeStart", function (event, next, current) {
             $rootScope.error = null;
 			

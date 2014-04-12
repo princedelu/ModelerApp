@@ -7,7 +7,7 @@ angular.module('ModelerApp')
 	$scope.user = Auth.user;
     $scope.userRoles = Auth.userRoles;
     $scope.accessLevels = Auth.accessLevels;
-	
+
     $scope.rememberme = true;
     $scope.login = function() {
         Auth.login({

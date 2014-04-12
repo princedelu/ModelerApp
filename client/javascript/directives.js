@@ -61,7 +61,20 @@ angular.module('ModelerApp').directive('jstree', ['$rootScope','$location', func
             $(function() {
                $(element[0]).jstree({
                      "core" : {
-                       "check_callback" : true
+                       'data' : function (obj, cb) {
+                            var listeValeurArbre = [] ;
+                            var valeurArbre={};
+
+                            for(var index=0;index<modelConfig.modelConfig.length;index++){
+                                valeurArbre={};
+                                valeurArbre["id"] = "idtree" + modelConfig.modelConfig[index].model;
+                                valeurArbre["parent"] = "#";
+                                valeurArbre["text"] = modelConfig.modelConfig[index].nom;
+							    listeValeurArbre[index] = valeurArbre;
+						    }
+                            cb.call(this,
+                              listeValeurArbre);
+                        }
                      },
                     "plugins" : [ "contextmenu" ], contextmenu: {items: customMenu}
                   });
