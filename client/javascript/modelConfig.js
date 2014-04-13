@@ -5,37 +5,26 @@
 			"nom":"Zone",
 			"model":"zone",
 			"libelleIHMListe":"Liste des zones",
-			"libelleIHMDétail":"Détail d'une zone",
+			"libelleIHMDetail":"Detail d'une zone",
 			"libelleIHMAjout":"Ajout d'une zone",
 			 "populate":[],
 			"champs":[
 				{
 					"nom":"Id",
 					"model":"_id",
-					"typeChamp":"ObjectId",
-					"typeHTML":"hidden"
+					"typeChamp":"ObjectId"
 				},
 				{
 					"nom":"Nom",
 					"model":"nom",
 					"typeChamp":"String",
-					"typeHTML":"input-text",
-					"placeHolder":"Nom",
-					"obligatoire":"Oui",
-					"longueurMin":1,
-					"longueurMax":20,
-					"autoFocus":"Oui"
+                    "typeHTML" : "inputtext"
 				},
 				{
 					"nom":"Description",
 					"model":"description",
 					"typeChamp":"String",
-					"typeHTML":"textarea",
-					"placeHolder":"Description",
-					"obligatoire":"Oui",
-					"longueurMin":1,
-					"longueurMax":60,
-					"autoFocus":"Non"
+                    "typeHTML" : "textarea"
 				}
 			]
 		},
@@ -43,7 +32,7 @@
 			"nom":"Bloc",
 			"model":"bloc",
 			"libelleIHMListe":"Liste des blocs",
-			"libelleIHMDétail":"Détail d'un bloc",
+			"libelleIHMDetail":"Detail d'un bloc",
 			"libelleIHMAjout":"Ajout d'un bloc",
 			"populate":[
 				{
@@ -54,39 +43,23 @@
 				{
 					"nom":"Id",
 					"model":"_id",
-					"typeChamp":"ObjectId",
-					"typeHTML":"hidden"
+					"typeChamp":"ObjectId"
 				},
 				{
 					"nom":"Nom",
 					"model":"nom",
-					"typeChamp":"String",
-					"typeHTML":"input-text",
-					"placeHolder":"Nom",
-					"obligatoire":"Oui",
-					"longueurMin":1,
-					"longueurMax":20,
-					"autoFocus":"Oui"
+					"typeChamp":"String"
 				},
 				{
 					"nom":"Description",
 					"model":"description",
-					"typeChamp":"String",
-					"typeHTML":"textarea",
-					"placeHolder":"Description",
-					"obligatoire":"Oui",
-					"longueurMin":1,
-					"longueurMax":60,
-					"autoFocus":"Non"
+					"typeChamp":"String"
 				},
 				{
 					"nom":"Zone",
 					"model":"zone",
 					"typeChamp":"ObjectId",
-					"champExterne":"zone",
-					"typeHTML":"select",
-					"obligatoire":"Oui",
-					"autoFocus":"Non"
+					"champExterne":"zone"
 				}
 			]
 		},
@@ -94,7 +67,7 @@
 			"nom":"Quartier",
 			"model":"quartier",
 			"libelleIHMListe":"Liste des quartiers",
-			"libelleIHMDétail":"Détail d'un quartier",
+			"libelleIHMDetail":"Detail d'un quartier",
 			"libelleIHMAjout":"Ajout d'un quartier",
 			"populate":[
 				{
@@ -105,42 +78,62 @@
 				{
 					"nom":"Id",
 					"model":"_id",
-					"typeChamp":"ObjectId",
-					"typeHTML":"hidden"
+					"typeChamp":"ObjectId"
 				},
 				{
 					"nom":"Nom",
 					"model":"nom",
-					"typeChamp":"String",
-					"typeHTML":"input-text",
-					"placeHolder":"Nom",
-					"obligatoire":"Oui",
-					"longueurMin":1,
-					"longueurMax":20,
-					"autoFocus":"Oui"
+					"typeChamp":"String"
 				},
 				{
 					"nom":"Description",
 					"model":"description",
-					"typeChamp":"String",
-					"typeHTML":"textarea",
-					"placeHolder":"Description",
-					"obligatoire":"Oui",
-					"longueurMin":1,
-					"longueurMax":60,
-					"autoFocus":"Non"
+					"typeChamp":"String"
 				},
 				{
 					"nom":"Bloc",
 					"model":"bloc",
 					"typeChamp":"ObjectId",
-					"champExterne":"bloc",
-					"typeHTML":"select",
-					"obligatoire":"Oui",
-					"autoFocus":"Non"
+					"champExterne":"bloc"
+				}
+			]
+		},
+		{
+			"nom":"Application",
+			"model":"application",
+			"libelleIHMListe":"Liste des applications",
+			"libelleIHMDetail":"Detail d'une application",
+			"libelleIHMAjout":"Ajout d'une application",
+			"populate":[
+				{
+					"model":"quartier"
+				}
+			],
+			"champs":[
+				{
+					"nom":"Id",
+					"model":"_id",
+					"typeChamp":"ObjectId"
+				},
+				{
+					"nom":"Nom",
+					"model":"nom",
+					"typeChamp":"String"
+				},
+				{
+					"nom":"Description",
+					"model":"description",
+					"typeChamp":"String"
+				},
+				{
+					"nom":"Quartier",
+					"model":"quartier",
+					"typeChamp":"ObjectId",
+					"champExterne":"quartier"
 				}
 			]
 		}
+        
 	];
 
 

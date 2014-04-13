@@ -77,6 +77,8 @@ var controllers = {
 							}
 						}
 
+                        $scope.elementConfig = elementConfig;
+
                         $scope.list = function() {
                             $scope.success = '';
 		                    $scope.error = '';

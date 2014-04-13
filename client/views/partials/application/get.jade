@@ -3,13 +3,16 @@ include ../../menuleft
 div(id='contenu')
     h1(data-ng-if="action == 'add'") {{ elementConfig.libelleIHMAjout }}
     h1(data-ng-if="action != 'add'") {{ elementConfig.libelleIHMDetail }}
-    form(ng-submit='add()', name="addForm",role='form')        
+    form(ng-submit='add()', name="addForm",role='form')
         div(class='form-group')
             label(for='nom') Nom
             input(type="text", data-ng-model="nom", id='nom', placeholder="Nom", name="nom", required, data-ng-minlength="1", data-ng-maxlength="20", autofocus,class='form-control app-control')
         div(class='form-group')
             label(for='description') Description
             textarea(rows=4, data-ng-model="description", placeholder="Description", name="description", required, data-ng-minlength="1", data-ng-maxlength="60",class='form-control app-control')
+         div(class='form-group')
+            label(for='quartier') Quartier
+            select(data-ng-model="quartier",name="quartier",required,data-ng-options="quartier._id as quartier.nom for quartier in quartiers",class='form-control app-control')               
         div(class='form-group')
             input(type="hidden", data-ng-model="_id", id='_id', name="_id")
             button.btn(type="submit", data-ng-disabled="addForm.$invalid") Valider
@@ -23,5 +26,6 @@ div(id='contenu')
                 li(ng-show="addForm.description.$error.required") Une description est requise
                 li(ng-show="addForm.description.$error.$error.minlength") La description doit avoir une longueur minimale de 1
                 li(ng-show="addForm.description.$error.maxlength") La description doit avoir une longueur maximum de 60
+                li(ng-show="addForm.quartier.$error.required") Un quartier doit être saisi
         div(ng-show="doublon") Merci de saisir un autre nom, celui-ci est déjà utilisé
         

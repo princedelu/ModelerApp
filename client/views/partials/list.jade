@@ -1,0 +1,21 @@
+include ../menuleft
+
+div(id='contenu')
+    h1 {{ elementConfig.libelleIHMListe }}
+
+    table.table.table-striped.table-condensed(data-ng-hide="loading")
+        thead
+            tr
+                th(data-ng-repeat="champ in elementConfig.champs",ng-show="!$first") {{ champ.nom }}
+                th Action
+        tbody
+            tr(data-ng-repeat="element in objets")
+                td(data-ng-repeat="champ in elementConfig.champs",ng-show="!$first")
+                   span(ng-show="champ.model == 'nom'")
+                       a(href='/{{ elementConfig.model }}/item/{{ element[champ.model] }}')
+                           | {{ element[champ.model] }}
+                   span(ng-show="champ.model != 'nom' && champ.typeChamp == 'String'") {{ element[champ.model] }}
+                   span(ng-show="champ.typeChamp == 'ObjectId'") {{ element[champ.model].nom }}
+                td
+                    button(type='button',class='btn btn-link app-btn-delete',ng-click='delete(element.nom)')
+                        span(class='glyphicon glyphicon-remove')

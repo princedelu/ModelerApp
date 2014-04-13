@@ -19,9 +19,7 @@ angular.module('ModelerApp', ['ngCookies', 'ngRoute'])
         });
     $routeProvider.when('/:objet/list',
         {
-            templateUrl:    function(params) {
-                                return '/partials/' + params.objet + '/list.jade';
-                            },
+            templateUrl:    '/partials/list.jade',
             controller:     'dynamicCtrl',
             action :        'list',
             access:         access.user
