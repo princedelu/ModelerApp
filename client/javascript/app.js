@@ -45,13 +45,13 @@ angular.module('ModelerApp', ['ngCookies', 'ngRoute'])
     $routeProvider.when('/group/:element',
         {
             templateUrl:function(params) { 
-                            return '/partials/group-' + params.element + '/get.jade';
+                            return '/partials/group/get.jade';
                         },
             controller:    'GroupCtrl',
             resolve: {
-                grappeElement: function ($q,Group) {
+                grappeElement: function ($route,$q,Group) {
                     var deferred = $q.defer();
-                    Group.get('metier',function(res){
+                    Group.get($route.current.params.element,function(res){
                             deferred.resolve(res);
                         },
                         function(err){

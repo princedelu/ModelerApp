@@ -4,10 +4,10 @@ var _ =           require('underscore')
     , AuthCtrl =  require('../controllers/auth')
     , User =      require('../models/User.js')
 	, routesUser = require('./routes-user')
-    , routesGroupMetier = require('./routes-group-metier')
     , userRoles = require('../../client/javascript/routingConfig').userRoles
     , accessLevels = require('../../client/javascript/routingConfig').accessLevels
-    , config = require('../../client/javascript/modelConfig').modelConfig;
+    , config = require('../../client/javascript/modelConfig').modelConfig.models
+    , groups = require('../../client/javascript/modelConfig').modelConfig.groups;
 
 var routes = [
 
@@ -61,13 +61,17 @@ var routesConcat = {};
 
 module.exports = function(app,db) {
     
-    routesConcat = _.union(routesGroupMetier,routesUser,routes);
+    routesConcat = _.union(routesUser,routes);
 
-    for(var index=0;index<config.length;index++){
-        var element = config[index];
-        var routesElement = require('./routes-name')(element.model,index);
-        routesConcat = _.union(routesElement,routesConcat);
-    }
+   _.each(groups.index, function(item,index) {
+            var routesElement = require('./routes-group')(item.nom);
+            routesConcat = _.union(routesElement,routesConcat);
+        });
+
+    _.each(config, function(item,index) {
+            var routesElement = require('./routes-name')(item.model,index);
+            routesConcat = _.union(routesElement,routesConcat);
+        });
 	
     _.each(routesConcat, function(route) {
         route.middleware.unshift(ensureAuthorized);

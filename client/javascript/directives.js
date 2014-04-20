@@ -64,11 +64,13 @@ angular.module('ModelerApp').directive('jstreerestit', ['$rootScope','$location'
                        'data' : function (obj, cb) {
                             var listeValeurArbre = [] ;
 
-                            var valeurArbre={};
-                            valeurArbre["id"] = "idtreeRestitmetier";
-                            valeurArbre["parent"] = "#";
-                            valeurArbre["text"] = "Metier";
-					        listeValeurArbre[0] = valeurArbre;
+                            for(var id=0;id<modelConfig.modelConfig.groups.index.length;id++){
+                                var valeurArbre={};
+                                valeurArbre["id"] = "idtreeRestit" + modelConfig.modelConfig.groups.index[id].nom;
+                                valeurArbre["parent"] = "#";
+                                valeurArbre["text"] = modelConfig.modelConfig.groups.index[id].nom.charAt(0).toUpperCase() + modelConfig.modelConfig.groups.index[id].nom.slice(1).toLowerCase();
+							    listeValeurArbre[id] = valeurArbre;
+						    }
 
                             cb.call(this,
                               listeValeurArbre);
@@ -116,11 +118,11 @@ angular.module('ModelerApp').directive('jstree', ['$rootScope','$location', func
                        'data' : function (obj, cb) {
                             var listeValeurArbre = [] ;
 
-                            for(var index=0;index<modelConfig.modelConfig.length;index++){
+                            for(var index=0;index<modelConfig.modelConfig.models.length;index++){
                                 var valeurArbre={};
-                                valeurArbre["id"] = "idtree" + modelConfig.modelConfig[index].model;
+                                valeurArbre["id"] = "idtree" + modelConfig.modelConfig.models[index].model;
                                 valeurArbre["parent"] = "#";
-                                valeurArbre["text"] = modelConfig.modelConfig[index].nom;
+                                valeurArbre["text"] = modelConfig.modelConfig.models[index].nom;
 							    listeValeurArbre[index] = valeurArbre;
 						    }
                             cb.call(this,

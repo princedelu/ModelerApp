@@ -81,8 +81,8 @@ var controllers = {
                         $scope.action = action;
 						var elementConfig;
 						
-						for(var index=0;index<modelConfig.modelConfig.length;index++){
-							elementConfig = modelConfig.modelConfig[index];
+						for(var index=0;index<modelConfig.modelConfig.models.length;index++){
+							elementConfig = modelConfig.modelConfig.models[index];
 							if (elementConfig.model == nomObjet){
 								break;
 							}
