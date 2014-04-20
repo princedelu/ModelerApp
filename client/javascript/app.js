@@ -42,6 +42,27 @@ angular.module('ModelerApp', ['ngCookies', 'ngRoute'])
             action :       'get',
             access:         access.user
         });
+    $routeProvider.when('/group/:element',
+        {
+            templateUrl:function(params) { 
+                            return '/partials/group-' + params.element + '/get.jade';
+                        },
+            controller:    'GroupCtrl',
+            resolve: {
+                grappeElement: function ($q,Group) {
+                    var deferred = $q.defer();
+                    Group.get('metier',function(res){
+                            deferred.resolve(res);
+                        },
+                        function(err){
+                            deferred.reject();
+                        }
+                    );
+                    return deferred.promise;
+                }
+            },
+            access:         access.user
+        });
     $routeProvider.when('/404',
         {
             templateUrl:    '/partials/404.jade',

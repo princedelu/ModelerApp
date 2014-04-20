@@ -32,6 +32,17 @@ angular.module('ModelerApp')
     };
 }]);
 
+angular.module('ModelerApp')
+.controller('GroupCtrl',
+['$route', '$scope', '$routeParams','grappeElement', 'Group', function($route, $scope, $routeParams,grappeElement, Group) {
+    
+    var element = $routeParams.element;
+    $scope.success = '';
+    $scope.error = '';
+	$scope.grappeElement = grappeElement;
+   
+}]);
+
 var controllers = {
     userCtrl : function($rootScope, $scope, $location,$route,$routeParams, User,nomObjet) {
 

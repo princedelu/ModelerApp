@@ -4,10 +4,11 @@
 		{
 			"nom":"Zone",
 			"model":"zone",
+            "group" : "metier",
 			"libelleIHMListe":"Liste des zones",
 			"libelleIHMDetail":"Detail d'une zone",
 			"libelleIHMAjout":"Ajout d'une zone",
-			 "populate":[],
+			"populate":[],
 			"champs":[
 				{
 					"nom":"Id",
@@ -31,6 +32,7 @@
 		{
 			"nom":"Bloc",
 			"model":"bloc",
+            "group" : "metier",
 			"libelleIHMListe":"Liste des blocs",
 			"libelleIHMDetail":"Detail d'un bloc",
 			"libelleIHMAjout":"Ajout d'un bloc",
@@ -66,6 +68,7 @@
 		{
 			"nom":"Quartier",
 			"model":"quartier",
+            "group" : "metier",
 			"libelleIHMListe":"Liste des quartiers",
 			"libelleIHMDetail":"Detail d'un quartier",
 			"libelleIHMAjout":"Ajout d'un quartier",
@@ -101,6 +104,7 @@
 		{
 			"nom":"Application",
 			"model":"application",
+            "group" : "applicatif",
 			"libelleIHMListe":"Liste des applications",
 			"libelleIHMDetail":"Detail d'une application",
 			"libelleIHMAjout":"Ajout d'une application",
