@@ -29,39 +29,6 @@ var routes = [
         httpMethod: 'POST',
         middleware: [AuthCtrl.logout]
     },
-     // All other get requests should be handled by AngularJS's client-side routing system
-    {
-        path: '/element',
-        httpMethod: 'GET',
-        middleware: [function(req, res) {
-            var role = userRoles.public, username = '';
-            if(req.user) {
-                role = req.user.role;
-                username = req.user.username;
-            }
-            res.cookie('user', JSON.stringify({
-                'username': username,
-                'role': role
-            }));
-            res.render('element/index',{classname:''});
-        }]
-    },
-    {
-        path: '/restitution',
-        httpMethod: 'GET',
-        middleware: [function(req, res) {
-            var role = userRoles.public, username = '';
-            if(req.user) {
-                role = req.user.role;
-                username = req.user.username;
-            }
-            res.cookie('user', JSON.stringify({
-                'username': username,
-                'role': role
-            }));
-            res.render('restit/index',{classname:''});
-        }]
-    },
     // All other get requests should be handled by AngularJS's client-side routing system
     {
         path: '/*',
@@ -76,7 +43,7 @@ var routes = [
                 'username': username,
                 'role': role
             }));
-            res.render('accueil/index',{classname:''});
+            res.render('common/index',{classname:''});
         }]
     }
 ];

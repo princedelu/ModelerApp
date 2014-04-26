@@ -26,20 +26,10 @@ angular.module('ModelerApp')
 
     $scope.logout = function() {
         Auth.logout(function() {
-            $window.location = '/';
+            $location.path('/');
         }, function() {
             $scope.error = "Failed to logout";
         });
-    };
-
-    $scope.redirectElement = function() {
-         $window.location = '/element';
-    };
-    $scope.redirectRestit = function() {
-         $window.location = '/restitution';
-    };
-    $scope.redirectHome = function() {
-         $window.location = '/home';
     };
 
     $scope.isModuleElement=false;
