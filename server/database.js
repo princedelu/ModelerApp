@@ -7,7 +7,7 @@ db.on('error', function(error) {
     mongoose.disconnect();
 });
 
-mongoose.connect('mongodb://localhost/modelerapp', function(err) {
+mongoose.connect(process.env.DATABASE_CONNECTION_STRING || 'mongodb://localhost/modelerapp', function(err) {
 	if (err) console.log("Connexion à la BDD en erreur");
 	else console.log("Connexion à la BDD OK");
 });
