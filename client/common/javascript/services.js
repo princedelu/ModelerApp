@@ -15,6 +15,8 @@ angular.module('ModelerApp')
 	
     return {
         authorize: function(accessLevel, role) {
+            if (accessLevel === undefined)
+                accessLevel = userRoles.user;
             if(role === undefined)
                 role = currentUser.role;
 
@@ -43,42 +45,6 @@ angular.module('ModelerApp')
         accessLevels: accessLevels,
         userRoles: userRoles,
         user: currentUser
-    };
-});
-
-angular.module('ModelerApp')
-.factory('Objet', function($http) {
-	var userRoles = routingConfig.userRoles;
-
-	return {
-        list: function(nomObjet,success, error) {
-            $http.get('/api/'+ nomObjet).success(success).error(error);
-        },
-		add: function(nomObjet,objet, success, error) {
-            $http.post('/api/' + nomObjet, objet).success(success).error(error);
-        },
-        get: function(nomObjet,id, success, error) {
-            $http.get('/api/' + nomObjet + '/' + id).success(success).error(error);
-        },
-        delete: function(nomObjet,id, success, error) {
-            $http.delete('/api/' + nomObjet + '/' + id).success(success).error(error);
-        },
-        put: function(nomObjet,objet, success, error) {
-            $http.put('/api/' + nomObjet, objet).success(success).error(error);
-        },
-		userRoles : userRoles
-    };
-});
-
-angular.module('ModelerApp')
-.factory('Group', function($http) {
-	var userRoles = routingConfig.userRoles;
-
-	return {
-        get: function(nomGroup, success, error) {
-            $http.get('/api/group-'+nomGroup).success(success).error(error);
-        },
-		userRoles : userRoles
     };
 });
 

@@ -1,0 +1,12 @@
+div(id='main')
+    div(id='menuleft')
+        div(class="panel-group",id="accordionmenu")
+            div(class="panel panel-default")
+                div(class="panel-heading")
+                    h4(class="panel-title")
+                        a(data-toggle="collapse",data-parent="#accordionmenu",href="#collapse1")
+                            | Liste des entités
+                div(id="collapse1",class="panel-collapse collapse in")
+                    div(class="panel-body")
+                        div(id="jstree1",jstree)
+                            ul

@@ -3,29 +3,21 @@ var _ =           require('underscore')
     , passport =  require('passport')
     , AuthCtrl =  require('../controllers/auth')
     , User =      require('../models/User.js')
-	, routesUser = require('./routes-user')
-    , userRoles = require('../../client/javascript/routingConfig').userRoles
-    , accessLevels = require('../../client/javascript/routingConfig').accessLevels
-    , config = require('../../client/javascript/modelConfig').modelConfig.models
-    , groups = require('../../client/javascript/modelConfig').modelConfig.groups;
+    , userRoles = require('../../client/common/javascript/routingConfig').userRoles
+    , accessLevels = require('../../client/common/javascript/routingConfig').accessLevels
+    , config = require('../../client/common/javascript/modelConfig').modelConfig.models
+    , groups = require('../../client/common/javascript/modelConfig').modelConfig.groups;
 
 var routes = [
 
     // Views
     {
-        path: '/partials/*',
+        path: '/*/partials/*',
         httpMethod: 'GET',
         middleware: [function (req, res) {
             var requestedView = path.join('./', req.url);
             res.render(requestedView);
         }]
-    },
-
-    // Local Auth
-    {
-        path: '/api/register',
-        httpMethod: 'POST',
-        middleware: [AuthCtrl.register]
     },
     {
         path: '/api/login',
@@ -37,7 +29,39 @@ var routes = [
         httpMethod: 'POST',
         middleware: [AuthCtrl.logout]
     },
-
+     // All other get requests should be handled by AngularJS's client-side routing system
+    {
+        path: '/element',
+        httpMethod: 'GET',
+        middleware: [function(req, res) {
+            var role = userRoles.public, username = '';
+            if(req.user) {
+                role = req.user.role;
+                username = req.user.username;
+            }
+            res.cookie('user', JSON.stringify({
+                'username': username,
+                'role': role
+            }));
+            res.render('element/index',{classname:''});
+        }]
+    },
+    {
+        path: '/restitution',
+        httpMethod: 'GET',
+        middleware: [function(req, res) {
+            var role = userRoles.public, username = '';
+            if(req.user) {
+                role = req.user.role;
+                username = req.user.username;
+            }
+            res.cookie('user', JSON.stringify({
+                'username': username,
+                'role': role
+            }));
+            res.render('restit/index',{classname:''});
+        }]
+    },
     // All other get requests should be handled by AngularJS's client-side routing system
     {
         path: '/*',
@@ -52,7 +76,7 @@ var routes = [
                 'username': username,
                 'role': role
             }));
-            res.render('index',{classname:''});
+            res.render('accueil/index',{classname:''});
         }]
     }
 ];
@@ -61,7 +85,7 @@ var routesConcat = {};
 
 module.exports = function(app,db) {
     
-    routesConcat = _.union(routesUser,routes);
+    routesConcat = routes;
 
    _.each(groups.index, function(item,index) {
             var routesElement = require('./routes-group')(item.nom);

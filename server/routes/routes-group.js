@@ -2,21 +2,10 @@ module.exports = exports = function(group) {
 
     var Ctrl =  		require('../controllers/group')(group)
 	    , path =      require('path')
-	    , userRoles = 		require('../../client/javascript/routingConfig').userRoles
-	    , accessLevels = 	require('../../client/javascript/routingConfig').accessLevels;
+	    , userRoles = 		require('../../client/common/javascript/routingConfig').userRoles
+	    , accessLevels = 	require('../../client/common/javascript/routingConfig').accessLevels;
 
     var routes = [
-
-	    // Views
-	    {
-		    path: '/partials/'+ group + '/*',
-		    httpMethod: 'GET',
-		    middleware: [function (req, res) {
-			    var requestedView = path.join('./', req.url);
-			    res.render(requestedView);
-		    }]
-	    },
-	
 	    // Read 
 	    {
 		    path: '/api/group-'+ group,
@@ -27,7 +16,7 @@ module.exports = exports = function(group) {
 
 	    // All other get requests should be handled by AngularJS's client-side routing system
 	    {
-		    path: '/group-'+ group + '/*',
+		    path: '/group/'+ group,
 		    httpMethod: 'GET',
 		    middleware: [function(req, res) {
 			    var role = userRoles.public, username = '';
@@ -39,7 +28,7 @@ module.exports = exports = function(group) {
 				    'username': username,
 				    'role': role
 			    }));
-			    res.render('index',{classname:group + '/'});
+			    res.render('restit/index',{classname:group + '/'});
 		    }]
 	    }
     ];

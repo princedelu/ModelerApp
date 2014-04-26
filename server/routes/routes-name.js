@@ -4,20 +4,10 @@ module.exports = exports = function(name,index) {
 
     var Ctrl =  		require('../controllers/element')(index)
 	, path =            require('path')
-	, userRoles = 		require('../../client/javascript/routingConfig').userRoles
-	, accessLevels = 	require('../../client/javascript/routingConfig').accessLevels;
+	, userRoles = 		require('../../client/common/javascript/routingConfig').userRoles
+	, accessLevels = 	require('../../client/common/javascript/routingConfig').accessLevels;
 
     var routes = [
-
-	    // Views
-	    {
-		    path: '/partials/'+ name + '/*',
-		    httpMethod: 'GET',
-		    middleware: [function (req, res) {
-			    var requestedView = path.join('./', req.url);
-			    res.render(requestedView);
-		    }]
-	    },
 
 	    // List
 	    {
@@ -73,7 +63,7 @@ module.exports = exports = function(name,index) {
 				    'username': username,
 				    'role': role
 			    }));
-			    res.render('index',{classname:''});
+			    res.render('element/index',{classname:''});
 		    }]
 	    }
     ];

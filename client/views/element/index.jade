@@ -1,0 +1,11 @@
+extends ../common/layout
+
+block content
+    div(ng-view='ng-view')
+
+block jsElements
+    script(src='/common/lib/jstree.min.js')
+    script(src='/element/javascript/controllers.js')
+    script(src='/element/javascript/services.js')
+    script(src='/element/javascript/directives.js')
+

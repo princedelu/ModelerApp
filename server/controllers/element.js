@@ -1,4 +1,4 @@
-var config = require('../../client/javascript/modelConfig').modelConfig.models;
+var config = require('../../client/common/javascript/modelConfig').modelConfig.models;
 
 module.exports = exports = function(index) {
 

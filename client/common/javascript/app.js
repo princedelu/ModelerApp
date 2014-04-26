@@ -7,19 +7,37 @@ angular.module('ModelerApp', ['ngCookies', 'ngRoute'])
 
     $routeProvider.when('/',
         {
-            templateUrl:    '/partials/public.jade',
+            templateUrl:    '/accueil/partials/public.jade',
             controller:     'LoginCtrl',
             access:         access.anon
         });
 	$routeProvider.when('/home',
         {
-            templateUrl:    '/partials/home.jade',
+            templateUrl:    '/accueil/partials/home.jade',
             controller:     'LoginCtrl',
+            access:         access.user
+        });
+    $routeProvider.when('/element',
+        {
+            templateUrl:    '/element/partials/home.jade',
+            controller:     'dynamicCtrl',
+            access:         access.user
+        });
+    $routeProvider.when('/restitution',
+        {
+            templateUrl:    '/restit/partials/home.jade',
+            controller:     'GroupCtrl',
+            action :        'home',
+            resolve: {
+                grappeElement: function () {
+                    return '';
+                }
+            },
             access:         access.user
         });
     $routeProvider.when('/:objet/list',
         {
-            templateUrl:    '/partials/list.jade',
+            templateUrl:    '/element/partials/list.jade',
             controller:     'dynamicCtrl',
             action :        'list',
             access:         access.user
@@ -27,7 +45,7 @@ angular.module('ModelerApp', ['ngCookies', 'ngRoute'])
     $routeProvider.when('/:objet/add',
         {
             templateUrl:    function(params) {
-                                return '/partials/' + params.objet + '/get.jade';
+                                return '/element/partials/' + params.objet + '/get.jade';
                             },
             controller:     'dynamicCtrl',
             action :        'add',
@@ -36,7 +54,7 @@ angular.module('ModelerApp', ['ngCookies', 'ngRoute'])
     $routeProvider.when('/:objet/item/:id',
         {
             templateUrl:function(params) { 
-                            return '/partials/' + params.objet + '/get.jade';
+                            return '/element/partials/' + params.objet + '/get.jade';
                         },
             controller:    'dynamicCtrl',
             action :       'get',
@@ -45,9 +63,10 @@ angular.module('ModelerApp', ['ngCookies', 'ngRoute'])
     $routeProvider.when('/group/:element',
         {
             templateUrl:function(params) { 
-                            return '/partials/group/get.jade';
+                            return '/restit/partials/group/get.jade';
                         },
             controller:    'GroupCtrl',
+            action :        'get',
             resolve: {
                 grappeElement: function ($route,$q,Group) {
                     var deferred = $q.defer();
@@ -92,7 +111,7 @@ angular.module('ModelerApp', ['ngCookies', 'ngRoute'])
         $rootScope.modelConfig = modelConfig.modelConfig;
         $rootScope.$on("$routeChangeStart", function (event, next, current) {
             $rootScope.error = null;
-			
+
             if (!Auth.authorize(next.access)) {
                if(Auth.isLoggedIn()) $location.path('/home');
                else                  $location.path('/');
