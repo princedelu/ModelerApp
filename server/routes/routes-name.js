@@ -63,7 +63,7 @@ module.exports = exports = function(name,index) {
 				    'username': username,
 				    'role': role
 			    }));
-			    res.render('element/index',{classname:''});
+			    res.render('common/index',{classname:''});
 		    }]
 	    }
     ];

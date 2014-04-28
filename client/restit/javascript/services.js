@@ -1,4 +1,5 @@
-'use strict';
+(function(){
+"use strict";
 
 angular.module('ModelerApp')
 .factory('Group', function($http) {
@@ -11,6 +12,8 @@ angular.module('ModelerApp')
 		userRoles : userRoles
     };
 });
+
+})();
 
 
 

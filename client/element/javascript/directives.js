@@ -1,4 +1,5 @@
-'use strict';
+(function(){
+"use strict";
 
 angular.module('ModelerApp').directive('jstree', ['$rootScope','$location', function($rootScope,$location) {
     return {
@@ -12,9 +13,9 @@ angular.module('ModelerApp').directive('jstree', ['$rootScope','$location', func
 
                             for(var index=0;index<modelConfig.modelConfig.models.length;index++){
                                 var valeurArbre={};
-                                valeurArbre["id"] = "idtree" + modelConfig.modelConfig.models[index].model;
-                                valeurArbre["parent"] = "#";
-                                valeurArbre["text"] = modelConfig.modelConfig.models[index].nom;
+                                valeurArbre.id = "idtree" + modelConfig.modelConfig.models[index].model;
+                                valeurArbre.parent = "#";
+                                valeurArbre.text = modelConfig.modelConfig.models[index].nom;
 							    listeValeurArbre[index] = valeurArbre;
 						    }
                             cb.call(this,
@@ -60,4 +61,6 @@ angular.module('ModelerApp').directive('jstree', ['$rootScope','$location', func
     };
 
 }]);
+
+})();
 

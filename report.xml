@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jslint>
+<file name="client/common/javascript/modelConfig.js">
+  
+</file>
+<file name="Gruntfile.js">
+  
+</file>
+<file name="client/common/javascript/routingConfig.js">
+  
+</file>
+<file name="client/common/javascript/app.js">
+  
+</file>
+<file name="client/restit/javascript/controllers.js">
+  
+</file>
+<file name="client/element/javascript/controllers.js">
+  
+</file>
+<file name="client/element/javascript/directives.js">
+  
+</file>
+<file name="client/common/javascript/services.js">
+  
+</file>
+<file name="client/restit/javascript/directives.js">
+  
+</file>
+<file name="client/accueil/javascript/services.js">
+  
+</file>
+<file name="client/common/javascript/directives.js">
+  
+</file>
+<file name="client/common/javascript/controllers.js">
+  
+</file>
+<file name="client/restit/javascript/services.js">
+  
+</file>
+<file name="client/element/javascript/services.js">
+  
+</file>
+<file name="client/accueil/javascript/controllers.js">
+  
+</file>
+</jslint>

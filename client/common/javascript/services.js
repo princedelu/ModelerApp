@@ -1,17 +1,18 @@
-'use strict';
+(function(){
+"use strict";
 
 angular.module('ModelerApp')
 .factory('Auth', function($http, $cookieStore){
 
-    var accessLevels = routingConfig.accessLevels
-        , userRoles = routingConfig.userRoles
-        , currentUser = $cookieStore.get('user') || { username: '', role: userRoles.public };
+    var accessLevels = routingConfig.accessLevels;
+    var userRoles = routingConfig.userRoles;
+    var currentUser = $cookieStore.get('user') || { username: '', role: userRoles.public };
 
     $cookieStore.remove('user');
 
 	function changeUser(user) {
 		_.extend(currentUser, user);
-	};
+	}
 	
     return {
         authorize: function(accessLevel, role) {
@@ -47,6 +48,8 @@ angular.module('ModelerApp')
         user: currentUser
     };
 });
+
+})();
 
 
 

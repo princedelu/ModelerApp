@@ -1,13 +1,14 @@
-'use strict';
+(function(){
+"use strict";
 
 angular.module('ModelerApp')
 .directive('accessLevel', ['Auth', function(Auth) {
     return {
         restrict: 'A',
         link: function($scope, element, attrs) {
-            var prevDisp = element.css('display')
-                , userRole
-                , accessLevel;
+            var prevDisp = element.css('display');
+            var userRole;
+            var accessLevel;
 
             $scope.user = Auth.user;
             $scope.$watch('user', function(user) {
@@ -53,3 +54,5 @@ angular.module('ModelerApp').directive('activeNav', ['$location', function($loca
     };
 
 }]);
+
+})();

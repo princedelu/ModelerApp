@@ -1,3 +1,6 @@
+(function(){
+"use strict";
+
 (function(exports){
 
     var config = {
@@ -172,7 +175,8 @@
                 }
 	};
 
-
     exports.modelConfig = config;
 
-})(typeof exports === 'undefined' ? this['modelConfig'] = {} : exports);
+})(typeof exports === 'undefined' ? this.modelConfig = {} : exports);
+
+})();

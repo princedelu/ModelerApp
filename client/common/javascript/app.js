@@ -1,5 +1,9 @@
 
-angular.module('ModelerApp', ['ngCookies', 'ngRoute'])
+angular.module('underscore', []).factory('_', function() {
+    return window._;
+});
+
+angular.module('ModelerApp', ['ngCookies', 'ngRoute','underscore'])
 
     .config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
 
@@ -102,7 +106,7 @@ angular.module('ModelerApp', ['ngCookies', 'ngRoute'])
                     return $q.reject(response);
                 }
             }
-        }
+        };
     });
 
 }])

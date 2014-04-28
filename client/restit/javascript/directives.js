@@ -1,4 +1,5 @@
-'use strict';
+(function(){
+"use strict";
 
 angular.module('ModelerApp').directive('jstreerestit', ['$rootScope','$location', function($rootScope,$location) {
     return {
@@ -12,9 +13,9 @@ angular.module('ModelerApp').directive('jstreerestit', ['$rootScope','$location'
 
                             for(var id=0;id<modelConfig.modelConfig.groups.index.length;id++){
                                 var valeurArbre={};
-                                valeurArbre["id"] = "idtreeRestit" + modelConfig.modelConfig.groups.index[id].nom;
-                                valeurArbre["parent"] = "#";
-                                valeurArbre["text"] = modelConfig.modelConfig.groups.index[id].nom.charAt(0).toUpperCase() + modelConfig.modelConfig.groups.index[id].nom.slice(1).toLowerCase();
+                                valeurArbre.id = "idtreeRestit" + modelConfig.modelConfig.groups.index[id].nom;
+                                valeurArbre.parent = "#";
+                                valeurArbre.text = modelConfig.modelConfig.groups.index[id].nom.charAt(0).toUpperCase() + modelConfig.modelConfig.groups.index[id].nom.slice(1).toLowerCase();
 							    listeValeurArbre[id] = valeurArbre;
 						    }
 
@@ -94,5 +95,7 @@ angular.module('ModelerApp').directive('d3TreeMap', ['$rootScope', '$location', 
     };
 
 }]);
+
+})();
 
 

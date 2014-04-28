@@ -1,4 +1,5 @@
-'use strict';
+(function(){
+"use strict";
 
 /* Controllers */
 angular.module('ModelerApp')
@@ -31,3 +32,5 @@ angular.module('ModelerApp')
         });
     };
 }]);
+
+})();

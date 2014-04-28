@@ -1,4 +1,5 @@
-'use strict';
+(function(){
+"use strict";
 
 angular.module('ModelerApp')
 .factory('Objet', function($http) {
@@ -23,6 +24,8 @@ angular.module('ModelerApp')
 		userRoles : userRoles
     };
 });
+
+})();
 
 
 

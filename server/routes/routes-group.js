@@ -28,7 +28,7 @@ module.exports = exports = function(group) {
 				    'username': username,
 				    'role': role
 			    }));
-			    res.render('restit/index',{classname:group + '/'});
+			    res.render('common/index',{classname:group + '/'});
 		    }]
 	    }
     ];

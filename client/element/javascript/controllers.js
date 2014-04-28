@@ -1,20 +1,21 @@
-'use strict';
+(function(){
+"use strict";
 
 angular.module('ModelerApp')
-    .controller('dynamicCtrl', ['$rootScope', '$scope', '$location', '$route', '$routeParams', 'Objet',
-        function ($rootScope, $scope, $location, $route, $routeParams, Objet) {
+    .controller('dynamicCtrl', ['$rootScope', '$scope', '$location', '$route', '$routeParams', 'Objet','_',
+        function ($rootScope, $scope, $location, $route, $routeParams, Objet, _) {
+
             $scope.isModuleElement = true;
             var nomObjet = $routeParams.objet;
             var action = $route.current.action;
             $scope.action = action;
             var elementConfig;
 
-            for (var index = 0; index < modelConfig.modelConfig.models.length; index++) {
-                elementConfig = modelConfig.modelConfig.models[index];
-                if (elementConfig.model == nomObjet) {
-                    break;
+            _.each(modelConfig.modelConfig.models, function(item,index) {
+                if (item.model == nomObjet) {
+                    elementConfig = item;
                 }
-            }
+            });
 
             $scope.elementConfig = elementConfig;
 
@@ -104,7 +105,7 @@ angular.module('ModelerApp')
                     function (res) {
                         for (var indexChamps = 0; indexChamps < elementConfig.champs.length; indexChamps++) {
                             var modelChamp = elementConfig.champs[indexChamps].model;
-                            eval("$scope." + modelChamp + "=res." + modelChamp);
+                            $scope[modelChamp]=res[modelChamp];
                         }
                         $scope.loading = false;
                     }, function (err) {
@@ -117,16 +118,16 @@ angular.module('ModelerApp')
                 $scope.success = '';
                 $scope.error = '';
 
-                for (var indexPopulate = 0; indexPopulate < elementConfig.populate.length; indexPopulate++) {
-                    var modelPopulate = elementConfig.populate[indexPopulate].model;
+                _.each(elementConfig.populate, function(item,index) {
+                    var modelPopulate = item.model;
                     Objet.list(modelPopulate, function (res) {
-                        $scope[modelPopulate + "s"] = res;
+                       $scope[modelPopulate + "s"] = res;
                         $scope.loading = false;
                     }, function (err) {
                         $scope.error = "Failed to fetch " + modelPopulate;
                         $scope.loading = false;
                     });
-                }
+                });
             };
 
             switch (action) {
@@ -146,3 +147,5 @@ angular.module('ModelerApp')
             }
         }
     ]);
+
+})();
