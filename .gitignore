@@ -220,3 +220,4 @@ pip-log.txt
 /log
 /node_modules
 *.bat
+report.xml
