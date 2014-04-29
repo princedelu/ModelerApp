@@ -1,6 +1,3 @@
-(function(){
-"use strict";
-
 (function(exports){
 
     var config = {
@@ -179,4 +176,3 @@
 
 })(typeof exports === 'undefined' ? this.modelConfig = {} : exports);
 
-})();
