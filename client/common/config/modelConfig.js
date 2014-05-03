@@ -32,12 +32,12 @@
 			                ]
 		                },
 		                {
-			                "nom":"Bloc",
-			                "model":"bloc",
+			                "nom":"Quartier",
+			                "model":"quartier",
                             "group" : "metier",
-			                "libelleIHMListe":"Liste des blocs",
-			                "libelleIHMDetail":"Detail d'un bloc",
-			                "libelleIHMAjout":"Ajout d'un bloc",
+			                "libelleIHMListe":"Liste des quartiers",
+			                "libelleIHMDetail":"Detail d'un quartier",
+			                "libelleIHMAjout":"Ajout d'un quartier",
 			                "populate":[
 				                {
 					                "model":"zone"
@@ -68,48 +68,12 @@
 			                ]
 		                },
 		                {
-			                "nom":"Quartier",
-			                "model":"quartier",
+			                "nom":"Ilot",
+			                "model":"ilot",
                             "group" : "metier",
-			                "libelleIHMListe":"Liste des quartiers",
-			                "libelleIHMDetail":"Detail d'un quartier",
-			                "libelleIHMAjout":"Ajout d'un quartier",
-			                "populate":[
-				                {
-					                "model":"bloc"
-				                }
-			                ],
-			                "champs":[
-				                {
-					                "nom":"Id",
-					                "model":"_id",
-					                "typeChamp":"ObjectId"
-				                },
-				                {
-					                "nom":"Nom",
-					                "model":"nom",
-					                "typeChamp":"String"
-				                },
-				                {
-					                "nom":"Description",
-					                "model":"description",
-					                "typeChamp":"String"
-				                },
-				                {
-					                "nom":"Bloc",
-					                "model":"bloc",
-					                "typeChamp":"ObjectId",
-					                "champExterne":"bloc"
-				                }
-			                ]
-		                },
-		                {
-			                "nom":"Application",
-			                "model":"application",
-                            "group" : "applicatif",
-			                "libelleIHMListe":"Liste des applications",
-			                "libelleIHMDetail":"Detail d'une application",
-			                "libelleIHMAjout":"Ajout d'une application",
+			                "libelleIHMListe":"Liste des ilots",
+			                "libelleIHMDetail":"Detail d'un ilot",
+			                "libelleIHMAjout":"Ajout d'un ilot",
 			                "populate":[
 				                {
 					                "model":"quartier"
@@ -132,10 +96,46 @@
 					                "typeChamp":"String"
 				                },
 				                {
-					                "nom":"Quartier",
+					                "nom":"Quartiers",
 					                "model":"quartier",
-					                "typeChamp":"ObjectId",
+					                "typeChamp":"ArrayObjectId",
 					                "champExterne":"quartier"
+				                }
+			                ]
+		                },
+		                {
+			                "nom":"Application",
+			                "model":"application",
+                            "group" : "applicatif",
+			                "libelleIHMListe":"Liste des applications",
+			                "libelleIHMDetail":"Detail d'une application",
+			                "libelleIHMAjout":"Ajout d'une application",
+			                "populate":[
+				                {
+					                "model":"ilot"
+				                }
+			                ],
+			                "champs":[
+				                {
+					                "nom":"Id",
+					                "model":"_id",
+					                "typeChamp":"ObjectId"
+				                },
+				                {
+					                "nom":"Nom",
+					                "model":"nom",
+					                "typeChamp":"String"
+				                },
+				                {
+					                "nom":"Description",
+					                "model":"description",
+					                "typeChamp":"String"
+				                },
+				                {
+					                "nom":"Ilot",
+					                "model":"ilot",
+					                "typeChamp":"ObjectId",
+					                "champExterne":"ilot"
 				                }
 			                ]
 		                }
@@ -151,21 +151,21 @@
                             "indexModel" : 0
                         },
                         {
-                            "nom" : "bloc",
+                            "nom" : "quartier",
                             "indexModel" : 1
                         },
                         {
-                            "nom" : "quartier",
+                            "nom" : "ilot",
                             "indexModel" : 2
                         }
                     ],
                     "test" : [
                         {
-                            "nom" : "bloc",
+                            "nom" : "quartier",
                             "indexModel" : 1
                         },
                         {
-                            "nom" : "quartier",
+                            "nom" : "ilot",
                             "indexModel" : 2
                         }
                     ]

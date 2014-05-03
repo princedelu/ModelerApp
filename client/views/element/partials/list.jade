@@ -16,6 +16,8 @@ div(id='contenu')
                            | {{ element[champ.model] }}
                    span(ng-show="champ.model != 'nom' && champ.typeChamp == 'String'") {{ element[champ.model] }}
                    span(ng-show="champ.typeChamp == 'ObjectId'") {{ element[champ.model].nom }}
+                   span(ng-show="champ.typeChamp == 'ArrayObjectId'")
+                       li(ng-repeat="quartier in element[champ.model]") {{ quartier.nom }}
                 td
                     button(type='button',class='btn btn-link app-btn-delete',ng-click='delete(element.nom)')
                         span(class='glyphicon glyphicon-remove')

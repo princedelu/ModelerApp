@@ -1,8 +1,8 @@
 include ../../menuleft
 
 div(id='contenu')
-    h1(data-ng-if="action == 'add'") Ajout d'un bloc
-    h1(data-ng-if="action != 'add'") Affichage d'un bloc
+    h1(data-ng-if="action == 'add'") {{ elementConfig.libelleIHMAjout }}
+    h1(data-ng-if="action != 'add'") {{ elementConfig.libelleIHMDetail }}
     form(ng-submit='add()', name="addForm",role='form')
         div(class='form-group')
             label(for='nom') Nom
@@ -11,8 +11,8 @@ div(id='contenu')
             label(for='description') Description
             textarea(rows=4, data-ng-model="description", placeholder="Description", name="description", required, data-ng-minlength="1", data-ng-maxlength="60",class='form-control app-control')
          div(class='form-group')
-            label(for='zone') Zone
-            select(data-ng-model="zone",name="zone",required,data-ng-options="zone._id as zone.nom for zone in zones",class='form-control app-control')               
+            label(for='quartier') Quartier
+            select(data-ng-model="quartier",name="quartier",required,data-ng-options="quartier._id as quartier.nom for quartier in quartiers",class='form-control app-control',multiple,ng-multiple="true",size="5")               
         div(class='form-group')
             input(type="hidden", data-ng-model="_id", id='_id', name="_id")
             button.btn(type="submit", data-ng-disabled="addForm.$invalid") Valider
@@ -26,6 +26,6 @@ div(id='contenu')
                 li(ng-show="addForm.description.$error.required") Une description est requise
                 li(ng-show="addForm.description.$error.$error.minlength") La description doit avoir une longueur minimale de 1
                 li(ng-show="addForm.description.$error.maxlength") La description doit avoir une longueur maximum de 60
-                li(ng-show="addForm.zone.$error.required") Une zone doit être saisie
+                li(ng-show="addForm.quartier.$error.required") Un quartier doit être saisi
         div(ng-show="doublon") Merci de saisir un autre nom, celui-ci est déjà utilisé
         

@@ -32,7 +32,12 @@ module.exports = exports = function(index) {
 			    if(typeChamp=='ObjectId'){
 				    var champExterne = ObjectJSON.champs[indexChamps].champExterne;
 				    typeChamp={type: Schema.Types.ObjectId,ref:champExterne};
-			    } 
+			    }
+
+                if(typeChamp=='ArrayObjectId'){
+                    var champExterne = ObjectJSON.champs[indexChamps].champExterne;
+				    typeChamp=[{type: Schema.Types.ObjectId,ref:champExterne}];
+                } 
 
 			    objetModel[nomChamp]=typeChamp;
 		    }
