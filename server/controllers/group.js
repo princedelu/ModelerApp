@@ -1,7 +1,7 @@
 var async = require("async"),
     _ =           require('underscore'),
-    config = require('../../client/common/javascript/modelConfig').modelConfig.models,
-    groups = require('../../client/common/javascript/modelConfig').modelConfig.groups;
+    config = require('../../client/common/config/modelConfig').modelConfig.models,
+    groups = require('../../client/common/config/modelConfig').modelConfig.groups;
 
 module.exports = exports = function(group) {
 

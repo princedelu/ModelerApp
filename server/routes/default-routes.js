@@ -3,10 +3,10 @@ var _ =           require('underscore')
     , passport =  require('passport')
     , AuthCtrl =  require('../controllers/auth')
     , User =      require('../models/User.js')
-    , userRoles = require('../../client/common/javascript/routingConfig').userRoles
-    , accessLevels = require('../../client/common/javascript/routingConfig').accessLevels
-    , config = require('../../client/common/javascript/modelConfig').modelConfig.models
-    , groups = require('../../client/common/javascript/modelConfig').modelConfig.groups;
+    , userRoles = require('../../client/common/config/routingConfig').userRoles
+    , accessLevels = require('../../client/common/config/routingConfig').accessLevels
+    , config = require('../../client/common/config/modelConfig').modelConfig.models
+    , groups = require('../../client/common/config/modelConfig').modelConfig.groups;
 
 var routes = [
 

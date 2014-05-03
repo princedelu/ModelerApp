@@ -2,8 +2,8 @@ module.exports = exports = function(group) {
 
     var Ctrl =  		require('../controllers/group')(group)
 	    , path =      require('path')
-	    , userRoles = 		require('../../client/common/javascript/routingConfig').userRoles
-	    , accessLevels = 	require('../../client/common/javascript/routingConfig').accessLevels;
+	    , userRoles = 		require('../../client/common/config/routingConfig').userRoles
+	    , accessLevels = 	require('../../client/common/config/routingConfig').accessLevels;
 
     var routes = [
 	    // Read 

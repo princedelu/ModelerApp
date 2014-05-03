@@ -1,6 +1,6 @@
 var _ = require('underscore');
 var mongoose = require('../database.js');
-var config = require('../../client/common/javascript/modelConfig').modelConfig.models;
+var config = require('../../client/common/config/modelConfig').modelConfig.models;
 
 module.exports = exports = function(index) {
 

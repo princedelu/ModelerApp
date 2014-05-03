@@ -3,7 +3,7 @@ var User
     , passport =        require('passport')
     , LocalStrategy =   require('passport-local').Strategy
     , check =           require('validator').check
-    , userRoles =       require('../../client/common/javascript/routingConfig').userRoles;
+    , userRoles =       require('../../client/common/config/routingConfig').userRoles;
 
 var users = [
     {

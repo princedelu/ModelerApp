@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <jslint>
-<file name="client/common/javascript/modelConfig.js">
-  
-</file>
 <file name="Gruntfile.js">
-  
-</file>
-<file name="client/common/javascript/routingConfig.js">
   
 </file>
 <file name="client/common/javascript/app.js">

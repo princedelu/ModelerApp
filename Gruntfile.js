@@ -7,11 +7,15 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     concat: {
       options: {
-        separator: ';'
+        separator: ''
       },
       dist: {
-        src: ['client/**/javascript/*.js'],
-        dest: 'dist/<%= pkg.name %>.js'
+        src: [  'client/common/javascript/app.js',
+                'client/**/javascript/services.js',
+                'client/**/javascript/controllers.js',
+                'client/**/javascript/directives.js'
+             ],
+        dest: 'client/common/javascript/<%= pkg.name %>.js'
       }
     },
     uglify: {
@@ -20,12 +24,16 @@ module.exports = function(grunt) {
       },
       dist: {
         files: {
-          'dist/<%= pkg.name %>.min.js': ['<%= concat.dist.dest %>']
+          'client/common/javascript/<%= pkg.name %>.min.js': ['<%= concat.dist.dest %>']
         }
       }
     },
     jshint: {
-      files: ['Gruntfile.js', 'client/**/javascript/*.js'],
+      files: ['Gruntfile.js', 'client/common/javascript/app.js',
+                'client/**/javascript/services.js',
+                'client/**/javascript/controllers.js',
+                'client/**/javascript/directives.js'
+            ],
       options: {
         // options here to override JSHint defaults
         globals: {
@@ -42,7 +50,11 @@ module.exports = function(grunt) {
     },
     complexity: {
         generic: {
-            src: ['Gruntfile.js', 'client/**/javascript/*.js'],
+            src: ['Gruntfile.js', 'client/common/javascript/app.js',
+                'client/**/javascript/services.js',
+                'client/**/javascript/controllers.js',
+                'client/**/javascript/directives.js'
+                 ],
             options: {
                 breakOnErrors: false,
                 jsLintXML: 'report.xml',         // create XML JSLint-like report
