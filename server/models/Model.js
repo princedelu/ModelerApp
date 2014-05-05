@@ -2,9 +2,9 @@ var _ = require('underscore');
 var mongoose = require('../database.js');
 var config = require('../../client/common/config/modelConfig').modelConfig.models;
 
-module.exports = exports = function(index) {
+module.exports = exports = function(nom) {
 
-    var ObjectJSON = config[index];
+    var ObjectJSON = config[nom];
 
     var modelTrouve = false;
     var listModelNames = mongoose.modelNames();
@@ -13,7 +13,7 @@ module.exports = exports = function(index) {
                 modelTrouve = true;
             }
         });
-    if (modelTrouve == true){
+    if (modelTrouve){
         return mongoose.model(ObjectJSON.model);
     }else{
         
@@ -23,25 +23,29 @@ module.exports = exports = function(index) {
         // Création du schéma
 
         var objetModel = {};
-        for(var indexChamps=0;indexChamps<ObjectJSON.champs.length;indexChamps++){
-            var nomChamp = ObjectJSON.champs[indexChamps].model;
+        _.each(ObjectJSON.champs, function(item) {
+            var nomChamp = item.model;
 		
 		    if (nomChamp != "_id"){
-			    var typeChamp = ObjectJSON.champs[indexChamps].typeChamp;
+			    var typeChamp = item.typeChamp;
 	     
 			    if(typeChamp=='ObjectId'){
-				    var champExterne = ObjectJSON.champs[indexChamps].champExterne;
+				    var champExterne = item.champExterne;
 				    typeChamp={type: Schema.Types.ObjectId,ref:champExterne};
 			    }
 
                 if(typeChamp=='ArrayObjectId'){
-                    var champExterne = ObjectJSON.champs[indexChamps].champExterne;
+                    var champExterne = item.champExterne;
 				    typeChamp=[{type: Schema.Types.ObjectId,ref:champExterne}];
                 } 
 
+                if(typeChamp=='StringNom'){
+                    typeChamp='String';
+                }
+
 			    objetModel[nomChamp]=typeChamp;
 		    }
-        }
+        });
 
         var objectSchema = new Schema(objetModel);
 

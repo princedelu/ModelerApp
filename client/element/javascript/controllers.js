@@ -11,9 +11,9 @@ angular.module('ModelerApp')
             $scope.action = action;
             var elementConfig;
 
-            _.each(modelConfig.modelConfig.models, function(item,index) {
-                if (item.model == nomObjet) {
-                    elementConfig = item;
+            _.each(modelConfig.modelConfig.models.index, function(item) {
+                if (modelConfig.modelConfig.models[item.nom].model == nomObjet) {
+                    elementConfig = modelConfig.modelConfig.models[item.nom];
                 }
             });
 
@@ -38,12 +38,12 @@ angular.module('ModelerApp')
                     $scope.update();
                 } else {
                     var objetValue = {};
-                    for (var indexChamps = 0; indexChamps < elementConfig.champs.length; indexChamps++) {
-                        var modelChamp = elementConfig.champs[indexChamps].model;
+                    _.each(elementConfig.champs, function(item) {
+                        var modelChamp = item.model;
                         if (modelChamp != "_id") {
                             objetValue[modelChamp] = $scope[modelChamp];
                         }
-                    }
+                    });
 
                     Objet.add(nomObjet, objetValue,
                         function () {
@@ -65,10 +65,10 @@ angular.module('ModelerApp')
                 $scope.error = '';
 
                 var objetValue = {};
-                for (var indexChamps = 0; indexChamps < elementConfig.champs.length; indexChamps++) {
-                    var modelChamp = elementConfig.champs[indexChamps].model;
+                 _.each(elementConfig.champs, function(item) {
+                    var modelChamp = item.model;
                     objetValue[modelChamp] = $scope[modelChamp];
-                }
+                });
 
                 Objet.put(nomObjet, objetValue,
                     function () {
@@ -103,10 +103,10 @@ angular.module('ModelerApp')
                 $scope.error = '';
                 Objet.get(nomObjet, id,
                     function (res) {
-                        for (var indexChamps = 0; indexChamps < elementConfig.champs.length; indexChamps++) {
-                            var modelChamp = elementConfig.champs[indexChamps].model;
+                         _.each(elementConfig.champs, function(item) {
+                            var modelChamp = item.model;
                             $scope[modelChamp]=res[modelChamp];
-                        }
+                        });
                         $scope.loading = false;
                     }, function (err) {
                         $scope.error = "Failed to fetch " + nomObjet;

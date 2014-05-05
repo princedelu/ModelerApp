@@ -11,13 +11,13 @@ angular.module('ModelerApp').directive('jstree', ['$rootScope','$location', func
                        'data' : function (obj, cb) {
                             var listeValeurArbre = [] ;
 
-                            for(var index=0;index<modelConfig.modelConfig.models.length;index++){
+                            _.each(modelConfig.modelConfig.models.index, function(item,index) {
                                 var valeurArbre={};
-                                valeurArbre.id = "idtree" + modelConfig.modelConfig.models[index].model;
+                                valeurArbre.id = "idtree" + modelConfig.modelConfig.models[item.nom].model;
                                 valeurArbre.parent = "#";
-                                valeurArbre.text = modelConfig.modelConfig.models[index].nom;
+                                valeurArbre.text = item.nom;
 							    listeValeurArbre[index] = valeurArbre;
-						    }
+						    });
                             cb.call(this,
                               listeValeurArbre);
                         }

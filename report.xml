@@ -9,13 +9,10 @@
 <file name="client/restit/javascript/controllers.js">
   
 </file>
-<file name="client/element/javascript/controllers.js">
-  
-</file>
-<file name="client/element/javascript/directives.js">
-  
-</file>
 <file name="client/common/javascript/services.js">
+  
+</file>
+<file name="client/element/javascript/controllers.js">
   
 </file>
 <file name="client/restit/javascript/directives.js">
@@ -25,6 +22,9 @@
   
 </file>
 <file name="client/common/javascript/directives.js">
+  
+</file>
+<file name="client/element/javascript/directives.js">
   
 </file>
 <file name="client/common/javascript/controllers.js">

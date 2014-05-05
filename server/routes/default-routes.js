@@ -59,8 +59,8 @@ module.exports = function(app,db) {
             routesConcat = _.union(routesElement,routesConcat);
         });
 
-    _.each(config, function(item,index) {
-            var routesElement = require('./routes-name')(item.model,index);
+    _.each(config.index, function(item,index) {
+            var routesElement = require('./routes-name')(item.nom);
             routesConcat = _.union(routesElement,routesConcat);
         });
 	

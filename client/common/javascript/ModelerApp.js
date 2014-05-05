@@ -383,9 +383,9 @@ angular.module('ModelerApp')
             $scope.action = action;
             var elementConfig;
 
-            _.each(modelConfig.modelConfig.models, function(item,index) {
-                if (item.model == nomObjet) {
-                    elementConfig = item;
+            _.each(modelConfig.modelConfig.models.index, function(item) {
+                if (modelConfig.modelConfig.models[item.nom].model == nomObjet) {
+                    elementConfig = modelConfig.modelConfig.models[item.nom];
                 }
             });
 
@@ -410,12 +410,12 @@ angular.module('ModelerApp')
                     $scope.update();
                 } else {
                     var objetValue = {};
-                    for (var indexChamps = 0; indexChamps < elementConfig.champs.length; indexChamps++) {
-                        var modelChamp = elementConfig.champs[indexChamps].model;
+                    _.each(elementConfig.champs, function(item) {
+                        var modelChamp = item.model;
                         if (modelChamp != "_id") {
                             objetValue[modelChamp] = $scope[modelChamp];
                         }
-                    }
+                    });
 
                     Objet.add(nomObjet, objetValue,
                         function () {
@@ -437,10 +437,10 @@ angular.module('ModelerApp')
                 $scope.error = '';
 
                 var objetValue = {};
-                for (var indexChamps = 0; indexChamps < elementConfig.champs.length; indexChamps++) {
-                    var modelChamp = elementConfig.champs[indexChamps].model;
+                 _.each(elementConfig.champs, function(item) {
+                    var modelChamp = item.model;
                     objetValue[modelChamp] = $scope[modelChamp];
-                }
+                });
 
                 Objet.put(nomObjet, objetValue,
                     function () {
@@ -475,10 +475,10 @@ angular.module('ModelerApp')
                 $scope.error = '';
                 Objet.get(nomObjet, id,
                     function (res) {
-                        for (var indexChamps = 0; indexChamps < elementConfig.champs.length; indexChamps++) {
-                            var modelChamp = elementConfig.champs[indexChamps].model;
+                         _.each(elementConfig.champs, function(item) {
+                            var modelChamp = item.model;
                             $scope[modelChamp]=res[modelChamp];
-                        }
+                        });
                         $scope.loading = false;
                     }, function (err) {
                         $scope.error = "Failed to fetch " + nomObjet;
@@ -622,13 +622,13 @@ angular.module('ModelerApp').directive('jstree', ['$rootScope','$location', func
                        'data' : function (obj, cb) {
                             var listeValeurArbre = [] ;
 
-                            for(var index=0;index<modelConfig.modelConfig.models.length;index++){
+                            _.each(modelConfig.modelConfig.models.index, function(item,index) {
                                 var valeurArbre={};
-                                valeurArbre.id = "idtree" + modelConfig.modelConfig.models[index].model;
+                                valeurArbre.id = "idtree" + modelConfig.modelConfig.models[item.nom].model;
                                 valeurArbre.parent = "#";
-                                valeurArbre.text = modelConfig.modelConfig.models[index].nom;
+                                valeurArbre.text = item.nom;
 							    listeValeurArbre[index] = valeurArbre;
-						    }
+						    });
                             cb.call(this,
                               listeValeurArbre);
                         }

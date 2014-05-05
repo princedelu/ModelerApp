@@ -1,17 +1,17 @@
 var config = require('../../client/common/config/modelConfig').modelConfig.models;
+var _ = require('underscore');
 
-module.exports = exports = function(index) {
+module.exports = exports = function(nom) {
 
-    var ObjectJSON = config[index];
-    var ObjectType = require('../models/Model.js')(index);
+    var ObjectJSON = config[nom];
+    var ObjectType = require('../models/Model.js')(nom);
 
     var fonctions = {
         list: function(req, res) {
            var query =  ObjectType.find();
-           for(var indexPopulate=0;indexPopulate<ObjectJSON.populate.length;indexPopulate++){
-            
-                query.populate(ObjectJSON.populate[indexPopulate].model);
-           }
+           _.each(ObjectJSON.populate, function(item) {
+                query.populate(item.model);
+           });
            query.exec(function (err, objet) {
                 if (err) { res.send(403,'Erreur interne'); }
                 res.send(200,objet);
@@ -40,12 +40,12 @@ module.exports = exports = function(index) {
                     res.send(403, 'Doublon');
                 }else{
 					var objetModel = {};
-					for(var indexChamps=0;indexChamps<ObjectJSON.champs.length;indexChamps++){
-						var modelChamp = ObjectJSON.champs[indexChamps].model;
+					_.each(ObjectJSON.champs, function(item) {
+						var modelChamp = item.model;
 						if (modelChamp != "_id") {
 							objetModel[modelChamp]=req.body[modelChamp];
 						}
-					}
+					});
                     var objet = new ObjectType(objetModel);
                     if (id==null)
                     {

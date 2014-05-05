@@ -23,13 +23,13 @@ module.exports = exports = function(group) {
 function recupItem(indexItem,groupsItem,callbackMethod,indexItemParent,idParent){
         var result = [];
         var indexTableau = 0;
-        var Object = require('../models/Model.js')(groupsItem[indexItem].indexModel);
+        var Object = require('../models/Model.js')(groupsItem[indexItem].nom);
         var ObjectJSON = config[groupsItem[indexItem].indexModel];
 
         var query = Object.find();
 
          if (typeof indexItemParent != "undefined") {
-            var ObjectJSONParent = config[groupsItem[indexItemParent].indexModel];
+            var ObjectJSONParent = config[groupsItem[indexItemParent].nom];
             query.where(ObjectJSONParent.model, idParent);
         }
         query.exec(function (err, listElement) {
