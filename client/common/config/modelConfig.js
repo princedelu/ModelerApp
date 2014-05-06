@@ -6,7 +6,8 @@
                             { "nom" : "Zone" },
                             { "nom" : "Quartier"},
                             { "nom" : "Ilot"},
-                            { "nom" : "Application"}
+                            { "nom" : "Application"},
+                            { "nom" : "Canal" }
                          ],
                         "Zone" : 
                         {
@@ -26,12 +27,14 @@
 			                    {
 				                    "nom":"Nom",
 				                    "model":"nom",
-				                    "typeChamp":"StringNom"
+				                    "typeChamp":"StringNom",
+                                    "afficheList" : true
 			                    },
 			                    {
 				                    "nom":"Description",
 				                    "model":"description",
-				                    "typeChamp":"String"
+				                    "typeChamp":"String",
+                                    "afficheList" : true
 			                    }
 		                    ]
 	                    },
@@ -57,18 +60,21 @@
 			                    {
 				                    "nom":"Nom",
 				                    "model":"nom",
-				                    "typeChamp":"StringNom"
+				                    "typeChamp":"StringNom",
+                                    "afficheList" : true
 			                    },
 			                    {
 				                    "nom":"Description",
 				                    "model":"description",
-				                    "typeChamp":"String"
+				                    "typeChamp":"String",
+                                    "afficheList" : true
 			                    },
 			                    {
 				                    "nom":"Zone",
 				                    "model":"zone",
 				                    "typeChamp":"ObjectId",
-				                    "champExterne":"zone"
+				                    "champExterne":"zone",
+                                    "afficheList" : true
 			                    }
 		                    ]
 	                    },
@@ -94,18 +100,21 @@
 			                    {
 				                    "nom":"Nom",
 				                    "model":"nom",
-				                    "typeChamp":"StringNom"
+				                    "typeChamp":"StringNom",
+                                    "afficheList" : true
 			                    },
 			                    {
 				                    "nom":"Description",
 				                    "model":"description",
-				                    "typeChamp":"String"
+				                    "typeChamp":"String",
+                                    "afficheList" : true
 			                    },
 			                    {
 				                    "nom":"Quartiers",
 				                    "model":"quartier",
 				                    "typeChamp":"ArrayObjectId",
-				                    "champExterne":"quartier"
+				                    "champExterne":"quartier",
+                                    "afficheList" : true
 			                    }
 		                    ]
 	                    },
@@ -120,6 +129,9 @@
 		                    "populate":[
 			                    {
 				                    "model":"ilot"
+			                    },
+                                {
+				                    "model":"canal"
 			                    }
 		                    ],
 		                    "champs":[
@@ -131,18 +143,58 @@
 			                    {
 				                    "nom":"Nom",
 				                    "model":"nom",
-				                    "typeChamp":"StringNom"
+				                    "typeChamp":"StringNom",
+                                    "afficheList" : true
 			                    },
 			                    {
 				                    "nom":"Description",
 				                    "model":"description",
-				                    "typeChamp":"String"
+				                    "typeChamp":"String",
+                                    "afficheList" : true
 			                    },
 			                    {
 				                    "nom":"Ilot",
 				                    "model":"ilot",
 				                    "typeChamp":"ObjectId",
-				                    "champExterne":"ilot"
+				                    "champExterne":"ilot",
+                                    "afficheList" : true
+			                    },
+			                    {
+				                    "nom":"Canal",
+				                    "model":"canal",
+				                    "typeChamp":"ObjectId",
+				                    "champExterne":"canal",
+                                    "afficheList" : false
+			                    }
+		                    ]
+	                    },
+                        "Canal" : 
+	                    {
+		                    "nom":"Canal",
+		                    "model":"canal",
+                            "group" : "applicatif",
+		                    "libelleIHMListe":"Liste des canaux",
+		                    "libelleIHMDetail":"Detail d'un canal",
+		                    "libelleIHMAjout":"Ajout d'un canal",
+		                    "populate":[
+		                    ],
+		                    "champs":[
+			                    {
+				                    "nom":"Id",
+				                    "model":"_id",
+				                    "typeChamp":"ObjectId"
+			                    },
+			                    {
+				                    "nom":"Nom",
+				                    "model":"nom",
+				                    "typeChamp":"StringNom",
+                                    "afficheList" : true
+			                    },
+			                    {
+				                    "nom":"Description",
+				                    "model":"description",
+				                    "typeChamp":"String",
+                                    "afficheList" : true
 			                    }
 		                    ]
 	                    }

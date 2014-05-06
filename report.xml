@@ -3,40 +3,37 @@
 <file name="Gruntfile.js">
   
 </file>
-<file name="client/common/javascript/app.js">
+<file name="src_client/common/app.js">
   
 </file>
-<file name="client/restit/javascript/controllers.js">
+<file name="src_client/restit/controllers.js">
   
 </file>
-<file name="client/common/javascript/services.js">
+<file name="src_client/common/services.js">
   
 </file>
-<file name="client/element/javascript/controllers.js">
+<file name="src_client/element/controllers.js">
   
 </file>
-<file name="client/restit/javascript/directives.js">
+<file name="src_client/restit/directives.js">
   
 </file>
-<file name="client/accueil/javascript/services.js">
+<file name="src_client/common/directives.js">
   
 </file>
-<file name="client/common/javascript/directives.js">
+<file name="src_client/element/directives.js">
   
 </file>
-<file name="client/element/javascript/directives.js">
+<file name="src_client/common/controllers.js">
   
 </file>
-<file name="client/common/javascript/controllers.js">
+<file name="src_client/restit/services.js">
   
 </file>
-<file name="client/restit/javascript/services.js">
+<file name="src_client/element/services.js">
   
 </file>
-<file name="client/element/javascript/services.js">
-  
-</file>
-<file name="client/accueil/javascript/controllers.js">
+<file name="src_client/accueil/controllers.js">
   
 </file>
 </jslint>

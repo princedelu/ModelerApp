@@ -13,7 +13,7 @@ div(id='contenu')
          div(class='form-group')
             label(for='quartier') Quartier
             select(data-ng-model="quartier",name="quartier",required,data-ng-options="quartier._id as quartier.nom for quartier in quartiers",class='form-control app-control',multiple,ng-multiple="true",size="5")               
-        div(class='form-group')
+        div(class='form-group',data-access-level='accessLevels.admin')
             input(type="hidden", data-ng-model="_id", id='_id', name="_id")
             button.btn(type="submit", data-ng-disabled="addForm.$invalid") Valider
 

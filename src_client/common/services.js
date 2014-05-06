@@ -2,7 +2,7 @@
 "use strict";
 
 angular.module('ModelerApp')
-.factory('Auth', function($http, $cookieStore){
+.factory('Auth', ['$http','$cookieStore', function($http, $cookieStore){
 
     var accessLevels = routingConfig.accessLevels;
     var userRoles = routingConfig.userRoles;
@@ -16,6 +16,8 @@ angular.module('ModelerApp')
 	
     return {
         authorize: function(accessLevel, role) {
+            if (accessLevel === undefined)
+                accessLevel = userRoles.admin;
             if(role === undefined)
                 role = currentUser.role;
 
@@ -45,8 +47,9 @@ angular.module('ModelerApp')
         userRoles: userRoles,
         user: currentUser
     };
-});
+}]);
 
 })();
+
 
 

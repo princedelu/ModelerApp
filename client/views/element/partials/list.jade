@@ -2,15 +2,19 @@ include ../menuleft
 
 div(id='contenu')
     h1 {{ elementConfig.libelleIHMListe }}
-
+    div(class="col-md-4 col-md-offset-8 text-right")
+        button(type='button',class='btn btn-link app-btn-add',ng-click="go('/' + elementConfig.model + '/add')",data-access-level='accessLevels.admin')
+            span(class='glyphicon glyphicon-plus')
+        | Filtre : 
+        input(type="text",data-ng-model="champNom")
     table.table.table-striped.table-condensed(data-ng-hide="loading")
         thead
             tr
-                th(data-ng-repeat="champ in elementConfig.champs",ng-show="!$first") {{ champ.nom }}
-                th Action
+                th(data-ng-repeat="champ in elementConfig.champs",ng-if="champ.afficheList === true") {{ champ.nom }}
+                th(data-access-level='accessLevels.admin') Action
         tbody
-            tr(data-ng-repeat="element in objets")
-                td(data-ng-repeat="champ in elementConfig.champs",ng-show="!$first",ng-switch="champ.typeChamp")
+            tr(data-ng-repeat="element in objets | filter:champNom")
+                td(data-ng-repeat="champ in elementConfig.champs",ng-switch="champ.typeChamp",ng-if="champ.afficheList === true")
                    span(ng-switch-when='StringNom')
                        a(href='/{{ elementConfig.model }}/item/{{ element[champ.model] }}')
                            | {{ element[champ.model] }}
@@ -18,6 +22,6 @@ div(id='contenu')
                    span(ng-switch-when='ArrayObjectId')
                        li(ng-repeat="item in element[champ.model]") {{ item.nom }}
                    span(ng-switch-default) {{ element[champ.model] }}
-                td
+                td(data-access-level='accessLevels.admin')
                     button(type='button',class='btn btn-link app-btn-delete',ng-click='delete(element.nom)')
                         span(class='glyphicon glyphicon-remove')

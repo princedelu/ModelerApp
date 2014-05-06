@@ -10,17 +10,19 @@ module.exports = function(grunt) {
         separator: ''
       },
       dist: {
-        src: [  'client/common/javascript/app.js',
-                'client/**/javascript/services.js',
-                'client/**/javascript/controllers.js',
-                'client/**/javascript/directives.js'
+        src: [  'src_client/common/app.js',
+                'src_client/**/services.js',
+                'src_client/**/controllers.js',
+                'src_client/**/directives.js'
              ],
         dest: 'client/common/javascript/<%= pkg.name %>.js'
       }
     },
     uglify: {
       options: {
-        banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
+        banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n',
+        report: 'min',
+        mangle: false
       },
       dist: {
         files: {
@@ -29,10 +31,10 @@ module.exports = function(grunt) {
       }
     },
     jshint: {
-      files: ['Gruntfile.js', 'client/common/javascript/app.js',
-                'client/**/javascript/services.js',
-                'client/**/javascript/controllers.js',
-                'client/**/javascript/directives.js'
+      files: ['Gruntfile.js', 'src_client/common/app.js',
+                'src_client/**/services.js',
+                'src_client/**/controllers.js',
+                'src_client/**/directives.js'
             ],
       options: {
         // options here to override JSHint defaults
@@ -50,10 +52,10 @@ module.exports = function(grunt) {
     },
     complexity: {
         generic: {
-            src: ['Gruntfile.js', 'client/common/javascript/app.js',
-                'client/**/javascript/services.js',
-                'client/**/javascript/controllers.js',
-                'client/**/javascript/directives.js'
+            src: ['Gruntfile.js', 'src_client/common/app.js',
+                'src_client/**/services.js',
+                'src_client/**/controllers.js',
+                'src_client/**/directives.js'
                  ],
             options: {
                 breakOnErrors: false,

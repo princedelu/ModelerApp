@@ -6,7 +6,7 @@ angular.module('ModelerApp').directive('jstree', ['$rootScope','$location', func
         restrict: 'A',
         link: function(scope, element, attrs) {
             $(function() {
-               $(element[0]).jstree({
+               var tree = $(element[0]).jstree({
                      "core" : {
                        'data' : function (obj, cb) {
                             var listeValeurArbre = [] ;
@@ -23,6 +23,13 @@ angular.module('ModelerApp').directive('jstree', ['$rootScope','$location', func
                         }
                      },
                     "plugins" : [ "contextmenu" ], contextmenu: {items: customMenu}
+                  });
+                tree.on('select_node.jstree', function (e, data) {
+                    var id = data.node.id;
+                    id = id.substring(6,id.length+1);
+                    $rootScope.$apply(function(){
+                       $location.path('/' + id + '/list'); 
+                    }); 
                   });
             });
 

@@ -133,59 +133,7 @@ $(document).ready(function () {
 "use strict";
 
 angular.module('ModelerApp')
-.factory('Auth', function($http, $cookieStore){
-
-    var accessLevels = routingConfig.accessLevels;
-    var userRoles = routingConfig.userRoles;
-    var currentUser = $cookieStore.get('user') || { username: '', role: userRoles.public };
-
-    $cookieStore.remove('user');
-
-	function changeUser(user) {
-		_.extend(currentUser, user);
-	}
-	
-    return {
-        authorize: function(accessLevel, role) {
-            if(role === undefined)
-                role = currentUser.role;
-
-            return accessLevel.bitMask & role.bitMask;
-        },
-        isLoggedIn: function(user) {
-            if(user === undefined)
-                user = currentUser;
-            return user.role.title == userRoles.user.title || user.role.title == userRoles.admin.title;
-        },
-        login: function(user, success, error) {
-            $http.post('/api/login', user).success(function(user){
-                changeUser(user);
-                success(user);
-            }).error(error);
-        },
-        logout: function(success, error) {
-            $http.post('/api/logout').success(function(){
-                changeUser({
-                    username: '',
-                    role: userRoles.public
-                });
-                success();
-            }).error(error);
-        },
-        accessLevels: accessLevels,
-        userRoles: userRoles,
-        user: currentUser
-    };
-});
-
-})();
-
-
-(function(){
-"use strict";
-
-angular.module('ModelerApp')
-.factory('Auth', function($http, $cookieStore){
+.factory('Auth', ['$http','$cookieStore', function($http, $cookieStore){
 
     var accessLevels = routingConfig.accessLevels;
     var userRoles = routingConfig.userRoles;
@@ -200,7 +148,7 @@ angular.module('ModelerApp')
     return {
         authorize: function(accessLevel, role) {
             if (accessLevel === undefined)
-                accessLevel = userRoles.user;
+                accessLevel = userRoles.admin;
             if(role === undefined)
                 role = currentUser.role;
 
@@ -230,7 +178,7 @@ angular.module('ModelerApp')
         userRoles: userRoles,
         user: currentUser
     };
-});
+}]);
 
 })();
 
@@ -240,7 +188,7 @@ angular.module('ModelerApp')
 "use strict";
 
 angular.module('ModelerApp')
-.factory('Objet', function($http) {
+.factory('Objet',['$http', function($http) {
 	var userRoles = routingConfig.userRoles;
 
 	return {
@@ -261,7 +209,7 @@ angular.module('ModelerApp')
         },
 		userRoles : userRoles
     };
-});
+}]);
 
 })();
 
@@ -272,7 +220,7 @@ angular.module('ModelerApp')
 "use strict";
 
 angular.module('ModelerApp')
-.factory('Group', function($http) {
+.factory('Group',['$http', function($http) {
 	var userRoles = routingConfig.userRoles;
 
 	return {
@@ -281,7 +229,7 @@ angular.module('ModelerApp')
         },
 		userRoles : userRoles
     };
-});
+}]);
 
 })();
 
@@ -374,8 +322,8 @@ angular.module('ModelerApp')
 "use strict";
 
 angular.module('ModelerApp')
-    .controller('dynamicCtrl', ['$rootScope', '$scope', '$location', '$route', '$routeParams', 'Objet','_',
-        function ($rootScope, $scope, $location, $route, $routeParams, Objet, _) {
+    .controller('dynamicCtrl', ['$rootScope', '$scope', '$location', '$route', '$routeParams', 'Objet','_','Auth',
+        function ($rootScope, $scope, $location, $route, $routeParams, Objet, _,Auth) {
 
             $scope.isModuleElement = true;
             var nomObjet = $routeParams.objet;
@@ -390,6 +338,10 @@ angular.module('ModelerApp')
             });
 
             $scope.elementConfig = elementConfig;
+
+            $scope.user = Auth.user;
+            $scope.userRoles = Auth.userRoles;
+            $scope.accessLevels = Auth.accessLevels;
 
             $scope.list = function () {
                 $scope.success = '';
@@ -468,6 +420,10 @@ angular.module('ModelerApp')
                         $scope.error = err;
                         $route.reload();
                     });
+            };
+
+            $scope.go = function ( path ) {
+                $location.path( path );
             };
 
             $scope.get = function (id) {
@@ -577,10 +533,12 @@ angular.module('ModelerApp')
 
             function updateCSS() {
                 if(userRole && accessLevel) {
-                    if(!Auth.authorize(accessLevel, userRole))
+                    if(!Auth.authorize(accessLevel, userRole)){
                         element.css('display', 'none');
-                    else
+                    }
+                    else{
                         element.css('display', prevDisp);
+                    }
                 }
             }
         }
@@ -617,7 +575,7 @@ angular.module('ModelerApp').directive('jstree', ['$rootScope','$location', func
         restrict: 'A',
         link: function(scope, element, attrs) {
             $(function() {
-               $(element[0]).jstree({
+               var tree = $(element[0]).jstree({
                      "core" : {
                        'data' : function (obj, cb) {
                             var listeValeurArbre = [] ;
@@ -634,6 +592,13 @@ angular.module('ModelerApp').directive('jstree', ['$rootScope','$location', func
                         }
                      },
                     "plugins" : [ "contextmenu" ], contextmenu: {items: customMenu}
+                  });
+                tree.on('select_node.jstree', function (e, data) {
+                    var id = data.node.id;
+                    id = id.substring(6,id.length+1);
+                    $rootScope.$apply(function(){
+                       $location.path('/' + id + '/list'); 
+                    }); 
                   });
             });
 

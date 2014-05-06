@@ -2,8 +2,8 @@
 "use strict";
 
 angular.module('ModelerApp')
-    .controller('dynamicCtrl', ['$rootScope', '$scope', '$location', '$route', '$routeParams', 'Objet','_',
-        function ($rootScope, $scope, $location, $route, $routeParams, Objet, _) {
+    .controller('dynamicCtrl', ['$rootScope', '$scope', '$location', '$route', '$routeParams', 'Objet','_','Auth',
+        function ($rootScope, $scope, $location, $route, $routeParams, Objet, _,Auth) {
 
             $scope.isModuleElement = true;
             var nomObjet = $routeParams.objet;
@@ -18,6 +18,10 @@ angular.module('ModelerApp')
             });
 
             $scope.elementConfig = elementConfig;
+
+            $scope.user = Auth.user;
+            $scope.userRoles = Auth.userRoles;
+            $scope.accessLevels = Auth.accessLevels;
 
             $scope.list = function () {
                 $scope.success = '';
@@ -96,6 +100,10 @@ angular.module('ModelerApp')
                         $scope.error = err;
                         $route.reload();
                     });
+            };
+
+            $scope.go = function ( path ) {
+                $location.path( path );
             };
 
             $scope.get = function (id) {

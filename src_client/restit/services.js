@@ -2,7 +2,7 @@
 "use strict";
 
 angular.module('ModelerApp')
-.factory('Group', function($http) {
+.factory('Group',['$http', function($http) {
 	var userRoles = routingConfig.userRoles;
 
 	return {
@@ -11,7 +11,7 @@ angular.module('ModelerApp')
         },
 		userRoles : userRoles
     };
-});
+}]);
 
 })();
 
