@@ -3,22 +3,13 @@ include ../../menuleft
 div(id='contenu')
     h1(data-ng-if="action == 'add'") {{ elementConfig.libelleIHMAjout }}
     h1(data-ng-if="action != 'add'") {{ elementConfig.libelleIHMDetail }}
-    form(ng-submit='add()', name="addForm",role='form')
+    form(ng-submit='add()', name="addForm",role='form')        
         div(class='form-group')
             label(for='nom') Nom
             input(type="text", data-ng-model="nom", id='nom', placeholder="Nom", name="nom", required, data-ng-minlength="1", data-ng-maxlength="20", autofocus,class='form-control app-control')
         div(class='form-group')
             label(for='description') Description
             textarea(rows=4, data-ng-model="description", placeholder="Description", name="description", required, data-ng-minlength="1", data-ng-maxlength="60",class='form-control app-control')
-         div(class='form-group')
-            label(for='ilot') Ilot
-            select(data-ng-model="ilot",name="ilot",required,data-ng-options="ilot._id as ilot.nom for ilot in ilots",class='form-control app-control')  
-         div(class='form-group')
-            label(for='canal') Canal
-            select(data-ng-model="canal",name="canal",required,data-ng-options="canal._id as canal.nom for canal in canals",class='form-control app-control')
-        div(class='form-group')
-            label(for='composant') Composants
-            select(data-ng-model="composant",name="composant",required,data-ng-options="composant._id as composant.nom for composant in composants",class='form-control app-control',multiple,ng-multiple="true",size="5")               
         div(class='form-group',data-access-level='accessLevels.admin')
             input(type="hidden", data-ng-model="_id", id='_id', name="_id")
             button.btn(type="submit", data-ng-disabled="addForm.$invalid") Valider
@@ -32,8 +23,5 @@ div(id='contenu')
                 li(ng-show="addForm.description.$error.required") Une description est requise
                 li(ng-show="addForm.description.$error.$error.minlength") La description doit avoir une longueur minimale de 1
                 li(ng-show="addForm.description.$error.maxlength") La description doit avoir une longueur maximum de 60
-                li(ng-show="addForm.ilot.$error.required") Un ilot doit être saisi
-                li(ng-show="addForm.canal.$error.required") Un canal doit être saisi
-                li(ng-show="addForm.composant.$error.required") Un composant doit être saisi
         div(ng-show="doublon") Merci de saisir un autre nom, celui-ci est déjà utilisé
         

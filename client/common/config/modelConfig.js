@@ -3,11 +3,15 @@
     var config = {
                     "models" : {
                         "index" : [
-                            { "nom" : "Zone" },
-                            { "nom" : "Quartier"},
-                            { "nom" : "Ilot"},
-                            { "nom" : "Application"},
-                            { "nom" : "Canal" }
+                            { "nom" : "Zone" , "type" : "param" },
+                            { "nom" : "Quartier" , "type" : "param" },
+                            { "nom" : "Ilot" , "type" : "param" },
+                            { "nom" : "Application" , "type" : "param" },
+                            { "nom" : "Composant" , "type" : "param" },
+                            { "nom" : "Canal" , "type" : "config" },
+                            { "nom" : "TypeComposant" , "type" : "config" },
+                            { "nom" : "Editeur" , "type" : "config" },
+                            { "nom" : "Logiciel" , "type" : "config" }
                          ],
                         "Zone" : 
                         {
@@ -132,6 +136,9 @@
 			                    },
                                 {
 				                    "model":"canal"
+			                    },
+                                {
+				                    "model":"composant"
 			                    }
 		                    ],
 		                    "champs":[
@@ -165,6 +172,42 @@
 				                    "typeChamp":"ObjectId",
 				                    "champExterne":"canal",
                                     "afficheList" : false
+			                    },
+			                    {
+				                    "nom":"Composants",
+				                    "model":"composant",
+				                    "typeChamp":"ArrayObjectId",
+				                    "champExterne":"composant",
+                                    "afficheList" : false
+			                    }
+		                    ]
+	                    },
+                        "Composant" : 
+	                    {
+		                    "nom":"Composant",
+		                    "model":"composant",
+                            "group" : "applicatif",
+		                    "libelleIHMListe":"Liste des composants",
+		                    "libelleIHMDetail":"Detail d'un composant",
+		                    "libelleIHMAjout":"Ajout d'un composant",
+		                    "populate":[],
+		                    "champs":[
+			                    {
+				                    "nom":"Id",
+				                    "model":"_id",
+				                    "typeChamp":"ObjectId"
+			                    },
+			                    {
+				                    "nom":"Nom",
+				                    "model":"nom",
+				                    "typeChamp":"StringNom",
+                                    "afficheList" : true
+			                    },
+			                    {
+				                    "nom":"Description",
+				                    "model":"description",
+				                    "typeChamp":"String",
+                                    "afficheList" : true
 			                    }
 		                    ]
 	                    },
@@ -193,6 +236,118 @@
 			                    {
 				                    "nom":"Description",
 				                    "model":"description",
+				                    "typeChamp":"String",
+                                    "afficheList" : true
+			                    }
+		                    ]
+	                    },
+                        "TypeComposant" : 
+	                    {
+		                    "nom":"TypeComposant",
+		                    "model":"typecomposant",
+                            "group" : "applicatif",
+		                    "libelleIHMListe":"Liste des types de composants",
+		                    "libelleIHMDetail":"Detail d'un type de composant",
+		                    "libelleIHMAjout":"Ajout d'un type de composant",
+		                    "populate":[
+		                    ],
+		                    "champs":[
+			                    {
+				                    "nom":"Id",
+				                    "model":"_id",
+				                    "typeChamp":"ObjectId"
+			                    },
+			                    {
+				                    "nom":"Nom",
+				                    "model":"nom",
+				                    "typeChamp":"StringNom",
+                                    "afficheList" : true
+			                    },
+			                    {
+				                    "nom":"Description",
+				                    "model":"description",
+				                    "typeChamp":"String",
+                                    "afficheList" : true
+			                    }
+		                    ]
+	                    },
+                        "Editeur" : 
+	                    {
+		                    "nom":"Editeur",
+		                    "model":"editeur",
+                            "group" : "editeur",
+		                    "libelleIHMListe":"Liste des editeurs",
+		                    "libelleIHMDetail":"Detail d'un editeur",
+		                    "libelleIHMAjout":"Ajout d'un editeur",
+		                    "populate":[
+		                    ],
+		                    "champs":[
+			                    {
+				                    "nom":"Id",
+				                    "model":"_id",
+				                    "typeChamp":"ObjectId"
+			                    },
+			                    {
+				                    "nom":"Nom",
+				                    "model":"nom",
+				                    "typeChamp":"StringNom",
+                                    "afficheList" : true
+			                    },
+			                    {
+				                    "nom":"Description",
+				                    "model":"description",
+				                    "typeChamp":"String",
+                                    "afficheList" : true
+			                    }
+		                    ]
+	                    },
+                        "Logiciel" : 
+	                    {
+		                    "nom":"Logiciel",
+		                    "model":"logiciel",
+                            "group" : "applicatif",
+		                    "libelleIHMListe":"Liste des logiciel",
+		                    "libelleIHMDetail":"Detail d'un logiciel",
+		                    "libelleIHMAjout":"Ajout d'un logiciel",
+		                    "populate":[
+                                {
+				                    "model":"editeur"
+			                    }
+		                    ],
+		                    "champs":[
+			                    {
+				                    "nom":"Id",
+				                    "model":"_id",
+				                    "typeChamp":"ObjectId"
+			                    },
+			                    {
+				                    "nom":"Nom",
+				                    "model":"nom",
+				                    "typeChamp":"StringNom",
+                                    "afficheList" : true
+			                    },
+			                    {
+				                    "nom":"Description",
+				                    "model":"description",
+				                    "typeChamp":"String",
+                                    "afficheList" : true
+			                    },
+			                    {
+				                    "nom":"Editeur",
+				                    "model":"editeur",
+				                    "typeChamp":"ObjectId",
+				                    "champExterne":"editeur",
+                                    "afficheList" : true
+			                    },
+			                    {
+				                    "nom":"Version",
+				                    "model":"version",
+				                    "typeChamp":"String",
+                                    "afficheList" : true
+			                    },
+			                    {
+				                    "nom":"Date de fin de support",
+				                    "model":"datefinsupport",
 				                    "typeChamp":"String",
                                     "afficheList" : true
 			                    }

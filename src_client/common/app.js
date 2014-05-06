@@ -3,7 +3,7 @@ angular.module('underscore', []).factory('_', function() {
     return window._;
 });
 
-angular.module('ModelerApp', ['ngCookies', 'ngRoute','underscore'])
+angular.module('ModelerApp', ['ngCookies', 'ngRoute','underscore','ui.bootstrap'])
 
     .config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
 

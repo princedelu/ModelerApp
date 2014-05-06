@@ -3,7 +3,7 @@ angular.module('underscore', []).factory('_', function() {
     return window._;
 });
 
-angular.module('ModelerApp', ['ngCookies', 'ngRoute','underscore'])
+angular.module('ModelerApp', ['ngCookies', 'ngRoute','underscore','ui.bootstrap'])
 
     .config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
 
@@ -579,13 +579,18 @@ angular.module('ModelerApp').directive('jstree', ['$rootScope','$location', func
                      "core" : {
                        'data' : function (obj, cb) {
                             var listeValeurArbre = [] ;
+                            var nbValeur = 0;
+                            var jstreeType = attrs.jstreeType;
 
                             _.each(modelConfig.modelConfig.models.index, function(item,index) {
-                                var valeurArbre={};
-                                valeurArbre.id = "idtree" + modelConfig.modelConfig.models[item.nom].model;
-                                valeurArbre.parent = "#";
-                                valeurArbre.text = item.nom;
-							    listeValeurArbre[index] = valeurArbre;
+                                if (item.type === jstreeType ){
+                                    var valeurArbre={};
+                                    valeurArbre.id = "idtree" + modelConfig.modelConfig.models[item.nom].model;
+                                    valeurArbre.parent = "#";
+                                    valeurArbre.text = item.nom;
+							        listeValeurArbre[nbValeur] = valeurArbre;
+                                    nbValeur++;
+                                }
 						    });
                             cb.call(this,
                               listeValeurArbre);
