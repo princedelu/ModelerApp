@@ -1,7 +1,19 @@
 (function(exports){
 
     var config = {
+                    "config" : {
+                        "accordionCloseOther" : false,
+                        "isOpenAccordion" : true 
+                    },
                     "models" : {
+                        "typeElements" : [
+                            { "nom" : "param",
+                              "texte" : "Liste des entités"
+                            },
+                            { "nom" : "config",
+                              "texte" : "Liste des confgurations"
+                            }
+                        ],
                         "index" : [
                             { "nom" : "Zone" , "type" : "param" },
                             { "nom" : "Quartier" , "type" : "param" },
@@ -190,7 +202,14 @@
 		                    "libelleIHMListe":"Liste des composants",
 		                    "libelleIHMDetail":"Detail d'un composant",
 		                    "libelleIHMAjout":"Ajout d'un composant",
-		                    "populate":[],
+		                    "populate":[
+                                {
+				                    "model":"typecomposant"
+			                    },
+                                {
+				                    "model":"logiciel"
+			                    },
+                            ],
 		                    "champs":[
 			                    {
 				                    "nom":"Id",
@@ -206,6 +225,26 @@
 			                    {
 				                    "nom":"Description",
 				                    "model":"description",
+				                    "typeChamp":"String",
+                                    "afficheList" : true
+			                    },
+			                    {
+				                    "nom":"Type de composant",
+				                    "model":"typecomposant",
+				                    "typeChamp":"ObjectId",
+				                    "champExterne":"typecomposant",
+                                    "afficheList" : true
+			                    },
+			                    {
+				                    "nom":"Logiciel",
+				                    "model":"logiciel",
+				                    "typeChamp":"ObjectId",
+				                    "champExterne":"logiciel",
+                                    "afficheList" : false
+			                    },
+			                    {
+				                    "nom":"Version du composant",
+				                    "model":"version",
 				                    "typeChamp":"String",
                                     "afficheList" : true
 			                    }
@@ -348,7 +387,7 @@
 			                    {
 				                    "nom":"Date de fin de support",
 				                    "model":"datefinsupport",
-				                    "typeChamp":"String",
+				                    "typeChamp":"Date",
                                     "afficheList" : true
 			                    }
 		                    ]

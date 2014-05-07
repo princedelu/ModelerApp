@@ -10,6 +10,21 @@ div(id='contenu')
         div(class='form-group')
             label(for='description') Description
             textarea(rows=4, data-ng-model="description", placeholder="Description", name="description", required, data-ng-minlength="1", data-ng-maxlength="60",class='form-control app-control')
+        div(class='form-group')
+            label(for='typecomposant') Type de composant
+            select(data-ng-model="typecomposant",name="typecomposant",required,data-ng-options="typecomposant._id as typecomposant.nom for typecomposant in typecomposants",class='form-control app-control')
+        div(class='form-group')
+            label(for='logiciel') Logiciel
+            select(data-ng-model="logiciel",name="logiciel",data-ng-options="logiciel._id as logiciel.nom for logiciel in logiciels",class='form-control app-control')
+        div(class='form-group')
+            label(for='version') Version
+            input(type="text", data-ng-model="version", id='version', placeholder="Version", name="version", required, data-ng-minlength="1", data-ng-maxlength="20",class='form-control app-control')
+        div(class='form-group')
+            label(for='cluster') Cluster
+            input(type="checkbox", data-ng-model="cluster", id='cluster', name="cluster",class='form-control app-control')
+       div(class='form-group',ng-if="cluster")
+            label(for='typecluster') Type de cluster
+            select(data-ng-model="typecluster",name="typecluster",required,data-ng-options="typecluster._id as typecluster.nom for typecluster in typeclusters",class='form-control app-control')
         div(class='form-group',data-access-level='accessLevels.admin')
             input(type="hidden", data-ng-model="_id", id='_id', name="_id")
             button.btn(type="submit", data-ng-disabled="addForm.$invalid") Valider
@@ -23,5 +38,9 @@ div(id='contenu')
                 li(ng-show="addForm.description.$error.required") Une description est requise
                 li(ng-show="addForm.description.$error.$error.minlength") La description doit avoir une longueur minimale de 1
                 li(ng-show="addForm.description.$error.maxlength") La description doit avoir une longueur maximum de 60
+                li(ng-show="addForm.typecomposant.$error.required") Un type de composant est requis
+                li(ng-show="addForm.version.$error.required") Une version est requise
+                li(ng-show="addForm.version.$error.$error.minlength") La version doit avoir une longueur minimale de 1
+                li(ng-show="addForm.version.$error.maxlength") La version doit avoir une longueur maximum de 20
         div(ng-show="doublon") Merci de saisir un autre nom, celui-ci est déjà utilisé
         

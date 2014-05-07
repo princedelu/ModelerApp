@@ -19,6 +19,7 @@ div(id='contenu')
                        a(href='/{{ elementConfig.model }}/item/{{ element[champ.model] }}')
                            | {{ element[champ.model] }}
                    span(ng-switch-when='ObjectId') {{ element[champ.model].nom }} 
+                   span(ng-switch-when='Date') {{ element[champ.model] | date : 'dd/MM/yyyy' }} 
                    span(ng-switch-when='ArrayObjectId')
                        li(ng-repeat="item in element[champ.model]") {{ item.nom }}
                    span(ng-switch-default) {{ element[champ.model] }}

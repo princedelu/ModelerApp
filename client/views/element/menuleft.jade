@@ -1,13 +1,9 @@
 div(id='main')
     div(id='menuleft')
         
-        accordion(close-others="true")
-            accordion-group(is-open="true")
+        accordion(close-others="accordionCloseOther")
+            accordion-group(data-ng-repeat="element in typeElements", is-open="isOpenAccordion")
                 accordion-heading
-                    | Liste des entités
-                div(id="jstreeParam",jstree jstree-type="param")
-            accordion-group(is-open="true")
-                accordion-heading
-                    | Liste des configurations
-                div(id="jstreeConfig",jstree jstree-type="config")
+                    | {{ element.texte }}
+                div(id="jstree{{ element.nom }}",jstree jstree-type="{{ element.nom }}")
 

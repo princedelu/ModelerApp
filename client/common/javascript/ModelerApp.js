@@ -329,6 +329,12 @@ angular.module('ModelerApp')
             var nomObjet = $routeParams.objet;
             var action = $route.current.action;
             $scope.action = action;
+
+            $scope.accordionCloseOther=modelConfig.modelConfig.config.accordionCloseOther;
+            $scope.isOpenAccordion=modelConfig.modelConfig.config.isOpenAccordion;
+            $scope.typeElements = modelConfig.modelConfig.models.typeElements;
+            
+            // Mise en place dans le scope de la liste des items
             var elementConfig;
 
             _.each(modelConfig.modelConfig.models.index, function(item) {
@@ -344,6 +350,7 @@ angular.module('ModelerApp')
             $scope.accessLevels = Auth.accessLevels;
 
             $scope.list = function () {
+
                 $scope.success = '';
                 $scope.error = '';
                 Objet.list(nomObjet, function (res) {
@@ -457,6 +464,25 @@ angular.module('ModelerApp')
                     });
                 });
             };
+
+            //
+            // Functions pour les datepickers
+            //
+            // Disable weekend selection
+            $scope.disabled = function(date, mode) {
+                return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
+            };
+
+            $scope.open = function($event) {
+                $event.preventDefault();
+                $event.stopPropagation();
+
+                $scope.opened = true;
+            };
+
+            //
+            // Fin des fonctions pour les dateprickers
+            //
 
             switch (action) {
             case 'list':

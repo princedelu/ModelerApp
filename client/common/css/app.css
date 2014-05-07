@@ -23,6 +23,14 @@ body {
 	width : 75%;
 }
 
+.app-control-date-input{
+    padding-right: 0px;
+}
+
+.app-control-date-button{
+	padding-left: 0px;
+}
+
 #main {
 margin:auto;
 }
