@@ -71,6 +71,15 @@ angular.module('ModelerApp')
                 }
             };
 
+            $scope.changed = function(scope, index) {
+                _.each(elementConfig.champs, function(item,index1) {
+                    var modelChamp = item.model;
+                    if (index == index1) {
+                       $scope[modelChamp] = scope.subForm.item.$modelValue;
+                    }
+                });
+            };
+
             $scope.update = function () {
                 $scope.success = '';
                 $scope.error = '';

@@ -1,0 +1,19 @@
+include ../menuleft
+
+div(id='contenu')
+    h1(data-ng-if="action == 'add'") {{ elementConfig.libelleIHMAjout }}
+    h1(data-ng-if="action != 'add'") {{ elementConfig.libelleIHMDetail }}
+    form(ng-submit='add()', name="addForm")        
+        div(class='form-group',data-ng-repeat="champ in elementConfig.champs",data-ng-show="!$first",ng-switch="champ.type")
+            label(for="{{champ.model}}") {{champ.nom}}            
+            include items/text
+            include items/textarea
+            include items/select
+            include items/date
+            
+        div(class='form-group',data-access-level='accessLevels.admin')
+            input(type="hidden", data-ng-model="_id", id='_id', name="_id")
+            button.btn(type="submit", data-ng-disabled="addForm.$invalid") Valider               
+               
+        div(ng-show="doublon") Merci de saisir un autre nom, celui-ci est déjà utilisé
+        

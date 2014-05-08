@@ -1,0 +1,9 @@
+ng-form(ng-switch-when='select',name="subForm",ng-class="{ 'has-error' : subForm.$invalid && !subForm.$pristine }")
+    select(data-ng-model="this[champ.model]",name="item",data-ng-required="{{champ.required}}",data-ng-options="element._id as element.nom for element in this[champ.listeElement]",class='form-control app-control',ng-change="changed(this, $index)")
+    div(ng-show="subForm.$dirty && subForm.$invalid")
+        span(class="help-block",ng-show="subForm.$error.required") {{champ.texteRequired}}
+
+ng-form(ng-switch-when='selectMultiple',name="subForm",ng-class="{ 'has-error' : subForm.$invalid && !subForm.$pristine }")
+    select(data-ng-model="this[champ.model]",name="item",data-ng-required="{{champ.required}}",data-ng-options="element._id as element.nom for element in this[champ.listeElement]",class='form-control app-control',ng-change="changed(this, $index)",multiple,ng-multiple="true",size="5")
+    div(ng-show="subForm.$dirty && subForm.$invalid")
+        span(class="help-block",ng-show="subForm.$error.required") {{champ.texteRequired}}

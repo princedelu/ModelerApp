@@ -49,7 +49,7 @@ angular.module('ModelerApp', ['ngCookies', 'ngRoute','underscore','ui.bootstrap'
     $routeProvider.when('/:objet/add',
         {
             templateUrl:    function(params) {
-                                return '/element/partials/' + params.objet + '/get.jade';
+                                return '/element/partials/get.jade';
                             },
             controller:     'dynamicCtrl',
             action :        'add',
@@ -58,7 +58,7 @@ angular.module('ModelerApp', ['ngCookies', 'ngRoute','underscore','ui.bootstrap'
     $routeProvider.when('/:objet/item/:id',
         {
             templateUrl:function(params) { 
-                            return '/element/partials/' + params.objet + '/get.jade';
+                            return '/element/partials/get.jade';
                         },
             controller:    'dynamicCtrl',
             action :       'get',
@@ -389,6 +389,15 @@ angular.module('ModelerApp')
                             $location.path('/' + nomObjet + '/add');
                         });
                 }
+            };
+
+            $scope.changed = function(scope, index) {
+                _.each(elementConfig.champs, function(item,index1) {
+                    var modelChamp = item.model;
+                    if (index == index1) {
+                       $scope[modelChamp] = scope.subForm.item.$modelValue;
+                    }
+                });
             };
 
             $scope.update = function () {

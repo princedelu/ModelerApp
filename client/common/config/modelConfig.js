@@ -11,7 +11,6 @@
                               "texte" : "Liste des entités"
                             },
                             { "nom" : "config",
-                              "texte" : "Liste des confgurations"
                             }
                         ],
                         "index" : [
@@ -44,13 +43,27 @@
 				                    "nom":"Nom",
 				                    "model":"nom",
 				                    "typeChamp":"StringNom",
-                                    "afficheList" : true
+                                    "afficheList" : true,
+                                    "type" : "text",
+                                    "required" : "true",
+                                    "minLength" : 0,
+                                    "maxLength" : 20,
+                                    "texteRequired" : "Un nom est requis",
+                                    "texteMinLength" : "Le nom doit avoir une longueur minimale de ",
+                                    "texteMaxLength" : "Le nom doit avoir une longueur maximale de "
 			                    },
 			                    {
 				                    "nom":"Description",
 				                    "model":"description",
 				                    "typeChamp":"String",
-                                    "afficheList" : true
+                                    "afficheList" : true,
+                                    "type" : "textarea",
+                                    "required" : "true",
+                                    "minLength" : 0,
+                                    "maxLength" : 60,
+                                    "texteRequired" : "Une description est requise",
+                                    "texteMinLength" : "La description doit avoir une longueur minimale de ",
+                                    "texteMaxLength" : "La description doit avoir une longueur maximale de "
 			                    }
 		                    ]
 	                    },
@@ -77,20 +90,38 @@
 				                    "nom":"Nom",
 				                    "model":"nom",
 				                    "typeChamp":"StringNom",
-                                    "afficheList" : true
+                                    "afficheList" : true,
+                                    "type" : "text",
+                                    "required" : "true",
+                                    "minLength" : 0,
+                                    "maxLength" : 20,
+                                    "texteRequired" : "Un nom est requis",
+                                    "texteMinLength" : "Le nom doit avoir une longueur minimale de ",
+                                    "texteMaxLength" : "Le nom doit avoir une longueur maximale de "
 			                    },
 			                    {
 				                    "nom":"Description",
 				                    "model":"description",
 				                    "typeChamp":"String",
-                                    "afficheList" : true
+                                    "afficheList" : true,
+                                    "type" : "textarea",
+                                    "required" : "true",
+                                    "minLength" : 0,
+                                    "maxLength" : 60,
+                                    "texteRequired" : "Une description est requise",
+                                    "texteMinLength" : "La description doit avoir une longueur minimale de ",
+                                    "texteMaxLength" : "La description doit avoir une longueur maximale de "
 			                    },
 			                    {
 				                    "nom":"Zone",
 				                    "model":"zone",
 				                    "typeChamp":"ObjectId",
-				                    "champExterne":"zone",
-                                    "afficheList" : true
+				                    "champExterne":"zone",                                    
+                                    "listeElement":"zones",
+                                    "afficheList" : true,
+                                    "type" : "select",
+                                    "required" : "true",
+                                    "texteRequired" : "Une zone est requise"
 			                    }
 		                    ]
 	                    },
@@ -117,20 +148,38 @@
 				                    "nom":"Nom",
 				                    "model":"nom",
 				                    "typeChamp":"StringNom",
-                                    "afficheList" : true
+                                    "afficheList" : true,
+                                    "type" : "text",
+                                    "required" : "true",
+                                    "minLength" : 0,
+                                    "maxLength" : 20,
+                                    "texteRequired" : "Un nom est requis",
+                                    "texteMinLength" : "Le nom doit avoir une longueur minimale de ",
+                                    "texteMaxLength" : "Le nom doit avoir une longueur maximale de "
 			                    },
 			                    {
 				                    "nom":"Description",
 				                    "model":"description",
 				                    "typeChamp":"String",
-                                    "afficheList" : true
+                                    "afficheList" : true,
+                                    "type" : "textarea",
+                                    "required" : "true",
+                                    "minLength" : 0,
+                                    "maxLength" : 60,
+                                    "texteRequired" : "Une description est requise",
+                                    "texteMinLength" : "La description doit avoir une longueur minimale de ",
+                                    "texteMaxLength" : "La description doit avoir une longueur maximale de "
 			                    },
 			                    {
 				                    "nom":"Quartiers",
 				                    "model":"quartier",
 				                    "typeChamp":"ArrayObjectId",
 				                    "champExterne":"quartier",
-                                    "afficheList" : true
+                                    "listeElement":"quartiers",
+                                    "afficheList" : true,
+                                    "type" : "selectMultiple",
+                                    "required" : "true",
+                                    "texteRequired" : "Un quartier est requis"
 			                    }
 		                    ]
 	                    },
@@ -163,34 +212,61 @@
 				                    "nom":"Nom",
 				                    "model":"nom",
 				                    "typeChamp":"StringNom",
-                                    "afficheList" : true
+                                    "afficheList" : true,
+                                    "type" : "text",
+                                    "required" : "true",
+                                    "minLength" : 0,
+                                    "maxLength" : 20,
+                                    "texteRequired" : "Un nom est requis",
+                                    "texteMinLength" : "Le nom doit avoir une longueur minimale de ",
+                                    "texteMaxLength" : "Le nom doit avoir une longueur maximale de "
 			                    },
 			                    {
 				                    "nom":"Description",
 				                    "model":"description",
 				                    "typeChamp":"String",
-                                    "afficheList" : true
+                                    "afficheList" : true,
+                                    "type" : "textarea",
+                                    "required" : "true",
+                                    "minLength" : 0,
+                                    "maxLength" : 60,
+                                    "texteRequired" : "Une description est requise",
+                                    "texteMinLength" : "La description doit avoir une longueur minimale de ",
+                                    "texteMaxLength" : "La description doit avoir une longueur maximale de "
 			                    },
 			                    {
 				                    "nom":"Ilot",
 				                    "model":"ilot",
 				                    "typeChamp":"ObjectId",
 				                    "champExterne":"ilot",
-                                    "afficheList" : true
+                                    "listeElement":"ilots",
+                                    "afficheList" : true,
+                                    "type" : "select",
+                                    "required" : "true",
+                                    "texteRequired" : "Un ilot est requis"
 			                    },
 			                    {
 				                    "nom":"Canal",
 				                    "model":"canal",
 				                    "typeChamp":"ObjectId",
 				                    "champExterne":"canal",
-                                    "afficheList" : false
+                                    "listeElement":"canals",
+                                    "afficheList" : true,
+                                    "type" : "select",
+                                    "required" : "true",
+                                    "texteRequired" : "Un canal est requis"
 			                    },
 			                    {
 				                    "nom":"Composants",
 				                    "model":"composant",
 				                    "typeChamp":"ArrayObjectId",
 				                    "champExterne":"composant",
-                                    "afficheList" : false
+                                    "afficheList" : false,
+                                    "listeElement":"composants",
+                                    "afficheList" : true,
+                                    "type" : "selectMultiple",
+                                    "required" : "true",
+                                    "texteRequired" : "Un composant est requis"
 			                    }
 		                    ]
 	                    },
@@ -220,33 +296,62 @@
 				                    "nom":"Nom",
 				                    "model":"nom",
 				                    "typeChamp":"StringNom",
-                                    "afficheList" : true
+                                    "afficheList" : true,
+                                    "type" : "text",
+                                    "required" : "true",
+                                    "minLength" : 0,
+                                    "maxLength" : 20,
+                                    "texteRequired" : "Un nom est requis",
+                                    "texteMinLength" : "Le nom doit avoir une longueur minimale de ",
+                                    "texteMaxLength" : "Le nom doit avoir une longueur maximale de "
 			                    },
 			                    {
 				                    "nom":"Description",
 				                    "model":"description",
 				                    "typeChamp":"String",
-                                    "afficheList" : true
+                                    "afficheList" : true,
+                                    "type" : "textarea",
+                                    "required" : "true",
+                                    "minLength" : 0,
+                                    "maxLength" : 60,
+                                    "texteRequired" : "Une description est requise",
+                                    "texteMinLength" : "La description doit avoir une longueur minimale de ",
+                                    "texteMaxLength" : "La description doit avoir une longueur maximale de "
 			                    },
 			                    {
 				                    "nom":"Type de composant",
 				                    "model":"typecomposant",
 				                    "typeChamp":"ObjectId",
 				                    "champExterne":"typecomposant",
-                                    "afficheList" : true
+                                    "listeElement":"typecomposants",
+                                    "afficheList" : true,
+                                    "type" : "select",
+                                    "required" : "true",
+                                    "texteRequired" : "Un type de composant est requis"
 			                    },
 			                    {
 				                    "nom":"Logiciel",
 				                    "model":"logiciel",
 				                    "typeChamp":"ObjectId",
 				                    "champExterne":"logiciel",
-                                    "afficheList" : false
+                                    "listeElement":"logiciels",
+                                    "afficheList" : true,
+                                    "type" : "select",
+                                    "required" : "true",
+                                    "texteRequired" : "Un logiciel est requis"
 			                    },
 			                    {
 				                    "nom":"Version du composant",
 				                    "model":"version",
 				                    "typeChamp":"String",
-                                    "afficheList" : true
+                                    "afficheList" : true,
+                                    "type" : "text",
+                                    "required" : "true",
+                                    "minLength" : 0,
+                                    "maxLength" : 20,
+                                    "texteRequired" : "Une version est requise",
+                                    "texteMinLength" : "La version doit avoir une longueur minimale de ",
+                                    "texteMaxLength" : "La version doit avoir une longueur maximale de "
 			                    }
 		                    ]
 	                    },
@@ -270,13 +375,27 @@
 				                    "nom":"Nom",
 				                    "model":"nom",
 				                    "typeChamp":"StringNom",
-                                    "afficheList" : true
+                                    "afficheList" : true,
+                                    "type" : "text",
+                                    "required" : "true",
+                                    "minLength" : 0,
+                                    "maxLength" : 20,
+                                    "texteRequired" : "Un nom est requis",
+                                    "texteMinLength" : "Le nom doit avoir une longueur minimale de ",
+                                    "texteMaxLength" : "Le nom doit avoir une longueur maximale de "
 			                    },
 			                    {
 				                    "nom":"Description",
 				                    "model":"description",
 				                    "typeChamp":"String",
-                                    "afficheList" : true
+                                    "afficheList" : true,
+                                    "type" : "textarea",
+                                    "required" : "true",
+                                    "minLength" : 0,
+                                    "maxLength" : 60,
+                                    "texteRequired" : "Une description est requise",
+                                    "texteMinLength" : "La description doit avoir une longueur minimale de ",
+                                    "texteMaxLength" : "La description doit avoir une longueur maximale de "
 			                    }
 		                    ]
 	                    },
@@ -300,13 +419,27 @@
 				                    "nom":"Nom",
 				                    "model":"nom",
 				                    "typeChamp":"StringNom",
-                                    "afficheList" : true
+                                    "afficheList" : true,
+                                    "type" : "text",
+                                    "required" : "true",
+                                    "minLength" : 0,
+                                    "maxLength" : 20,
+                                    "texteRequired" : "Un nom est requis",
+                                    "texteMinLength" : "Le nom doit avoir une longueur minimale de ",
+                                    "texteMaxLength" : "Le nom doit avoir une longueur maximale de "
 			                    },
 			                    {
 				                    "nom":"Description",
 				                    "model":"description",
 				                    "typeChamp":"String",
-                                    "afficheList" : true
+                                    "afficheList" : true,
+                                    "type" : "textarea",
+                                    "required" : "true",
+                                    "minLength" : 0,
+                                    "maxLength" : 60,
+                                    "texteRequired" : "Une description est requise",
+                                    "texteMinLength" : "La description doit avoir une longueur minimale de ",
+                                    "texteMaxLength" : "La description doit avoir une longueur maximale de "
 			                    }
 		                    ]
 	                    },
@@ -330,13 +463,27 @@
 				                    "nom":"Nom",
 				                    "model":"nom",
 				                    "typeChamp":"StringNom",
-                                    "afficheList" : true
+                                    "afficheList" : true,
+                                    "type" : "text",
+                                    "required" : "true",
+                                    "minLength" : 0,
+                                    "maxLength" : 20,
+                                    "texteRequired" : "Un nom est requis",
+                                    "texteMinLength" : "Le nom doit avoir une longueur minimale de ",
+                                    "texteMaxLength" : "Le nom doit avoir une longueur maximale de "
 			                    },
 			                    {
 				                    "nom":"Description",
 				                    "model":"description",
 				                    "typeChamp":"String",
-                                    "afficheList" : true
+                                    "afficheList" : true,
+                                    "type" : "textarea",
+                                    "required" : "true",
+                                    "minLength" : 0,
+                                    "maxLength" : 60,
+                                    "texteRequired" : "Une description est requise",
+                                    "texteMinLength" : "La description doit avoir une longueur minimale de ",
+                                    "texteMaxLength" : "La description doit avoir une longueur maximale de "
 			                    }
 		                    ]
 	                    },
@@ -363,32 +510,60 @@
 				                    "nom":"Nom",
 				                    "model":"nom",
 				                    "typeChamp":"StringNom",
-                                    "afficheList" : true
+                                    "afficheList" : true,
+                                    "type" : "text",
+                                    "required" : "true",
+                                    "minLength" : 0,
+                                    "maxLength" : 20,
+                                    "texteRequired" : "Un nom est requis",
+                                    "texteMinLength" : "Le nom doit avoir une longueur minimale de ",
+                                    "texteMaxLength" : "Le nom doit avoir une longueur maximale de "
 			                    },
 			                    {
 				                    "nom":"Description",
 				                    "model":"description",
 				                    "typeChamp":"String",
-                                    "afficheList" : true
+                                    "afficheList" : true,
+                                    "type" : "textarea",
+                                    "required" : "true",
+                                    "minLength" : 0,
+                                    "maxLength" : 60,
+                                    "texteRequired" : "Une description est requise",
+                                    "texteMinLength" : "La description doit avoir une longueur minimale de ",
+                                    "texteMaxLength" : "La description doit avoir une longueur maximale de "
 			                    },
 			                    {
 				                    "nom":"Editeur",
 				                    "model":"editeur",
 				                    "typeChamp":"ObjectId",
 				                    "champExterne":"editeur",
-                                    "afficheList" : true
+                                    "listeElement":"editeurs",
+                                    "afficheList" : true,
+                                    "type" : "select",
+                                    "required" : "true",
+                                    "texteRequired" : "Un edtieur est requis"
 			                    },
 			                    {
 				                    "nom":"Version",
 				                    "model":"version",
 				                    "typeChamp":"String",
-                                    "afficheList" : true
+                                    "afficheList" : true,
+                                    "type" : "text",
+                                    "required" : "true",
+                                    "minLength" : 0,
+                                    "maxLength" : 20,
+                                    "texteRequired" : "Une version est requise",
+                                    "texteMinLength" : "La version doit avoir une longueur minimale de ",
+                                    "texteMaxLength" : "La version doit avoir une longueur maximale de "
 			                    },
 			                    {
 				                    "nom":"Date de fin de support",
 				                    "model":"datefinsupport",
 				                    "typeChamp":"Date",
-                                    "afficheList" : true
+                                    "afficheList" : true,
+                                    "type" : "date",
+                                    "required" : "true",
+                                    "texteRequired" : "Une date de fin de support est requise"
 			                    }
 		                    ]
 	                    }

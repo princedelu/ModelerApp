@@ -49,7 +49,7 @@ angular.module('ModelerApp', ['ngCookies', 'ngRoute','underscore','ui.bootstrap'
     $routeProvider.when('/:objet/add',
         {
             templateUrl:    function(params) {
-                                return '/element/partials/' + params.objet + '/get.jade';
+                                return '/element/partials/get.jade';
                             },
             controller:     'dynamicCtrl',
             action :        'add',
@@ -58,7 +58,7 @@ angular.module('ModelerApp', ['ngCookies', 'ngRoute','underscore','ui.bootstrap'
     $routeProvider.when('/:objet/item/:id',
         {
             templateUrl:function(params) { 
-                            return '/element/partials/' + params.objet + '/get.jade';
+                            return '/element/partials/get.jade';
                         },
             controller:    'dynamicCtrl',
             action :       'get',

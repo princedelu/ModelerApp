@@ -1,0 +1,6 @@
+ng-form(ng-switch-when='textarea',name="subForm",ng-class="{ 'has-error' : subForm.$invalid && !subForm.$pristine }")
+    textarea(rows=4, data-ng-model="this[champ.model]", placeholder="{{champ.nom}}", name="item", data-ng-required="{{champ.required}}",data-ng-minlength="{{champ.minLength}}", data-ng-maxlength="{{champ.maxLength}}",class='form-control app-control',ng-change="changed(this, $index)")
+    div(ng-show="subForm.$dirty && subForm.$invalid")
+        span(class="help-block",ng-show="subForm.$error.required") {{champ.texteRequired}}
+        span(class="help-block",ng-show="subForm.$error.minlength") {{champ.texteMinLength}} {{champ.minLength}}
+        span(class="help-block",ng-show="subForm.$error.maxlength") {{champ.texteMaxLength}} {{champ.maxLength}}

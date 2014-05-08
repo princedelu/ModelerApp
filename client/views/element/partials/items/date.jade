@@ -1,0 +1,12 @@
+ng-form(ng-switch-when='date',name="subForm",ng-class="{ 'has-error' : subForm.$invalid && !subForm.$pristine }")
+    div(class="row")
+        div(class="col-md-2 app-control-date-input")
+            input(type="text",class="form-control",datepicker-popup="dd/MM/yyyy",ng-model="this[champ.model]",is-open="opened",min-date="'2000-01-01'",max-date="'2099-12-31'",datepicker-options="{formatYear: 'yyyy',startingDay: 1}",ng-required="true",close-text="Fermer",date-disabled="disabled(date, mode)",ng-change="changed(this, $index)",name="item")
+        div(class="col-md-1 app-control-date-button")
+            div(class='form-group')
+                button(type="button",class="btn btn-default form-control",ng-click="open($event)")
+                    i(class="glyphicon glyphicon-calendar")
+    div(ng-show="subForm.$dirty && subForm.$invalid")
+        span(class="help-block",ng-show="subForm.$error.required") {{champ.texteRequired}}
+        span(class="help-block",ng-show="subForm.$error.minlength") {{champ.texteMinLength}} {{champ.minLength}}
+        span(class="help-block",ng-show="subForm.$error.maxlength") {{champ.texteMaxLength}} {{champ.maxLength}}
