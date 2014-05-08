@@ -80,6 +80,18 @@ angular.module('ModelerApp')
                 });
             };
 
+            $scope.displayItem = function(value) {
+               if (value !== undefined){
+                   if (typeof value == 'boolean'){
+                        return value;
+                   }else{
+                        return $scope[value];
+                   }
+               }else{
+                    return true;
+               }
+            };
+
             $scope.update = function () {
                 $scope.success = '';
                 $scope.error = '';

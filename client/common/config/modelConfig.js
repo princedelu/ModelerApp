@@ -11,6 +11,7 @@
                               "texte" : "Liste des entités"
                             },
                             { "nom" : "config",
+                              "texte" : "Liste des configurations"
                             }
                         ],
                         "index" : [
@@ -22,7 +23,12 @@
                             { "nom" : "Canal" , "type" : "config" },
                             { "nom" : "TypeComposant" , "type" : "config" },
                             { "nom" : "Editeur" , "type" : "config" },
-                            { "nom" : "Logiciel" , "type" : "config" }
+                            { "nom" : "Logiciel" , "type" : "config" },
+                            { "nom" : "TypeCluster" , "type" : "config" },
+                            { "nom" : "Site" , "type" : "config" },
+                            { "nom" : "TypeInfra" , "type" : "config" },
+                            { "nom" : "Constructeur" , "type" : "config" },
+                            { "nom" : "Os" , "type" : "config" }
                          ],
                         "Zone" : 
                         {
@@ -46,7 +52,7 @@
                                     "afficheList" : true,
                                     "type" : "text",
                                     "required" : "true",
-                                    "minLength" : 0,
+                                    "minLength" : 1,
                                     "maxLength" : 20,
                                     "texteRequired" : "Un nom est requis",
                                     "texteMinLength" : "Le nom doit avoir une longueur minimale de ",
@@ -59,7 +65,7 @@
                                     "afficheList" : true,
                                     "type" : "textarea",
                                     "required" : "true",
-                                    "minLength" : 0,
+                                    "minLength" : 1,
                                     "maxLength" : 60,
                                     "texteRequired" : "Une description est requise",
                                     "texteMinLength" : "La description doit avoir une longueur minimale de ",
@@ -93,7 +99,7 @@
                                     "afficheList" : true,
                                     "type" : "text",
                                     "required" : "true",
-                                    "minLength" : 0,
+                                    "minLength" : 1,
                                     "maxLength" : 20,
                                     "texteRequired" : "Un nom est requis",
                                     "texteMinLength" : "Le nom doit avoir une longueur minimale de ",
@@ -106,7 +112,7 @@
                                     "afficheList" : true,
                                     "type" : "textarea",
                                     "required" : "true",
-                                    "minLength" : 0,
+                                    "minLength" : 1,
                                     "maxLength" : 60,
                                     "texteRequired" : "Une description est requise",
                                     "texteMinLength" : "La description doit avoir une longueur minimale de ",
@@ -151,7 +157,7 @@
                                     "afficheList" : true,
                                     "type" : "text",
                                     "required" : "true",
-                                    "minLength" : 0,
+                                    "minLength" : 1,
                                     "maxLength" : 20,
                                     "texteRequired" : "Un nom est requis",
                                     "texteMinLength" : "Le nom doit avoir une longueur minimale de ",
@@ -164,7 +170,7 @@
                                     "afficheList" : true,
                                     "type" : "textarea",
                                     "required" : "true",
-                                    "minLength" : 0,
+                                    "minLength" : 1,
                                     "maxLength" : 60,
                                     "texteRequired" : "Une description est requise",
                                     "texteMinLength" : "La description doit avoir une longueur minimale de ",
@@ -215,7 +221,7 @@
                                     "afficheList" : true,
                                     "type" : "text",
                                     "required" : "true",
-                                    "minLength" : 0,
+                                    "minLength" : 1,
                                     "maxLength" : 20,
                                     "texteRequired" : "Un nom est requis",
                                     "texteMinLength" : "Le nom doit avoir une longueur minimale de ",
@@ -228,7 +234,7 @@
                                     "afficheList" : true,
                                     "type" : "textarea",
                                     "required" : "true",
-                                    "minLength" : 0,
+                                    "minLength" : 1,
                                     "maxLength" : 60,
                                     "texteRequired" : "Une description est requise",
                                     "texteMinLength" : "La description doit avoir une longueur minimale de ",
@@ -285,6 +291,9 @@
                                 {
 				                    "model":"logiciel"
 			                    },
+                                {
+                                    "model" : "typecluster"
+                                }
                             ],
 		                    "champs":[
 			                    {
@@ -299,7 +308,7 @@
                                     "afficheList" : true,
                                     "type" : "text",
                                     "required" : "true",
-                                    "minLength" : 0,
+                                    "minLength" : 1,
                                     "maxLength" : 20,
                                     "texteRequired" : "Un nom est requis",
                                     "texteMinLength" : "Le nom doit avoir une longueur minimale de ",
@@ -312,7 +321,7 @@
                                     "afficheList" : true,
                                     "type" : "textarea",
                                     "required" : "true",
-                                    "minLength" : 0,
+                                    "minLength" : 1,
                                     "maxLength" : 60,
                                     "texteRequired" : "Une description est requise",
                                     "texteMinLength" : "La description doit avoir une longueur minimale de ",
@@ -347,11 +356,28 @@
                                     "afficheList" : true,
                                     "type" : "text",
                                     "required" : "true",
-                                    "minLength" : 0,
+                                    "minLength" : 1,
                                     "maxLength" : 20,
                                     "texteRequired" : "Une version est requise",
                                     "texteMinLength" : "La version doit avoir une longueur minimale de ",
                                     "texteMaxLength" : "La version doit avoir une longueur maximale de "
+			                    },
+			                    {
+				                    "nom":"Cluster",
+				                    "model":"cluster",
+				                    "typeChamp":"Boolean",
+                                    "afficheList" : false,
+                                    "type" : "checkbox"
+			                    },
+			                    {
+				                    "nom":"Type de cluster",
+				                    "model":"typecluster",
+				                    "typeChamp":"ObjectId",
+				                    "champExterne":"typecluster",
+                                    "listeElement":"typeclusters",
+                                    "afficheList" : false,
+                                    "type" : "select",
+                                    "conditionAffichage" : "cluster"
 			                    }
 		                    ]
 	                    },
@@ -378,7 +404,7 @@
                                     "afficheList" : true,
                                     "type" : "text",
                                     "required" : "true",
-                                    "minLength" : 0,
+                                    "minLength" : 1,
                                     "maxLength" : 20,
                                     "texteRequired" : "Un nom est requis",
                                     "texteMinLength" : "Le nom doit avoir une longueur minimale de ",
@@ -391,7 +417,7 @@
                                     "afficheList" : true,
                                     "type" : "textarea",
                                     "required" : "true",
-                                    "minLength" : 0,
+                                    "minLength" : 1,
                                     "maxLength" : 60,
                                     "texteRequired" : "Une description est requise",
                                     "texteMinLength" : "La description doit avoir une longueur minimale de ",
@@ -401,7 +427,7 @@
 	                    },
                         "TypeComposant" : 
 	                    {
-		                    "nom":"TypeComposant",
+		                    "nom":"Type composant",
 		                    "model":"typecomposant",
                             "group" : "applicatif",
 		                    "libelleIHMListe":"Liste des types de composants",
@@ -422,7 +448,7 @@
                                     "afficheList" : true,
                                     "type" : "text",
                                     "required" : "true",
-                                    "minLength" : 0,
+                                    "minLength" : 1,
                                     "maxLength" : 20,
                                     "texteRequired" : "Un nom est requis",
                                     "texteMinLength" : "Le nom doit avoir une longueur minimale de ",
@@ -435,7 +461,7 @@
                                     "afficheList" : true,
                                     "type" : "textarea",
                                     "required" : "true",
-                                    "minLength" : 0,
+                                    "minLength" : 1,
                                     "maxLength" : 60,
                                     "texteRequired" : "Une description est requise",
                                     "texteMinLength" : "La description doit avoir une longueur minimale de ",
@@ -466,7 +492,7 @@
                                     "afficheList" : true,
                                     "type" : "text",
                                     "required" : "true",
-                                    "minLength" : 0,
+                                    "minLength" : 1,
                                     "maxLength" : 20,
                                     "texteRequired" : "Un nom est requis",
                                     "texteMinLength" : "Le nom doit avoir une longueur minimale de ",
@@ -479,7 +505,7 @@
                                     "afficheList" : true,
                                     "type" : "textarea",
                                     "required" : "true",
-                                    "minLength" : 0,
+                                    "minLength" : 1,
                                     "maxLength" : 60,
                                     "texteRequired" : "Une description est requise",
                                     "texteMinLength" : "La description doit avoir une longueur minimale de ",
@@ -513,7 +539,7 @@
                                     "afficheList" : true,
                                     "type" : "text",
                                     "required" : "true",
-                                    "minLength" : 0,
+                                    "minLength" : 1,
                                     "maxLength" : 20,
                                     "texteRequired" : "Un nom est requis",
                                     "texteMinLength" : "Le nom doit avoir une longueur minimale de ",
@@ -526,7 +552,7 @@
                                     "afficheList" : true,
                                     "type" : "textarea",
                                     "required" : "true",
-                                    "minLength" : 0,
+                                    "minLength" : 1,
                                     "maxLength" : 60,
                                     "texteRequired" : "Une description est requise",
                                     "texteMinLength" : "La description doit avoir une longueur minimale de ",
@@ -550,7 +576,7 @@
                                     "afficheList" : true,
                                     "type" : "text",
                                     "required" : "true",
-                                    "minLength" : 0,
+                                    "minLength" : 1,
                                     "maxLength" : 20,
                                     "texteRequired" : "Une version est requise",
                                     "texteMinLength" : "La version doit avoir une longueur minimale de ",
@@ -564,6 +590,253 @@
                                     "type" : "date",
                                     "required" : "true",
                                     "texteRequired" : "Une date de fin de support est requise"
+			                    }
+		                    ]
+	                    },
+                        "TypeCluster" : 
+	                    {
+		                    "nom":"Type de cluster",
+		                    "model":"typecluster",
+                            "group" : "config",
+		                    "libelleIHMListe":"Liste des types de clusters",
+		                    "libelleIHMDetail":"Detail d'un type de cluster",
+		                    "libelleIHMAjout":"Ajout d'un type de cluster",
+		                    "populate":[
+		                    ],
+		                    "champs":[
+			                    {
+				                    "nom":"Id",
+				                    "model":"_id",
+				                    "typeChamp":"ObjectId"
+			                    },
+			                    {
+				                    "nom":"Nom",
+				                    "model":"nom",
+				                    "typeChamp":"StringNom",
+                                    "afficheList" : true,
+                                    "type" : "text",
+                                    "required" : "true",
+                                    "minLength" : 1,
+                                    "maxLength" : 20,
+                                    "texteRequired" : "Un nom est requis",
+                                    "texteMinLength" : "Le nom doit avoir une longueur minimale de ",
+                                    "texteMaxLength" : "Le nom doit avoir une longueur maximale de "
+			                    },
+			                    {
+				                    "nom":"Description",
+				                    "model":"description",
+				                    "typeChamp":"String",
+                                    "afficheList" : true,
+                                    "type" : "textarea",
+                                    "required" : "true",
+                                    "minLength" : 1,
+                                    "maxLength" : 60,
+                                    "texteRequired" : "Une description est requise",
+                                    "texteMinLength" : "La description doit avoir une longueur minimale de ",
+                                    "texteMaxLength" : "La description doit avoir une longueur maximale de "
+			                    }
+		                    ]
+	                    },
+                        "Site" : 
+	                    {
+		                    "nom":"Site",
+		                    "model":"site",
+                            "group" : "config",
+		                    "libelleIHMListe":"Liste des sites",
+		                    "libelleIHMDetail":"Detail d'un site",
+		                    "libelleIHMAjout":"Ajout d'un site",
+		                    "populate":[
+		                    ],
+		                    "champs":[
+			                    {
+				                    "nom":"Id",
+				                    "model":"_id",
+				                    "typeChamp":"ObjectId"
+			                    },
+			                    {
+				                    "nom":"Nom",
+				                    "model":"nom",
+				                    "typeChamp":"StringNom",
+                                    "afficheList" : true,
+                                    "type" : "text",
+                                    "required" : "true",
+                                    "minLength" : 1,
+                                    "maxLength" : 20,
+                                    "texteRequired" : "Un nom est requis",
+                                    "texteMinLength" : "Le nom doit avoir une longueur minimale de ",
+                                    "texteMaxLength" : "Le nom doit avoir une longueur maximale de "
+			                    },
+			                    {
+				                    "nom":"Description",
+				                    "model":"description",
+				                    "typeChamp":"String",
+                                    "afficheList" : true,
+                                    "type" : "textarea",
+                                    "required" : "true",
+                                    "minLength" : 1,
+                                    "maxLength" : 60,
+                                    "texteRequired" : "Une description est requise",
+                                    "texteMinLength" : "La description doit avoir une longueur minimale de ",
+                                    "texteMaxLength" : "La description doit avoir une longueur maximale de "
+			                    },
+			                    {
+				                    "nom":"Societe",
+				                    "model":"societe",
+				                    "typeChamp":"String",
+                                    "afficheList" : true,
+                                    "type" : "text",
+                                    "required" : "true",
+                                    "minLength" : 1,
+                                    "maxLength" : 60,
+                                    "texteRequired" : "Une société est requise",
+                                    "texteMinLength" : "La société doit avoir une longueur minimale de ",
+                                    "texteMaxLength" : "La société doit avoir une longueur maximale de "
+			                    }
+		                    ]
+	                    },
+                        "TypeInfra" : 
+	                    {
+		                    "nom":"Type d'infrastructures",
+		                    "model":"typeinfra",
+                            "group" : "config",
+		                    "libelleIHMListe":"Liste des types d'infrastructures",
+		                    "libelleIHMDetail":"Detail d'un type d'infrastructures",
+		                    "libelleIHMAjout":"Ajout d'un type d'infrastructures",
+		                    "populate":[
+		                    ],
+		                    "champs":[
+			                    {
+				                    "nom":"Id",
+				                    "model":"_id",
+				                    "typeChamp":"ObjectId"
+			                    },
+			                    {
+				                    "nom":"Nom",
+				                    "model":"nom",
+				                    "typeChamp":"StringNom",
+                                    "afficheList" : true,
+                                    "type" : "text",
+                                    "required" : "true",
+                                    "minLength" : 1,
+                                    "maxLength" : 20,
+                                    "texteRequired" : "Un nom est requis",
+                                    "texteMinLength" : "Le nom doit avoir une longueur minimale de ",
+                                    "texteMaxLength" : "Le nom doit avoir une longueur maximale de "
+			                    },
+			                    {
+				                    "nom":"Description",
+				                    "model":"description",
+				                    "typeChamp":"String",
+                                    "afficheList" : true,
+                                    "type" : "textarea",
+                                    "required" : "true",
+                                    "minLength" : 1,
+                                    "maxLength" : 60,
+                                    "texteRequired" : "Une description est requise",
+                                    "texteMinLength" : "La description doit avoir une longueur minimale de ",
+                                    "texteMaxLength" : "La description doit avoir une longueur maximale de "
+			                    }
+		                    ]
+	                    },
+                        "Constructeur" : 
+	                    {
+		                    "nom":"Constructeur",
+		                    "model":"constructeur",
+                            "group" : "config",
+		                    "libelleIHMListe":"Liste des constructeurs",
+		                    "libelleIHMDetail":"Detail d'un constructeur",
+		                    "libelleIHMAjout":"Ajout d'un constructeur",
+		                    "populate":[
+		                    ],
+		                    "champs":[
+			                    {
+				                    "nom":"Id",
+				                    "model":"_id",
+				                    "typeChamp":"ObjectId"
+			                    },
+			                    {
+				                    "nom":"Nom",
+				                    "model":"nom",
+				                    "typeChamp":"StringNom",
+                                    "afficheList" : true,
+                                    "type" : "text",
+                                    "required" : "true",
+                                    "minLength" : 1,
+                                    "maxLength" : 20,
+                                    "texteRequired" : "Un nom est requis",
+                                    "texteMinLength" : "Le nom doit avoir une longueur minimale de ",
+                                    "texteMaxLength" : "Le nom doit avoir une longueur maximale de "
+			                    },
+			                    {
+				                    "nom":"Description",
+				                    "model":"description",
+				                    "typeChamp":"String",
+                                    "afficheList" : true,
+                                    "type" : "textarea",
+                                    "required" : "true",
+                                    "minLength" : 1,
+                                    "maxLength" : 60,
+                                    "texteRequired" : "Une description est requise",
+                                    "texteMinLength" : "La description doit avoir une longueur minimale de ",
+                                    "texteMaxLength" : "La description doit avoir une longueur maximale de "
+			                    }
+		                    ]
+	                    },
+                        "Os" : 
+	                    {
+		                    "nom":"Os",
+		                    "model":"os",
+                            "group" : "config",
+		                    "libelleIHMListe":"Liste des os",
+		                    "libelleIHMDetail":"Detail d'un os",
+		                    "libelleIHMAjout":"Ajout d'un os",
+		                    "populate":[
+                                {
+				                    "model":"editeur"
+			                    }
+		                    ],
+		                    "champs":[
+			                    {
+				                    "nom":"Id",
+				                    "model":"_id",
+				                    "typeChamp":"ObjectId"
+			                    },
+			                    {
+				                    "nom":"Nom",
+				                    "model":"nom",
+				                    "typeChamp":"StringNom",
+                                    "afficheList" : true,
+                                    "type" : "text",
+                                    "required" : "true",
+                                    "minLength" : 1,
+                                    "maxLength" : 20,
+                                    "texteRequired" : "Un nom est requis",
+                                    "texteMinLength" : "Le nom doit avoir une longueur minimale de ",
+                                    "texteMaxLength" : "Le nom doit avoir une longueur maximale de "
+			                    },
+			                    {
+				                    "nom":"Description",
+				                    "model":"description",
+				                    "typeChamp":"String",
+                                    "afficheList" : true,
+                                    "type" : "textarea",
+                                    "required" : "true",
+                                    "minLength" : 1,
+                                    "maxLength" : 60,
+                                    "texteRequired" : "Une description est requise",
+                                    "texteMinLength" : "La description doit avoir une longueur minimale de ",
+                                    "texteMaxLength" : "La description doit avoir une longueur maximale de "
+			                    },
+			                    {
+				                    "nom":"Editeur",
+				                    "model":"editeur",
+				                    "typeChamp":"ObjectId",
+				                    "champExterne":"editeur",
+                                    "listeElement":"editeurs",
+                                    "afficheList" : true,
+                                    "type" : "select",
+                                    "required" : "true",
+                                    "texteRequired" : "Un edtieur est requis"
 			                    }
 		                    ]
 	                    }

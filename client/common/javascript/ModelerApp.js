@@ -400,6 +400,18 @@ angular.module('ModelerApp')
                 });
             };
 
+            $scope.displayItem = function(value) {
+               if (value !== undefined){
+                   if (typeof value == 'boolean'){
+                        return value;
+                   }else{
+                        return $scope[value];
+                   }
+               }else{
+                    return true;
+               }
+            };
+
             $scope.update = function () {
                 $scope.success = '';
                 $scope.error = '';
@@ -622,7 +634,7 @@ angular.module('ModelerApp').directive('jstree', ['$rootScope','$location', func
                                     var valeurArbre={};
                                     valeurArbre.id = "idtree" + modelConfig.modelConfig.models[item.nom].model;
                                     valeurArbre.parent = "#";
-                                    valeurArbre.text = item.nom;
+                                    valeurArbre.text = modelConfig.modelConfig.models[item.nom].nom;
 							        listeValeurArbre[nbValeur] = valeurArbre;
                                     nbValeur++;
                                 }

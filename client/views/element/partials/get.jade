@@ -4,12 +4,13 @@ div(id='contenu')
     h1(data-ng-if="action == 'add'") {{ elementConfig.libelleIHMAjout }}
     h1(data-ng-if="action != 'add'") {{ elementConfig.libelleIHMDetail }}
     form(ng-submit='add()', name="addForm")        
-        div(class='form-group',data-ng-repeat="champ in elementConfig.champs",data-ng-show="!$first",ng-switch="champ.type")
+        div(class='form-group',data-ng-repeat="champ in elementConfig.champs",data-ng-show="!$first",ng-switch="champ.type",ng-if="displayItem(champ.conditionAffichage)")
             label(for="{{champ.model}}") {{champ.nom}}            
             include items/text
             include items/textarea
             include items/select
             include items/date
+            include items/checkbox
             
         div(class='form-group',data-access-level='accessLevels.admin')
             input(type="hidden", data-ng-model="_id", id='_id', name="_id")

@@ -1,0 +1,2 @@
+ng-form(ng-switch-when='checkbox',name="subForm",ng-class="{ 'has-error' : subForm.$invalid && !subForm.$pristine }")
+    input(type="checkbox", data-ng-model="this[champ.model]", id='{{champ.model}}', name="item",class='form-control app-control',ng-change="changed(this, $index)")
