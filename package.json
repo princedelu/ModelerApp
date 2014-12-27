@@ -21,7 +21,7 @@
   },
   "subdomain": "ModelerApp",
   "scripts": {
-    "start": "node server.js",
+    "start": "nodejs server.js",
     "test": "grunt test"
   },
   "engines": {
